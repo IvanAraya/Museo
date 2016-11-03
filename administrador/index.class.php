@@ -1,6 +1,6 @@
 <?php
 
-class admin{
+class index{
 	
 	function getMenu(){
 		
@@ -9,25 +9,24 @@ class admin{
 		
 		$menu = array(
 			new Menu('Perfil','perfil',false),
-			new Menu('Usuarios','', array(
-				new Menu('Nuevo Usuario','usuario',false),
+			new Menu('Usuarios',null, array(
+				new Menu('Nuevo Usuario','usuarios',false),
 				new Menu('Editar Usuario','listausuario',false)
 			)),
-			new Menu('Catalogo','', array(
-				new Menu('Nueva Muestra','usuario',false),
+			new Menu('Catalogo',null, array(
+				new Menu('Nueva Muestra','catalogo',false),
 				new Menu('Editar Muestra','listausuario',false)
 			)),
-			new Menu('Actividad Reciente','', array(
-				new Menu('Nueva Actividad','usuario',false),
-				new Menu('Editar Actividad','listausuario',false)
+			new Menu('Actividad Reciente',null, array(
+				new Menu('Nueva Actividad','noticias',false),
+				new Menu('Editar Actividad','noticias',false)
 			)),
-			new Menu('Recursos','', array(
-				new Menu('Nuevo Recurso','usuario',false),
+			new Menu('Recursos',null, array(
+				new Menu('Nuevo Recurso','recursos',false),
 				new Menu('Editar Recurso','listausuario',false)
 			)),
 		);
 
-		
 		return $menu;
 	}
 }

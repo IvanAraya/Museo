@@ -1,4 +1,4 @@
-var r = new RemoteObject('admin');
+var r = new RemoteObject('index');
 
 function init(){
 	
@@ -36,12 +36,22 @@ function load(modulo){
 		xhr = new XMLHttpRequest();
 	else 
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	xhr.script = document.createElement('script');
+	xhr.script.type = 'text/javascript';
+	xhr.script.onload = function () { eval(modulo+'_onload();');}
+	xhr.script.src = modulo+'.js';
+	xhr.script.id = 'externJS';
 	xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200){
 				var cuerpo = document.getElementById('cuerpo');								
-				cuerpo.innerHTML = this.responseText;
+				cuerpo.innerHTML = this.responseText;				
+				var head= document.getElementsByTagName('head')[0];
+				if(document.getElementById('externJS'))
+					head.removeChild(document.getElementById('externJS'));
+				head.appendChild(this.script);
+				
 		}
-    }
+	}
 	xhr.open('POST',modulo+'.php', true);
 	xhr.send(null);
 }

@@ -1,4 +1,9 @@
 
-function main(){
-	alert('hola');
+function perfil_onload(){
+
+}
+
+function boton(){
+	
+	alert('hola boton');
 }

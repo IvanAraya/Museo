@@ -1,21 +1,53 @@
-<?php?>
+<?php
+
+?>
 <html>
-  <head>
-    <meta content="text/html; charset=windows-1252" http-equiv="content-type">
-    <script src="perfil.js"></script>
-  </head>
   <body onload="main()">
-    <div class="frame">
-      <form id="formPerfil"> 
-			<span class="control" style="top: 100px; left: 200px;">Rut </span>
-			<span class="control" style="top: 100px; left: 400px;" id="rut"  >{Rut}</span> 
-			<span class="control" style="top: 150px; left: 200px;">Nombre </span>
-			<span class="control" style="top: 150px; left: 400px;" id="nombre">{Nombre}</span> 
-			<span class="control" style="top: 200px; left: 200px;">Contrase&ntilde;a</span>
-			<input class="control" style="top: 200px; left: 400px;" name="password" type="password"> 
-			<span class="control" style="top: 250px; left: 200px;">Email</span>
-			<input class="control" style="top: 250px; left: 400px;" name="mail" type="email"> 
-			<input class="control" style="top: 350px; left: 300px;" name="ok" value="ok"  type="button">
+    <div class="frame w3-container">
+		<div class="titulo-form w3-row">
+			<div class="w3-col l12">
+				<span >Perfil</span>
+			</div>
+		</div>
+		<br>
+		<form id="formPerfil"> 
+			<div class="w3-row">
+				<div class="w3-col m6 w3-container">
+					<label for="rut">Rut </label>
+				</div>
+				<div class="w3-col m6  w3-container">
+					<span id="rut" >{Rut}</span> <br>
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-col m6  w3-container">
+					<label for="nombre" >Nombre </label><br>
+				</div>
+				<div class="w3-col m6  w3-container">
+					<span class="control" id="nombre">{Nombre}</span> 	<br>	
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-col m6  w3-container">
+					<label for="password">Contrase&ntilde;a</label><br>
+				</div>
+				<div class="w3-col m6  w3-container">
+					<input name="password" type="password"> <br>	
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-col m6  w3-container">
+					<label for="mail" >Email</label><br>
+				</div>
+				<div class="w3-col m6  w3-container">
+					<input class="control" name="mail" type="email"> <br>
+				</div>
+			</div>
+			<div class="w3-row">
+				<div class="w3-rest w3-center">
+					<input class="control center" name="ok" value="ok" type="button" onclick="">
+				</div>
+			</div>
 		</form>
 	</div>
 </body></html>

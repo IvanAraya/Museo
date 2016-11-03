@@ -4,7 +4,7 @@
 		<div class="frame w3-container">
 			<div class="titulo-form w3-row">
 				<div class="w3-col l12">
-					<span >Catalogo</span>
+					<span >Recursos</span>
 				</div>
 			</div>
 			<br>
