@@ -31,6 +31,9 @@ function init(){
 }
 
 function load(modulo){
+	var keyValue = '';
+	if(arguments[1])
+		keyValue = '"'+arguments[1]+'"';
 	var xhr;
 	if (window.XMLHttpRequest) 
 		xhr = new XMLHttpRequest();
@@ -38,7 +41,7 @@ function load(modulo){
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
 	xhr.script = document.createElement('script');
 	xhr.script.type = 'text/javascript';
-	xhr.script.onload = function () { eval(modulo+'_onload();');}
+	xhr.script.onload = function () { eval(modulo+'_onload('+keyValue+')')};
 	xhr.script.src = modulo+'.js';
 	xhr.script.id = 'externJS';
 	xhr.onreadystatechange = function() {
@@ -49,7 +52,6 @@ function load(modulo){
 				if(document.getElementById('externJS'))
 					head.removeChild(document.getElementById('externJS'));
 				head.appendChild(this.script);
-				
 		}
 	}
 	xhr.open('POST',modulo+'.php', true);
