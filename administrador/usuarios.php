@@ -28,7 +28,7 @@
 										echo "<td>".$row["nombre"]." ".$row["apellido"]."</td>\n";
 										echo "<td>".$row["mail"]."</td>\n";
 										echo "<td><button onclick=editarUsuario('".$row["rut"]."')>Edit</button></td>";
-										echo "<td><button onclick=editarUsuario('".$row["rut"]."')>Eliminar</button></td>";
+										echo "<td><button onclick=eliminarUsuario('".$row["rut"]."')>Eliminar</button></td>";
 									echo "</tr>\n";
 								}
 							echo "</table>\n";

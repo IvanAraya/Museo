@@ -4,13 +4,16 @@
 	/**
 	* 
 	*/
+
+
+
 	class Usuarios 
 	{
 		function enviarInfo()
 		{
 			$rut = $_POST['rut'];
 			
-
+			$conn = null;
 			$usuario = 'root';
 			$passwd = '';
 
@@ -21,7 +24,6 @@
 				print "¡Error!: " . $e->getMessage() . "<br/>";
 				die();
 			}
-
 
 			$stmt = $conn->prepare("SELECT * FROM usuarios_administracion WHERE rut = :rut");
 			$stmt->bindParam(":rut", $rut);
@@ -43,6 +45,31 @@
 				return $arreglo;
 			}
 			
+		}
+
+		function eliminarUsuario()
+		{
+			$rut = $_POST['rut'];
+
+			$conn = null;
+			$usuario = 'root';
+			$passwd = '';
+
+			try {
+				$conn = new PDO('mysql:host=localhost;dbname=Museo;charset=utf8', $usuario, $passwd);
+				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			} catch (PDOException $e) {
+				print "¡Error!: " . $e->getMessage() . "<br/>";
+				die();
+			}
+
+
+			$stmt = $conn->prepare("DELETE FROM usuarios_administracion WHERE rut = :rut");
+			//$stmt->bindParam(":rut", $rut);
+			$stmt->execute( array( ":rut" => $rut ));
+			//$query->execute( array( ":id_to_delete" => $id_to_delete ) );
+
+			return true;
 		}
 	}
  ?>
