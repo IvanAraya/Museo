@@ -5,10 +5,13 @@ var f = new RemoteObject('Usuarios');
 function editarUsuario(rut)
 {
 	//alert("editate");
+
 	var datos = new FormData();
 	datos.append('rut',rut);
 	f.callMethod("enviarInfo", datos, function(respuesta){
+
 		document.getElementById("Erut").value = rut+"-"+respuesta[0];
+		document.getElementById("Erut").disabled= true;
 		document.getElementById("Enombre").value = respuesta[1];
 		document.getElementById("Eapellido").value = respuesta[2];
 		document.getElementById("Epass").value = respuesta[3];
@@ -49,58 +52,58 @@ function eliminarUsuario(rut)
 
 function agregarUsuario()
 {
-		rut_c=document.getElementById("Erut").value;
-		nombre=document.getElementById("Enombre").value;
-		apellido=document.getElementById("Eapellido").value;
-		pass=document.getElementById("Epass").value;
-		email=document.getElementById("Email").value;
+	rut_c=document.getElementById("Erut").value;
+	nombre=document.getElementById("Enombre").value;
+	apellido=document.getElementById("Eapellido").value;
+	pass=document.getElementById("Epass").value;
+	email=document.getElementById("Email").value;
 
-		rut = rut_c.split("-")[0];
-		div = rut_c.split("-")[1];
+	rut = rut_c.split("-")[0];
+	div = rut_c.split("-")[1];
 
-		if(document.getElementById("AS").checked == true)
-			as = 1;
-		else
-			as = 0;
+	if(document.getElementById("AS").checked == true)
+		as = 1;
+	else
+		as = 0;
 
-		if(document.getElementById("EC").checked == true)
-			ec = 1;
-		else
-			ec = 0;
+	if(document.getElementById("EC").checked == true)
+		ec = 1;
+	else
+		ec = 0;
 
-		if(document.getElementById("EAR").checked == true)
-			ear = 1;
-		else
-			ear = 0;
+	if(document.getElementById("EAR").checked == true)
+		ear = 1;
+	else
+		ear = 0;
 
-		if(document.getElementById("ER").checked == true)
-			er = 1;
-		else
-			er = 0;
+	if(document.getElementById("ER").checked == true)
+		er = 1;
+	else
+		er = 0;
 
-		var arr =[];
+	var arr =[];
 
-		arr[0] = rut;
-		arr[1] = div;
+	arr[0] = rut;
+	arr[1] = div;
 
-		arr[2] = nombre;
-		arr[3] = apellido;
-		arr[4] = pass;
-		arr[5] = email;
+	arr[2] = nombre;
+	arr[3] = apellido;
+	arr[4] = pass;
+	arr[5] = email;
 
-		arr[6] = as;
-		arr[7] = ec;
-		arr[8] = ear;
-		arr[9] = er;
+	arr[6] = as;
+	arr[7] = ec;
+	arr[8] = ear;
+	arr[9] = er;
 
 	var jsonarr = JSON.stringify(arr);
 	
 	var arg = new FormData();
 	arg.append('datos',jsonarr);
 
-	//f.callMethod("eliminarUsuario", datos, function(respuesta){
-	//	alert(respuesta);
-	//});
+	f.callMethod("agregarUsuario", arg, function(respuesta){
+		alert("agrego");
+	});
 
 
 }
