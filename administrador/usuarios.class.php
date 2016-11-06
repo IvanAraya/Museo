@@ -71,5 +71,12 @@
 
 			return true;
 		}
+
+		function agregarUsuario()
+		{
+			$datos = $_POST['datos'] ;
+		
+			$datos = json_decode($datos);
+		}
 	}
  ?>
