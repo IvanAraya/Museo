@@ -4,14 +4,14 @@ var f = new RemoteObject('Usuarios');
 
 function editarUsuario(rut)
 {
-	alert("editate");
+	//alert("editate");
 	var datos = new FormData();
 	datos.append('rut',rut);
 	f.callMethod("enviarInfo", datos, function(respuesta){
 		document.getElementById("Erut").value = rut+"-"+respuesta[0];
 		document.getElementById("Enombre").value = respuesta[1];
 		document.getElementById("Eapellido").value = respuesta[2];
-		//document.getElementById("Epass").value = respuesta[3];
+		document.getElementById("Epass").value = respuesta[3];
 		document.getElementById("Email").value =respuesta[4];
 		
 		if(respuesta[5] == 1)
@@ -42,9 +42,9 @@ function eliminarUsuario(rut)
 	alert("eliminate");
 	var datos = new FormData();
 	datos.append('rut',rut);
-	f.callMethod("enviarInfo", datos, function(respuesta){
+	f.callMethod("eliminarUsuario", datos, function(respuesta){
 		alert(respuesta);
-	}
+	});
 }
 
 function agregarUsuario()
