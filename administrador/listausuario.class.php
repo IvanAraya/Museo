@@ -4,36 +4,15 @@
 	/**
 	* 
 	*/
-function conectar()
-{
-	$conn = null;
-	$usuario = 'root';
-	$passwd = '';
 
-	try {
-		$conn = new PDO('mysql:host=localhost;dbname=Museo;charset=utf8', $usuario, $passwd);
-		$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	} catch (PDOException $e) {
-		print "¡Error!: " . $e->getMessage() . "<br/>";
-		die();
-
-	return $conn;
-}
 
 
 	class Usuarios 
 	{
-		var $conn = null;
-		
 		function enviarInfo()
 		{
 			$rut = $_POST['rut'];
 			
-			var $conexion = $this->conn;
-
-			if($conexion == null)
-				$conexion = conectar();
-
 			/*
 			$conn = null;
 			$usuario = 'root';
@@ -48,7 +27,7 @@ function conectar()
 			}
 			*/
 
-			$stmt = $conexion->prepare("SELECT * FROM usuarios_administracion WHERE rut = :rut");
+			$stmt = $conn->prepare("SELECT * FROM usuarios_administracion WHERE rut = :rut");
 			$stmt->bindParam(":rut", $rut);
 			$stmt->execute();
 
@@ -73,10 +52,7 @@ function conectar()
 		function eliminarUsuario()
 		{
 			$rut = $_POST['rut'];
-			var $conexion = $this->conn;
 
-			if($conexion == null)
-				$conexion = conectar();
 			/*
 			$conn = null;
 			$usuario = 'root';
@@ -91,7 +67,7 @@ function conectar()
 			}*/
 
 
-			$stmt = $conexion->prepare("DELETE FROM usuarios_administracion WHERE rut = :rut");
+			$stmt = $conn->prepare("DELETE FROM usuarios_administracion WHERE rut = :rut");
 			//$stmt->bindParam(":rut", $rut);
 			$stmt->execute( array( ":rut" => $rut ));
 			//$query->execute( array( ":id_to_delete" => $id_to_delete ) );
@@ -101,11 +77,6 @@ function conectar()
 
 		function agregarUsuario()
 		{
-			var $conexion = $this->conn;
-
-			if($conexion == null)
-				$conexion = conectar();
-
 			$datos = $_POST['datos'] ;
 			$datos = json_decode($datos);
 
@@ -134,7 +105,7 @@ function conectar()
 				die();
 			}*/
 
-			$stmt = $conexion->prepare("INSERT INTO usuarios_administracion VALUES (:rut, :div, :nombre, :apellido, :password, :mail, :permiso_usuarios, 
+			$stmt = $conn->prepare("INSERT INTO usuarios_administracion VALUES (:rut, :div, :nombre, :apellido, :password, :mail, :permiso_usuarios, 
 				:permiso_catalogo, :permiso_actividad, :permiso_recursos)");
 
 			$stmt->bindParam(":rut", $rut);
@@ -153,11 +124,6 @@ function conectar()
 
 		function editarUsuario()
 		{
-			var $conexion = $this->conn;
-
-			if($conexion == null)
-				$conexion = conectar();
-
 			$datos = $_POST['datos'] ;
 			$datos = json_decode($datos);
 
@@ -188,7 +154,7 @@ function conectar()
 			}*/
 
 
-			$stmt = $conexion->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, password=:password, mail=:mail, permiso_usuarios=:permiso_usuarios, 
+			$stmt = $conn->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, password=:password, mail=:mail, permiso_usuarios=:permiso_usuarios, 
 				permiso_catalogo=:permiso_catalogo, permiso_actividad=:permiso_actividad, permiso_recursos=:permiso_recursos WHERE rut=:rut");
 
 			$stmt->bindParam(":rut", $rut);
