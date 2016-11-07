@@ -13,7 +13,6 @@
 		{
 			$rut = $_POST['rut'];
 			
-			/*
 			$conn = null;
 			$usuario = 'root';
 			$passwd = '';
@@ -25,7 +24,6 @@
 				print "¡Error!: " . $e->getMessage() . "<br/>";
 				die();
 			}
-			*/
 
 			$stmt = $conn->prepare("SELECT * FROM usuarios_administracion WHERE rut = :rut");
 			$stmt->bindParam(":rut", $rut);
@@ -43,7 +41,7 @@
 				array_push($arreglo, $row['permiso_catalogo']);
 				array_push($arreglo, $row['permiso_actividad']);
 				array_push($arreglo, $row['permiso_recursos']);
-				//$conn = null;
+				$conn = null;
 				return $arreglo;
 			}
 			
@@ -53,7 +51,6 @@
 		{
 			$rut = $_POST['rut'];
 
-			/*
 			$conn = null;
 			$usuario = 'root';
 			$passwd = '';
@@ -64,7 +61,7 @@
 			} catch (PDOException $e) {
 				print "¡Error!: " . $e->getMessage() . "<br/>";
 				die();
-			}*/
+			}
 
 
 			$stmt = $conn->prepare("DELETE FROM usuarios_administracion WHERE rut = :rut");
@@ -92,7 +89,7 @@
 			$ear = $datos[8];
 			$er =$datos[9];
 
-			/*
+
 			$conn = null;
 			$usuario = 'root';
 			$passwd = '';
@@ -103,7 +100,7 @@
 			} catch (PDOException $e) {
 				print "¡Error!: " . $e->getMessage() . "<br/>";
 				die();
-			}*/
+			}
 
 			$stmt = $conn->prepare("INSERT INTO usuarios_administracion VALUES (:rut, :div, :nombre, :apellido, :password, :mail, :permiso_usuarios, 
 				:permiso_catalogo, :permiso_actividad, :permiso_recursos)");
@@ -139,7 +136,6 @@
 			$ear = $datos[8];
 			$er =$datos[9];
 
-			/*
 
 			$conn = null;
 			$usuario = 'root';
@@ -151,7 +147,7 @@
 			} catch (PDOException $e) {
 				print "¡Error!: " . $e->getMessage() . "<br/>";
 				die();
-			}*/
+			}
 
 
 			$stmt = $conn->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, password=:password, mail=:mail, permiso_usuarios=:permiso_usuarios, 
