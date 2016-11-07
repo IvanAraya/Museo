@@ -1,6 +1,8 @@
 var f = new RemoteObject('Usuarios');
 
-
+function usuarios_onload(){
+	
+}
 
 function editarUsuario(rut)
 {
