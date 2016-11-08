@@ -2,7 +2,14 @@ var obj = new RemoteObject('noticias'); //crea un objeto de la clse que se encue
 
 function noticias_onload(){
 	
+	var id = null;
+	if(arguments[0]){
+		id = arguments[0] ;
+		alert("editar registro: "+id);
+	}
+	
 	var datos = new FormData(document.getElementById('form'));
+	datos.append('id',id);
 	obj.callMethod('verificar', datos, function(respuesta){
 		if(respuesta.b){
 			alert("cargando");

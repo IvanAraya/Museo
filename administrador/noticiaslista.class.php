@@ -1,33 +1,20 @@
+<?php 
 
-
-
-
-<!DOCTYPE html>
-<html>
-	<head>
-		<title></title>
-		  <link rel="stylesheet" type="text/css" href="css/estilo.css">
-
-		<script type="text/javascript">
-			function nueva(){
-				window.location="noticias.html";
-			}
-		</script>
-
-	</head>
-	<body >
-		<div id="formulario">
-			<h2>Publicaciones</h2><hr>
-			<table border="2px">
-				<tr>
-					<td width="500px">
-						<p>Titulo</p>
-					</td>
-					<td colspan="2">	
-						<p>Opciones</p>					
-					</td>
-				</tr>
-			<?php 
+class noticiaslista{
+	
+	
+	function cargar(){
+		
+		
+		$resp = array();
+		$resp[0] = array('1','publicacion1');
+		$resp[1] = array('2','publicacion2');
+		
+		return $resp;
+		
+	}
+	
+	function otra(){
 				///Datos conexion///
 				$ip = "localhost";
 				$usr = "root";
@@ -59,15 +46,8 @@
 
 					echo "</tr>";
 				}
-			?>
-			</table>
+	}
+	
+}
 
-			<input type="button" name="nuevo" value="Nueva publicaion" onclick="nueva()">
-
-
-		</div>
-
-
-
-	</body>
-</html>
+?>
