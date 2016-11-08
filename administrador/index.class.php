@@ -19,7 +19,7 @@ class index{
 			)),
 			new Menu('Actividad Reciente',null, array(
 				new Menu('Nueva Actividad','noticias',false),
-				new Menu('Editar Actividad','listanoticias',false)
+				new Menu('Editar Actividad','noticiaslista',false)
 			)),
 			new Menu('Recursos',null, array(
 				new Menu('Nuevo Recurso','recursos',false),

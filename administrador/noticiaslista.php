@@ -1,22 +1,27 @@
+<?php
+
+?>
+
 <!DOCTYPE html>
 <html>
-	<body>
-		<div class="frame w3-container">
+	<body >
+		<div id="formulario">
+			
 			<div class="titulo-form w3-row">
 				<div class="w3-col l12">
-					<span >Lista muestra</span>
+					<span >Actividad Reciente</span>
 				</div>
 			</div>
 			<br>
+
 			<table class="w3-table-all w3-hoverable" id="tablaLista">
 				<tr>
-					<td>id</td>
-					<td>campo 1</td>
-					<td>campo n</td>
+					<td width="500px">Titulo</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 				</tr>
 			</table>
+
 		</div>
 	</body>
 </html>
