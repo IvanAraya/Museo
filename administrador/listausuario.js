@@ -8,6 +8,7 @@ function listausuario_onload()
 function editarUsuario(rut)
 {
 	//alert("editate");
+	/*
 
 	var datos = new FormData();
 	datos.append('rut',rut);
@@ -40,7 +41,9 @@ function editarUsuario(rut)
 		else
 			document.getElementById("ER").checked= false;
 		
-	});
+	});*/
+	
+	load('usuarios','daniel');
 }
 
 function eliminarUsuario(rut)

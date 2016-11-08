@@ -1,6 +1,8 @@
-var f = new RemoteObject('Usuarios');
+var f = new RemoteObject('usuarios');
 
 function usuarios_onload(){
+	if(arguments[0])
+	alert(arguments[0]);
 	
 }
 
