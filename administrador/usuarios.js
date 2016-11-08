@@ -141,6 +141,7 @@ function validando()
     }
     else
     {
+    	document.getElementById("alertas").style.visibility = "hidden";
         alert("Rut invalidado: "+compRut);
     }
 

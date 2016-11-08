@@ -15,26 +15,29 @@ echo "<p>".$_SESSION['apellido']."</p>";
 
 <!DOCTYPE html>
 <html>
-<header>
+<!--<header>
 	<script type="text/javascript" src="validacion.js"></script>
 	<script type="text/javascript" src="base/ajax.js"></script>
-	<script type="text/javascript" src="usuarios.js"></script>
-</header>
+	<script type="text/javascript" src="listausuarios.js"></script>
+</header>-->
 	<body>
 		<div class="frame w3-container">
 			<div class="titulo-form w3-row">
 				<div class="w3-col l12">
-					<span >Usuarios</span>
-
 					<div id="listUsuarios">
 						<h1>Listado de Usuarios</h1>
 						<?php 
 							include("../data.php");
-							echo "<table>\n";
+							echo "<table class='w3-table w3-striped'>\n";
+							echo "<tr class='w3-red'>";
+									  echo "<th>Rut</th>";
+									  echo "<th>Nombre</th>";
+									  echo "<th>Apellido</th>";
+							echo "</tr>";
 								foreach($conn->query('SELECT * FROM usuarios_administracion') as $row)
 								{
 									echo "<tr id='".$row["rut"]."'>\n";
-										echo "<td>".$row["rut"]."</td>\n";
+										echo "<td>".$row["rut"]."-".$row["dv"]."</td>\n";
 										echo "<td>".$row["nombre"]." ".$row["apellido"]."</td>\n";
 										echo "<td>".$row["mail"]."</td>\n";
 										echo "<td><button onclick=editarUsuario('".$row["rut"]."')>Edit</button></td>";
@@ -42,7 +45,7 @@ echo "<p>".$_SESSION['apellido']."</p>";
 									echo "</tr>\n";
 								}
 							echo "</table>\n";
-							//$conn = null;
+							$conn = null;
 						 ?>
 						
 					</div>
