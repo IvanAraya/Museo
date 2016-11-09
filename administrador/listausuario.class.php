@@ -7,7 +7,7 @@
 
 
 
-	class usuarios 
+	class Usuarios 
 	{
 		function enviarInfo()
 		{
