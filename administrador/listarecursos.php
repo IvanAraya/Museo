@@ -13,10 +13,10 @@
 			<br>
 			<table class="w3-table-all w3-hoverable" id="tablaLista">
 				<tr>
-					<td>Documento</td>
-					<td>Fecha Subida</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
+					<th>Documento</th>
+					<th>Fecha Subida</th>
+					<th>&nbsp;</th>
+					<th>&nbsp;</th>
 				</tr>
 			</table>
             <br>

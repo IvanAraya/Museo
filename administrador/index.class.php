@@ -9,22 +9,22 @@ class index{
 		
 		$menu = array(
 			new Menu('Perfil','perfil',false),
-			new Menu('Usuarios',null, array(
-				new Menu('Nuevo Usuario','usuarios',false),
-				new Menu('Editar Usuario','listausuarios',false)
+			new Menu('Usuarios',null, array(			
+				new Menu('Editar Usuario','listausuarios',false),
+				new Menu('Nuevo Usuario','usuarios',false)
 			)),
-			new Menu('Catalogo',null, array(
-				new Menu('Nueva Muestra','catalogo',false),
-				new Menu('Editar Muestra','listacatalogo',false)
+			new Menu('Cat&aacute;logo',null, array(
+				new Menu('Editar Muestra','listacatalogo',false),
+				new Menu('Nueva Muestra','catalogo',false)
 			)),
 			new Menu('Actividad Reciente',null, array(
-				new Menu('Nueva Actividad','noticias',false),
-				new Menu('Editar Actividad','noticiaslista',false)
+				new Menu('Editar Actividad','noticiaslista',false),
+				new Menu('Nueva Actividad','noticias',false)
 			)),
 			new Menu('Recursos',null, array(
-				new Menu('Nuevo Recurso','recursos',false),
-				new Menu('Editar Recurso','listarecursos',false)
-			)),
+				new Menu('Editar Recurso','listarecursos',false),
+				new Menu('Nuevo Recurso','recursos',false)
+			))
 		);
 
 		return $menu;

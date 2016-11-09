@@ -12,7 +12,7 @@
 			<div class="w3-row">
 				<div class="w3-container m4 w3-col">
 					<img src="img/subir.jpg" width="200px" height="250px" id="imagenS">
-					<input type="button" name="b_subir_imagen" value="Subir imagen" onclick="subirImagen()">
+					<input type="button" name="b_subir_imagen" value="Subir imagen" onclick="subirImagen()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 				</div>
 				<div class="w3-container m8 w3-col">
 					<label for="ti">Titulo</label>		
@@ -24,10 +24,10 @@
 				</div>
 			</div>
 				<div class="centrar">
-					<input type="button" name="b_guardar" value="Guardar" onclick="guardar()">
-					<input type="button" name="b_cancelar" value="Cancelar" onclick="cancelar()"> 					
-					<input type="button" name="b_publicar" value="Publicar" onclick="publicar()">
-					<input type="button" class="boton-rojo" id="b_eliminar" value="Eliminar" onclick="eliminar()" > 
+					<input type="button" name="b_guardar" value="Guardar" onclick="guardar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
+					<input type="button" name="b_cancelar" value="Cancelar" onclick="cancelar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge"> 					
+					<input type="button" name="b_publicar" value="Publicar" onclick="publicar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
+					<input type="button" id="b_eliminar" value="Eliminar" onclick="eliminar()" class="w3-btn w3-red w3-border w3-round-xlarge"> 
 				</div>
 			</form>
 		</div>

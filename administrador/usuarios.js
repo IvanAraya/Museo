@@ -1,13 +1,19 @@
+
 var f = new RemoteObject('usuarios');
+var nuevoUsuario ;
 
 function usuarios_onload(){
+
 	if(arguments[0])
 	{
 		//editar usuario
+		nuevoUsuario = false;
+		editarUsuario(arguments[0]);
 	}
 	else
 	{
 		//nuevo usuario
+		nuevoUsuario = true;
 	}
 	
 }
@@ -15,7 +21,6 @@ function usuarios_onload(){
 function editarUsuario(rut)
 {
 	//alert("editate");
-
 	var datos = new FormData();
 	datos.append('rut',rut);
 	f.callMethod("enviarInfo", datos, function(respuesta){
@@ -50,14 +55,22 @@ function editarUsuario(rut)
 	});
 }
 
-function eliminarUsuario(rut)
+function eliminarUsuario()
 {
 	//alert("eliminate");
-	var datos = new FormData();
-	datos.append('rut',rut);
-	f.callMethod("eliminarUsuario", datos, function(respuesta){
-		document.getElementById(rut).remove();
-	});
+	if(confirm('¿Desea eliminar a este usuario?')){
+		var rut = document.getElementById('Erut').value.split('-')[0];
+		var datos = new FormData();
+		datos.append('rut',rut);
+		f.callMethod("eliminarUsuario", datos, function(respuesta){
+			if(respuesta){
+				alert('Usuario eliminado con exito');
+				load('listausuarios');
+			}else
+				alert('No se pudo eliminar el usuario');
+			//document.getElementById(rut).remove();
+		});
+	}
 }
 
 function agregarUsuario()
@@ -110,9 +123,17 @@ function agregarUsuario()
 	
 	var arg = new FormData();
 	arg.append('datos',jsonarr);
-
-	f.callMethod("agregarUsuario", arg, function(respuesta){
-		alert("agrego");
+	var metodo;
+	if(nuevoUsuario)
+		metodo  = "agregarUsuario";
+	else
+		metodo  = "editarUsuario";
+	
+	f.callMethod(metodo, arg, function(respuesta){
+		if(respuesta)
+			alert("Usuario guardado con exito");
+		else
+			alert("No se pudo guardar el usuario");
 	});
 
 
@@ -149,7 +170,7 @@ function validando()
     }
     else
     {
-    	document.getElementById("alertas").style.visibility = "hidden";
+    	//document.getElementById("alertas").style.visibility = "hidden";
         alert("Rut invalidado: "+compRut);
     }
 
@@ -177,4 +198,9 @@ function validarEmail( email ) {
     return true;
 }
 
+function cancelar(){
+	
+	if(confirm('¿Desea cancelar?'))	
+		load('listausuarios');
+}
 

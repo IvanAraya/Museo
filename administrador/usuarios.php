@@ -14,10 +14,14 @@ echo "<p>".$_SESSION['apellido']."</p>";
 
 	<body>
 		<div class="frame w3-container">
-			<div class="titulo-form w3-row">
-				<div class="w3-col l12">
+            <div class="titulo-form w3-row">
+                <div class="w3-col l12">
+                    <span >Datos Personales</span>
+                </div>
+            </div>
+            <br>
+
 					<div id="editUsuario">
-						<h2>Datos Personales</h2>
 						<div id="datosUsuario">
 							<!--<div id = "alertas" style="display:none" >
 								<div id ="alerRut" class="w3-panel w3-red">
@@ -27,59 +31,55 @@ echo "<p>".$_SESSION['apellido']."</p>";
 								</div>
 							</div>-->
 
-							<table>
-								<tr>
-									<td>Rut</td>
-									<td>
-										<input id="Erut" type="text" placeholder="eje: 11111111-1">
-									</td>
-								</tr>
-								<tr>
-									<td>Nombre</td>
-									<td>
-										<input id="Enombre" type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Apellido</td>
-									<td>
-										<input id="Eapellido" type="text">
-									</td>
-								</tr>
-								<tr>
-									<td>Mail</td>
-									<td>
-										<input id="Email" type="text" placeholder='mi@ejemplo.com'>
-									</td>
-								</tr>
-								<tr>
-									<td>Contraseña</td>
-									<td>
-										<input id="Epass" type="text">
-									</td>
-								</tr>
-							</table>
+							<div class="w3-row">
+                                <div class="w3-col m6 w3-container">Rut<br></div>
+                                <div class="w3-col m6 w3-container">
+                                    <input id="Erut" type="text" placeholder="ej: 11111111-1"><br>
+                                </div>
+                            </div>
+							<div class="w3-row">
+								<div class="w3-col m6 w3-container">Nombre</div>
+								<div class="w3-col m6 w3-container">
+									<input id="Enombre" type="text">
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-col m6 w3-container">Apellido</div>
+								<div class="w3-col m6 w3-container">
+									<input id="Eapellido" type="text">
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-col m6 w3-container">Mail</div>
+								<div class="w3-col m6 w3-container">
+									<input id="Email" type="text" placeholder='mi@ejemplo.com'>
+								</div>
+							</div>
+							<div class="w3-row">
+								<div class="w3-col m6 w3-container">Contrase&ntilde;a</div>
+								<div class="w3-col m6 w3-container">
+									<input id="Epass" type="text">
+								</div>
+							</div>
 						</div>
 
 						<div id="permisoUsuario">
-							<h2>Permiso de usuario</h2>
+							<p class="titulo-form">Permiso de usuario</p>
 
 							<fieldset>
-									<input id ="AS" type="checkbox">Administrador de sistema <br>
-									<input id ="EC" type="checkbox">Editar Catálogo <br>
-									<input id ="EAR" type="checkbox">Editar Actividad Reciente <br>
-									<input id ="ER" type="checkbox">Editar Recursos <br>
+									<input id ="AS" type="checkbox"> Administrador de sistema <br>
+									<input id ="EC" type="checkbox"> Editar Catálogo <br>
+									<input id ="EAR" type="checkbox"> Editar Actividad Reciente <br>
+									<input id ="ER" type="checkbox"> Editar Recursos <br>
 							</fieldset>	
 						</div>
-						
-						<table>
-							<tr>
-								<td><button onclick="validando()">Guardar</button></td>
-								<td><button>Cancelar</button></td>
-								<td><button>Eliminar</button></td>
-							</tr>
-						</table>
-
+						<br>
+						<div class="centrar">
+							<button class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="validando()" >Guardar</button>
+							<button class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="cancelar()">Cancelar</button>
+							<button class="w3-btn w3-red w3-border w3-round-xlarge" onclick="eliminarUsuario()" >Eliminar</button>
+						</div>
+						<br>
 					</div>
 
 				</div>
