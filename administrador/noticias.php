@@ -27,7 +27,7 @@
 					<input type="button" name="b_guardar" value="Guardar" onclick="guardar()">
 					<input type="button" name="b_cancelar" value="Cancelar" onclick="cancelar()"> 					
 					<input type="button" name="b_publicar" value="Publicar" onclick="publicar()">
-					<input type="button" id="b_eliminar" value="Eliminar" onclick="eliminar()" class="boton-rojo"> 
+					<input type="button" class="boton-rojo" id="b_eliminar" value="Eliminar" onclick="eliminar()" > 
 				</div>
 			</form>
 		</div>

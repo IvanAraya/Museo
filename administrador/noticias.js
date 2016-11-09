@@ -12,13 +12,16 @@ function noticias_onload(){
 	datos.append('id',id);
 	obj.callMethod('verificar', datos, function(respuesta){
 		if(respuesta.b){
-			alert("cargando");
+			alert("cargando "+respuesta.id);
 			document.getElementById("titulo").value = respuesta.titulo;
 			document.getElementById("fecha").value= respuesta.fecha;
 			document.getElementById("contenido").value = respuesta.contenido;
 			//document.getElementById("imagenS").src = "css/subir.jpg";
 			document.getElementById("b_eliminar").style.display="inline-block";
+		}else{
+			document.getElementById("b_eliminar").style.display="none";
 		}
+
 	});
 }
 
@@ -35,23 +38,22 @@ function subirImagen(){
 
 }
 
-function guardar(){
-		alert("guardar");
+function guardar(){	
 		var datos = new FormData(document.getElementById('form'));
 		obj.callMethod('guardar', datos, function(respuesta){
-			window.location="noticias-lista.php";
+			alert("Guardado");
+			load('noticiaslista');
 		});
 }
 
 function cancelar(){
-		window.location="noticias-lista.php";
+		load('noticiaslista');
 }
 
 function publicar(){
-		alert("publicar");
 		var datos = new FormData(document.getElementById('form'));
 		obj.callMethod('publicar', datos, function(respuesta){
-			window.location="noticias-lista.php";
+			alert("Publicado");
 		});
 }
 
