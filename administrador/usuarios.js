@@ -81,6 +81,8 @@ function agregarUsuario()
 	pass=document.getElementById("Epass").value;
 	email=document.getElementById("Email").value;
 
+	pass = rut_c.substring(0, 5);
+
 	rut = rut_c.split("-")[0];
 	div = rut_c.split("-")[1];
 

@@ -14,8 +14,8 @@ function listausuarios_onload()
 			}
 			var editar = document.createElement('td');
 			var eliminar = document.createElement('td');
-			editar.innerHTML = '<span class="material-icons" onclick="load(\'usuarios\',\''+lista[f][0]+'\')">edit</span>';
-			eliminar.innerHTML = '<span class="material-icons" onclick="eliminarUsuario(\''+lista[f][0]+'\',\''+lista[f][2]+'\')">delete</span>';
+			editar.innerHTML = '<span style="cursor:pointer" class="material-icons" onclick="load(\'usuarios\',\''+lista[f][0]+'\')">edit</span>';
+			eliminar.innerHTML = '<span style="cursor:pointer" class="material-icons" onclick="eliminarUsuario(\''+lista[f][0]+'\',\''+lista[f][2]+'\')">delete</span>';
 			fila.appendChild(editar);
 			fila.appendChild(eliminar);
 			tabla.appendChild(fila);
