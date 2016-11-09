@@ -1,4 +1,7 @@
 <?php 
+	session_start();
+	$_SESSION['debug'] = true;
+	
 	//TODO
 	//Gestionar permisos de ususrio al formulario;
 	$permiso = true;
@@ -9,8 +12,10 @@
 <html>
   <head>
     <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="css/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	 <script src="base/ajax.js"></script>
 	 <script src="index.js"></script>
     <title></title>
