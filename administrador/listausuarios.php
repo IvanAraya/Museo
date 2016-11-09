@@ -15,43 +15,24 @@ echo "<p>".$_SESSION['apellido']."</p>";
 
 <!DOCTYPE html>
 <html>
-<!--<header>
-	<script type="text/javascript" src="validacion.js"></script>
-	<script type="text/javascript" src="base/ajax.js"></script>
-	<script type="text/javascript" src="listausuarios.js"></script>
-</header>-->
 	<body>
 		<div class="frame w3-container">
-			<div class="titulo-form w3-row">
+        	<div class="titulo-form w3-row">
 				<div class="w3-col l12">
-					<div id="listUsuarios">
-						<h1>Listado de Usuarios</h1>
-						<?php 
-							include("../data.php");
-							echo "<table class='w3-table w3-striped'>\n";
-							echo "<tr class='w3-red'>";
-									  echo "<th>Rut</th>";
-									  echo "<th>Nombre</th>";
-									  echo "<th>Apellido</th>";
-							echo "</tr>";
-								foreach($conn->query('SELECT * FROM usuarios_administracion') as $row)
-								{
-									echo "<tr id='".$row["rut"]."'>\n";
-										echo "<td>".$row["rut"]."-".$row["dv"]."</td>\n";
-										echo "<td>".$row["nombre"]." ".$row["apellido"]."</td>\n";
-										echo "<td>".$row["mail"]."</td>\n";
-										echo "<td><button onclick=editarUsuario('".$row["rut"]."')>Edit</button></td>";
-										echo "<td><button onclick=eliminarUsuario('".$row["rut"]."')>Eliminar</button></td>";
-									echo "</tr>\n";
-								}
-							echo "</table>\n";
-							$conn = null;
-						 ?>
-						
-					</div>
-
-					
+					<span >Lista de Usuarios</span>
+				</div>
+			</div>
 			<br>
+            <table class='w3-table-all w3-hoverable'  id="tablaLista">
+                <tr>
+                    <th>Rut</th>
+                    <th>Nombre</th>
+                    <th>Mail</th>
+                    <th>&nbsp;</th>
+                    <th>&nbsp;</th>
+                </tr>
+			</table>
+            <br>
 		</div>
 	</body>
 </html>

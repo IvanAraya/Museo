@@ -5,27 +5,20 @@
 	* 
 	*/
 
-
-
 	class usuarios 
 	{
+		var $db;
+	//--------------------------------------------------------------------------------------------------------
+		function __construct(){
+			include ('../../data.php');
+			$this->db = $conn; 
+		}
+	//--------------------------------------------------------------------------------------------------------	
 		function enviarInfo()
 		{
 			$rut = $_POST['rut'];
-			
-			$conn = null;
-			$usuario = 'root';
-			$passwd = '';
 
-			try {
-				$conn = new PDO('mysql:host=localhost;dbname=Museo;charset=utf8', $usuario, $passwd);
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch (PDOException $e) {
-				print "¡Error!: " . $e->getMessage() . "<br/>";
-				die();
-			}
-
-			$stmt = $conn->prepare("SELECT * FROM usuarios_administracion WHERE rut = :rut");
+			$stmt = $this->db->prepare("SELECT * FROM usuarios_administracion WHERE rut = :rut");
 			$stmt->bindParam(":rut", $rut);
 			$stmt->execute();
 
@@ -41,37 +34,24 @@
 				array_push($arreglo, $row['permiso_catalogo']);
 				array_push($arreglo, $row['permiso_actividad']);
 				array_push($arreglo, $row['permiso_recursos']);
-				$conn = null;
+				$this->db = null;
 				return $arreglo;
 			}
-			
+			$this->db = null;
 		}
-
+	//--------------------------------------------------------------------------------------------------------
 		function eliminarUsuario()
 		{
 			$rut = $_POST['rut'];
 
-			$conn = null;
-			$usuario = 'root';
-			$passwd = '';
-
-			try {
-				$conn = new PDO('mysql:host=localhost;dbname=Museo;charset=utf8', $usuario, $passwd);
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch (PDOException $e) {
-				print "¡Error!: " . $e->getMessage() . "<br/>";
-				die();
-			}
-
-
-			$stmt = $conn->prepare("DELETE FROM usuarios_administracion WHERE rut = :rut");
+			$stmt = $this->db->prepare("DELETE FROM usuarios_administracion WHERE rut = :rut");
 			//$stmt->bindParam(":rut", $rut);
 			$stmt->execute( array( ":rut" => $rut ));
 			//$query->execute( array( ":id_to_delete" => $id_to_delete ) );
-
+			$this->db = null;
 			return true;
 		}
-
+	//--------------------------------------------------------------------------------------------------------
 		function agregarUsuario()
 		{
 			$datos = $_POST['datos'] ;
@@ -89,20 +69,7 @@
 			$ear = $datos[8];
 			$er =$datos[9];
 
-
-			$conn = null;
-			$usuario = 'root';
-			$passwd = '';
-
-			try {
-				$conn = new PDO('mysql:host=localhost;dbname=Museo;charset=utf8', $usuario, $passwd);
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch (PDOException $e) {
-				print "¡Error!: " . $e->getMessage() . "<br/>";
-				die();
-			}
-
-			$stmt = $conn->prepare("INSERT INTO usuarios_administracion VALUES (:rut, :div, :nombre, :apellido, :password, :mail, :permiso_usuarios, 
+			$stmt = $this->db->prepare("INSERT INTO usuarios_administracion VALUES (:rut, :div, :nombre, :apellido, :password, :mail, :permiso_usuarios, 
 				:permiso_catalogo, :permiso_actividad, :permiso_recursos)");
 
 			$stmt->bindParam(":rut", $rut);
@@ -116,9 +83,11 @@
 			$stmt->bindParam(":permiso_actividad", $ear);
 			$stmt->bindParam(":permiso_recursos", $er);
 			$stmt->execute();
+			$this->db = null;
+			return true;
 
 		}
-
+	//--------------------------------------------------------------------------------------------------------
 		function editarUsuario()
 		{
 			$datos = $_POST['datos'] ;
@@ -137,20 +106,7 @@
 			$er =$datos[9];
 
 
-			$conn = null;
-			$usuario = 'root';
-			$passwd = '';
-
-			try {
-				$conn = new PDO('mysql:host=localhost;dbname=Museo;charset=utf8', $usuario, $passwd);
-				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			} catch (PDOException $e) {
-				print "¡Error!: " . $e->getMessage() . "<br/>";
-				die();
-			}
-
-
-			$stmt = $conn->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, password=:password, mail=:mail, permiso_usuarios=:permiso_usuarios, 
+			$stmt = $this->db->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, password=:password, mail=:mail, permiso_usuarios=:permiso_usuarios, 
 				permiso_catalogo=:permiso_catalogo, permiso_actividad=:permiso_actividad, permiso_recursos=:permiso_recursos WHERE rut=:rut");
 
 			$stmt->bindParam(":rut", $rut);
@@ -163,6 +119,29 @@
 			$stmt->bindParam(":permiso_actividad", $ear);
 			$stmt->bindParam(":permiso_recursos", $er);
 			$stmt->execute();
+			$this->db = null;
+			return true;
+		}
+//--------------------------------------------------------------------------------------------------------
+		function listarUsuarios(){
+			
+			$lista = array();
+			foreach($this->db->query('SELECT * FROM usuarios_administracion') as $row)
+				{
+					$fila = array(
+						$row["rut"],
+						$row["rut"]."-".$row["dv"],
+						$row["nombre"]." ".$row["apellido"],
+						$row["mail"],
+						//echo "<td><button onclick=editarUsuario('".$row["rut"]."')>Edit</button></td>";
+						//echo "<td><button onclick=eliminarUsuario('".$row["rut"]."')>Eliminar</button></td>";
+
+					);
+					array_push($lista,$fila);
+				}
+
+			$this->db = null;
+			return $lista;
 		}
 	}
 

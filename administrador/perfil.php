@@ -45,7 +45,7 @@
 			</div>
 			<div class="w3-row">
 				<div class="w3-rest w3-center">
-					<input class="control center" name="ok" value="ok" type="button" onclick="">
+					<input name="ok" value="ok" type="button" onclick="" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 				</div>
 			</div>
 		</form>

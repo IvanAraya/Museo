@@ -17,7 +17,7 @@
 			$resp = $clase->$metodo() ;
 			echo json_encode($resp) ;
 		}catch(Exception $err){
-			echo '<span>'.$err->getMessage.'</span>' ;
+			echo '<span>'.$err->getMessage().'</span>' ;
 		}
 	}else{
 		echo '<span>Parametros no validos</span>';

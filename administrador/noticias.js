@@ -1,18 +1,22 @@
 var obj = new RemoteObject('noticias'); //crea un objeto de la clse que se encuentra en el php 
+var nuevaNoticia ;
+var id = null;
 
 function noticias_onload(){
 	
-	var id = null;
+	
 	if(arguments[0]){
 		id = arguments[0] ;
-		alert("editar registro: "+id);
+		nuevaNoticia = false;
+	}else{
+		id = null;
+		nuevaNoticia = true;
 	}
-	
 	var datos = new FormData(document.getElementById('form'));
 	datos.append('id',id);
 	obj.callMethod('verificar', datos, function(respuesta){
 		if(respuesta.b){
-			alert("cargando "+respuesta.id);
+			//alert("cargando "+respuesta.id);
 			document.getElementById("titulo").value = respuesta.titulo;
 			document.getElementById("fecha").value= respuesta.fecha;
 			document.getElementById("contenido").value = respuesta.contenido;
@@ -38,12 +42,23 @@ function subirImagen(){
 
 }
 
-function guardar(){	
-		var datos = new FormData(document.getElementById('form'));
-		obj.callMethod('guardar', datos, function(respuesta){
+function guardar(){
+	
+	var metodo;
+	if(nuevaNoticia)
+		metodo = 'guardar';
+	else
+		metodo = 'actualizar';
+		
+	var datos = new FormData(document.getElementById('form'));
+	datos.append('id',id);
+	obj.callMethod(metodo, datos, function(respuesta){
+		if(respuesta){
 			alert("Guardado");
 			load('noticiaslista');
-		});
+		}else
+			alert("No se pudo guardar la noticia");
+	});
 }
 
 function cancelar(){
