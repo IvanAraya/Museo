@@ -55,11 +55,17 @@
 
 
 		function verificar(){
+			
+
 			$retorno=array();
 			$retorno['b']=false;
 
-			if(isset($_GET['id'])){
-				$id=$_GET['id'];
+			if(isset($_POST['id'])){
+
+
+
+				$id=$_POST['id'];
+				// echo "<script>alert('"+$id+"')</script>";
 				///Datos conexion///
 				$ip = "localhost";
 				$usr = "root";
@@ -69,17 +75,17 @@
 
 				///Creacion conexion///
 				$conexion = mysqli_connect($ip,$usr,$pass,$bd);
-				$accion="select * fom publicaciones where id='$id'";
-				$resultado=mysqli_query($conexion,$accion);
+				$consulta="select * from publicaciones where id = $id" ;
+				$resultados = mysqli_query($conexion,$consulta) ;
 
-				
-				$retorno['id']=$resultado['id'];
-				$retorno['titulo']=$resultado['titulo'];
-				$retorno['fecha']=$resultado['fecha'];
-				$retorno['contenido']=$resultado['contenido'];
-				$retorno['img']=$resultado['img'];
-				$retorno['b']=true;
-
+				while ($reg = mysqli_fetch_array($resultados)) {
+					$retorno['id']	   	 = $reg['id'];
+					$retorno['titulo']	 = $reg['titulo'];
+					$retorno['fecha']	 = $reg['fecha'];
+					$retorno['contenido']= $reg['contenido'];
+					$retorno['img']		 = $reg['img'];
+					$retorno['b']		 = true;
+				}
 				
 			}
 			return $retorno;
