@@ -20,9 +20,9 @@ class recursos{
 			$resp = array(
 				'id' => $row['id_documento'],
 				'titulo' => $row['titulo'],
-				'fecha' => $row['fecha_subida'],
+				'ruta' => $row['ruta_documento'],
 				'descripcion' => $row['descripción'],
-				'ruta' => $row['ruta_documento']
+				'fecha' => $row['fecha_subida'],
 			);
 		}
 		
@@ -32,14 +32,16 @@ class recursos{
 //--------------------------------------------------------------------------------------------------------
 	function listarRecursos(){
 		
-		$stmt = $this->db->prepare("SELECT id_documento, titulo, fecha_subida FROM documentos ORDER BY fecha_subida");
+		$stmt = $this->db->prepare("SELECT id_documento,titulo,ruta_documento,descripcion,fecha_subida FROM documentos ORDER BY fecha_subida");
 		$stmt->execute();
 		$lista = array();
 		if($row = $stmt->fetch()){
 			$fila = array(
 				$row['id_documento'],
 				$row['titulo'],
-				$row['fecha_subida']
+				$row['ruta_documento'],
+				$row['descripcion'],
+				$row['fecha_subida'],
 			);
 			array_push($lista,$fila);
 		}
@@ -47,19 +49,11 @@ class recursos{
 		$this->db = null;
 		return $lista;
 	}
-//--------------------------------------------------------------------------------------------------------
-	function nuevoRecurso(){
 	
-	}
-//--------------------------------------------------------------------------------------------------------
-	function editarRecurso(){
-	
-	}
-//--------------------------------------------------------------------------------------------------------
-	function eliminarRecurso(){
-		return true;
-	}
-//--------------------------------------------------------------------------------------------------------
+}
+
+function eliminarRecurso(){
+	return true;
 }
 
 ?>
