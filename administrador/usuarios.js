@@ -9,11 +9,14 @@ function usuarios_onload(){
 		//editar usuario
 		nuevoUsuario = false;
 		editarUsuario(arguments[0]);
+		document.getElementById("eliminar").disabled= false;
 	}
 	else
 	{
 		//nuevo usuario
 		nuevoUsuario = true;
+		document.getElementById("eliminar").disabled= true;
+		document.getElementById("guardar").disabled= true;
 	}
 	
 }
@@ -191,6 +194,23 @@ function validando()
  		agregarUsuario();
  	}   
 
+}
+
+function validar_rut(input)
+{
+	if(Fn.validaRut(input.value))
+	{
+		input.style.color = "black"; 
+		input.style.borderColor = "black";
+		document.getElementById("guardar").disabled= false;
+
+	}
+	else
+	{
+		input.style.color = "red"; 
+		input.style.borderColor = "red";
+		document.getElementById("guardar").disabled= true;
+	}
 }
 
 function validarEmail( email ) {
