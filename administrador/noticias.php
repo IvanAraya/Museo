@@ -12,7 +12,11 @@
 			<div class="w3-row">
 				<div class="w3-container m4 w3-col">
 					<img src="img/subir.jpg" width="200px" height="250px" id="imagenS">
-					<input type="button" name="b_subir_imagen" value="Subir imagen" onclick="subirImagen()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
+					<!-- boton oculto para seleccionar imagen, muestra una previsualizacion de la imagen el el cuadro de imagen-->
+					<input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();" accept="image/*" style="display: none;"/>
+					<!-- acciona el boton oculto , principalmente es para no ver la ruta a un lado-->
+					<input type="button" name="b_subir_imagen" value="Subir imagen" onclick="document.getElementById('uploadImage').click();" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
+
 				</div>
 				<div class="w3-container m8 w3-col">
 					<label for="ti">Titulo</label>		

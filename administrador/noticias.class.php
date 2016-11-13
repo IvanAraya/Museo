@@ -18,7 +18,7 @@
 			$titulo=$_POST['titulo'];
 			$fecha=$_POST['fecha'];
 			$cont=$_POST['contenido'];
-			$ruta_imagen="ruta de prueba";
+			$ruta_imagen="img/imgnoticias/".$titulo.".jpg";
 			$fecha_actual=date("Y-m-d");
 			$publicado=$_POST['check'];
 			$id = NULL;
