@@ -26,6 +26,7 @@ input[type="button"]{
 }
 input[type="button"]:hover{
 	background: #CBCACA;
+	cursor: pointer;
 }
 textarea{
 	resize:none; 
@@ -74,4 +75,8 @@ label{
 }
 .boton-rojo{
 	background:#ff0000;
+}
+
+span:hover{
+	cursor: pointer;
 }
