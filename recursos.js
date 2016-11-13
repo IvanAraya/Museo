@@ -1,0 +1,2 @@
+
+function recursos_onload(){}

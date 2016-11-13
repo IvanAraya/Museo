@@ -2,10 +2,13 @@ var r = new RemoteObject('index');
 
 function init(){
 	
+	load('home','Home');
+	
 	initMap();
+	
 }
 
-function load(modulo){
+function load(modulo, titulo){
 	var xhr;
 	if (window.XMLHttpRequest) 
 		xhr = new XMLHttpRequest();
@@ -13,9 +16,10 @@ function load(modulo){
 		xhr = new ActiveXObject("Microsoft.XMLHTTP");
 	xhr.script = document.createElement('script');
 	xhr.script.type = 'text/javascript';
-	xhr.script.onload = function () { eval(modulo+'_onload('+keyValue+')')};
+	xhr.script.onload = function () { eval(modulo+'_onload()')};
 	xhr.script.src = modulo+'.js';
 	xhr.script.id = 'externJS';
+	xhr.titulo = titulo;
 	xhr.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200){
 				var cuerpo = document.getElementById('cuerpo');								
@@ -24,6 +28,8 @@ function load(modulo){
 				if(document.getElementById('externJS'))
 					head.removeChild(document.getElementById('externJS'));
 				head.appendChild(this.script);
+				var titulo = document.getElementById('pageName');
+				titulo.innerHTML=this.titulo + "&nbsp;";
 		}
 	}
 	xhr.open('POST',modulo+'.php', true);

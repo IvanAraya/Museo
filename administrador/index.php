@@ -23,7 +23,7 @@
   <body onload="init()">
     <div id="pagina">
       <div id="header" class="w3-row">
-        <div class="w3-col s2"><img title="logo" alt="logo" src="img/logoadmin.png" style="margin-left:10px;"></div>
+        <div class="w3-col" style="width:150px;"><img title="logo" alt="logo" src="img/logoadmin.png" style="margin-left:10px;"></div>
         <div class="w3-rest" >
           <div class="w3-hide-small"><br><img title="logo" alt="logo" src="img/textoadmin.png"><br><br></div>
           <div class="menu-horizontal">
