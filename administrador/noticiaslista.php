@@ -18,6 +18,7 @@
 				<tr>
 					<th width="500px">Titulo</th>
                     <th>Fecha</th>
+					<th>Estado</th>
 					<th>&nbsp;</th>
 					<th>&nbsp;</th>
 				</tr>

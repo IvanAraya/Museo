@@ -19,6 +19,8 @@
 					<input type="text" name="titulo" id="titulo" style="width:100%;"><br>
 					<label for="fecha">Fecha</label>
 					<input type="date" name="fecha" id="fecha">
+					<label for="publi">Publicar</label>
+					<input type="checkbox" id="publicar" name="publicar">
 					<label for="desc">Descripción</label>
 					<textarea name="contenido" id="contenido" style="width:100%;"></textarea>
 				</div>
@@ -26,7 +28,7 @@
 				<div class="centrar">
 					<input type="button" name="b_guardar" value="Guardar" onclick="guardar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 					<input type="button" name="b_cancelar" value="Cancelar" onclick="cancelar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge"> 					
-					<input type="button" name="b_publicar" value="Publicar" onclick="publicar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
+					<!--<input type="button" name="b_publicar" value="Publicar" onclick="publicar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge"> -->
 					<input type="button" id="b_eliminar" value="Eliminar" onclick="eliminar()" class="w3-btn w3-red w3-border w3-round-xlarge"> 
 				</div>
 			</form>

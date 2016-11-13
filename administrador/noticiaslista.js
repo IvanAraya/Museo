@@ -34,7 +34,8 @@ function eliminar(id,titulo){
 		obj.callMethod('eliminarNoticia', datos, function(respuesta){			
 			if(respuesta){
 				alert('Actividad eliminada');
-				noticiaslista_onload();
+				//noticiaslista_onload();
+				load('noticiaslista');
 			}else
 				alert('La actividad no pudo ser eliminada');
 		});
