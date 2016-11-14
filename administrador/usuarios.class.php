@@ -61,7 +61,7 @@
 			$div = $datos[1];
 			$nombre =$datos[2];
 			$apellido =$datos[3];
-			$pass=$datos[4];
+			$pass=md5($datos[4]);
 			$mail=$datos[5];
 
 			$as = $datos[6];

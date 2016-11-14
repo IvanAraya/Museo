@@ -34,7 +34,7 @@ echo "<p>".$_SESSION['apellido']."</p>";
 							<div class="w3-row">
                                 <div class="w3-col m6 w3-container">Rut<br></div>
                                 <div class="w3-col m6 w3-container">
-                                    <input id="Erut" type="text" placeholder="ej: 11111111-1"><br>
+                                    <input id="Erut" type="text" onkeyup="validar_rut(this)" placeholder="ej: 11111111-1"><br>
                                 </div>
                             </div>
 							<div class="w3-row">
@@ -75,9 +75,9 @@ echo "<p>".$_SESSION['apellido']."</p>";
 						</div>
 						<br>
 						<div class="centrar">
-							<button class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="validando()" >Guardar</button>
-							<button class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="cancelar()">Cancelar</button>
-							<button class="w3-btn w3-red w3-border w3-round-xlarge" onclick="eliminarUsuario()" >Eliminar</button>
+							<button id = "guardar" class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="validando()" >Guardar</button>
+							<button id = "cancelar" class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="cancelar()">Cancelar</button>
+							<button id = "eliminar" class="w3-btn w3-red w3-border w3-round-xlarge" onclick="eliminarUsuario()" >Eliminar</button>
 						</div>
 						<br>
 					</div>
