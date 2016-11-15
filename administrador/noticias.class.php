@@ -18,19 +18,21 @@
 			$titulo=$_POST['titulo'];
 			$fecha=$_POST['fecha'];
 			$cont=$_POST['contenido'];
-			$ruta_imagen="img/imgnoticias/".$titulo.".jpg";
 			$fecha_actual=date("Y-m-d");
 			$publicado=$_POST['check'];
-			$id = NULL;
+			$id = 0;
 
-			/*
-			 * FALTA RECUPERAR EL ULTIMO id_actividad E INCREMENTARLO EN 1 PARA GENERAR EL NUEVO id_actividad.
-			 * CUIDADO CUANDO LA TABLA ESTA VACÍA PORQUE ALGUNOS MOTORES DE BBDD DEVUELVEN NULL EN CASO DE NO HABER
-			 * DATOS EN VEZ DE DEVOLVER 0 CUANDO SE CONSULTA POR EL ULTIMO ID.
-			 *
-			 *No s epuede usar ID auto incrementable? ... por ahora lo dejare asi para pruebas
-			 *
-			 */
+			$max_id="select MAX(id_actividad) from actividades";
+			$stmt1=$this->db->prepare($max_id);
+			$stmt1->execute();
+
+			if( $reg = $stmt1->fetch() ){
+				$id = $reg['MAX(id_actividad)']+1;
+			}
+
+			$ruta_imagen="img/imgnoticias/".$id.".jpg";
+
+
 			
 			$accion="INSERT INTO actividades (id_actividad, titulo, texto, fecha,fecha_publicacion,publicado,ruta_imagen) 
 					VALUES (:id,:titulo,:cont,:fecha,:fecha_p,:publicado,:ruta)";
