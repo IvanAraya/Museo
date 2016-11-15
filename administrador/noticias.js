@@ -18,7 +18,7 @@ function noticias_onload(){
 			document.getElementById("fecha").value= respuesta.fecha;
 			document.getElementById("contenido").value = respuesta.contenido;
 			//document.getElementById("imagenS").src = "css/subir.jpg";
-			document.getElementById("b_eliminar").style.display="inline-block";
+			document.getElementById("b_eliminar").disabled=false;
 
 			if(respuesta.publicado==0)
 				document.getElementById("publicar").checked = false;
@@ -29,7 +29,7 @@ function noticias_onload(){
 
 
 		}else{
-			document.getElementById("b_eliminar").style.display="none";
+			document.getElementById("b_eliminar").disabled=true;
 		}
 	});
 }
