@@ -18,6 +18,9 @@ function catalogo_onload(){
 }
 
 function photoPreview(file){
-	alert(file.value);
-	document.getElementById('imgFoto').src = file.value;
+	var oFReader = new FileReader();
+	oFReader.readAsDataURL(document.getElementById('foto').files[0]);
+	oFReader.onload = function (oFREvent) {
+		document.getElementById('imgFoto').src = oFREvent.target.result;
+	};
 }

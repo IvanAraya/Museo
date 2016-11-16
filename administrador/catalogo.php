@@ -8,13 +8,11 @@
 				</div>
 			</div>
 			<br>
-			<div class="w3-row">
-				<div class="w3-rest w3-container w3-center">
-					<div class="contenedor-imagen" style="width:100%; height:250px; border: 1px solid grey;">
-						<img id="imgFoto" src="img/subir.jpg">
-					</div>
-				</div>				
-			</div>
+			<div class="w3-center" style="max-width:500px;margin:auto">
+				<div class="contenedor-imagen" style="width:100%; border: 1px solid grey;">
+					<img id="imgFoto" src="img/subir.jpg">
+				</div>
+			</div>			
 			<div class="w3-row">
 				<div class="w3-rest w3-container w3-center">
 					<input type="file" id="foto" name="foto" style="display:none;" onchange="photoPreview(this)">

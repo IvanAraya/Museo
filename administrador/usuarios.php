@@ -31,31 +31,31 @@ echo "<p>".$_SESSION['apellido']."</p>";
 								</div>
 							</div>-->
 
-							<div class="w3-row">
+							<div class="w3-row" style="margin:5px;">
                                 <div class="w3-col m6 w3-container">Rut<br></div>
                                 <div class="w3-col m6 w3-container">
                                     <input id="Erut" type="text" onkeyup="validar_rut(this)" placeholder="ej: 11111111-1"><br>
                                 </div>
                             </div>
-							<div class="w3-row">
+							<div class="w3-row" style="margin:5px;">
 								<div class="w3-col m6 w3-container">Nombre</div>
 								<div class="w3-col m6 w3-container">
 									<input id="Enombre" type="text">
 								</div>
 							</div>
-							<div class="w3-row">
+							<div class="w3-row" style="margin:5px;">
 								<div class="w3-col m6 w3-container">Apellido</div>
 								<div class="w3-col m6 w3-container">
 									<input id="Eapellido" type="text">
 								</div>
 							</div>
-							<div class="w3-row">
+							<div class="w3-row" style="margin:5px;">
 								<div class="w3-col m6 w3-container">Mail</div>
 								<div class="w3-col m6 w3-container">
 									<input id="Email" type="text" placeholder='mi@ejemplo.com'>
 								</div>
 							</div>
-							<div class="w3-row">
+							<div class="w3-row" style="margin:5px;">
 								<div class="w3-col m6 w3-container">Contrase&ntilde;a</div>
 								<div class="w3-col m6 w3-container">
 									<input id="Epass" type="text">
