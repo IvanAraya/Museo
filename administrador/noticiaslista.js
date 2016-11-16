@@ -15,8 +15,8 @@ function noticiaslista_onload(){
 			var editar = document.createElement('td');
 			var eliminar = document.createElement('td');
 
-			editar.innerHTML = '<i class="material-icons" onclick="load(\'noticias\',\''+lista[f][0]+'\')">edit</i>';
-			eliminar.innerHTML = '<i class="material-icons" onclick="eliminar(\''+lista[f][0]+'\',\''+lista[f][1]+'\')">delete</i>';
+			editar.innerHTML = '<span class="material-icons"  style="cursor:pointer" onclick="load(\'noticias\',\''+lista[f][0]+'\')">edit</span>';
+			eliminar.innerHTML = '<span class="material-icons" style="cursor:pointer" onclick="eliminar(\''+lista[f][0]+'\',\''+lista[f][1]+'\')">delete</span>';
 			fila.appendChild(editar);
 			fila.appendChild(eliminar);
 			tabla.appendChild(fila);
@@ -34,7 +34,8 @@ function eliminar(id,titulo){
 		obj.callMethod('eliminarNoticia', datos, function(respuesta){			
 			if(respuesta){
 				alert('Actividad eliminada');
-				noticiaslista_onload();
+				//noticiaslista_onload();
+				load('noticiaslista');
 			}else
 				alert('La actividad no pudo ser eliminada');
 		});
