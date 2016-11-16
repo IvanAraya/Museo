@@ -3,9 +3,7 @@
 ?>
 
 <html>
-	
 	<body>
-		
 		<div class="frame w3-container">
 			<div class="titulo-form w3-row">
 				<div class="w3-col l12">
@@ -18,7 +16,6 @@
 					<tr>
 						<th> Titulo </th>
 						<th> Nombre archivo </th>
-						<th> Descripción </th>
 						<th> Fecha </th>
 						<th> &nbsp; </th>
 						<th> &nbsp; </th>
@@ -26,7 +23,5 @@
 				</table> <br>
 			</div>
 		</div>
-		
 	</body>
-	
 </html>
