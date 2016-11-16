@@ -12,7 +12,12 @@ function catalogo_onload(){
 		id = arguments[0] ;
 		alert("editar registro: "+id);
 	}
-	// aqui se hace con el registro lo que sea necesario
-	
-	 
+
+	var myNicEditor = new nicEditor({iconsPath : 'js/nicEdit/nicEditorIcons.gif', buttonList : ['subscript','superscript']});
+   myNicEditor.panelInstance('formula');
+}
+
+function photoPreview(file){
+	alert(file.value);
+	document.getElementById('imgFoto').src = file.value;
 }

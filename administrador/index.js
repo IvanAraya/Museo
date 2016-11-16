@@ -45,15 +45,30 @@ function load(modulo){
 	xhr.script.src = modulo+'.js';
 	xhr.script.id = 'externJS';
 	xhr.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200){
-				var cuerpo = document.getElementById('cuerpo');								
-				cuerpo.innerHTML = this.responseText;				
-				var head= document.getElementsByTagName('head')[0];
-				if(document.getElementById('externJS'))
-					head.removeChild(document.getElementById('externJS'));
-				head.appendChild(this.script);
+	  if (this.readyState == 4 && this.status == 200){
+			var cuerpo = document.getElementById('cuerpo');								
+			cuerpo.innerHTML = this.responseText;				
+			var head= document.getElementsByTagName('head')[0];
+			if(document.getElementById('externJS'))
+				head.removeChild(document.getElementById('externJS'));
+			head.appendChild(this.script);
 		}
 	}
 	xhr.open('POST',modulo+'.php', true);
+	xhr.send(null);
+}
+
+function include(script, callbackFunction){
+	if (window.XMLHttpRequest) 
+		xhr = new XMLHttpRequest();
+	else 
+		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	xhr.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200){			
+			eval(this.responseText);
+			callbackFunction();
+		}
+	}
+	xhr.open('POST',script, true);
 	xhr.send(null);
 }

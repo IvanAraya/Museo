@@ -5,7 +5,7 @@ function listacatalogo_onload(){
 	
 	obj.callMethod('cargar_listado', null, function(lista){
 		
-		var tabla = document.getElementById('tablaLista');		
+		/*var tabla = document.getElementById('tablaLista');		
 		for(f=0;f<lista.length;f++){			
 			var fila = document.createElement('tr');			
 			for(c=0;c<lista[f].length;c++){
@@ -34,7 +34,7 @@ function listacatalogo_onload(){
 			fila.appendChild(editar);
 			fila.appendChild(eliminar);
 			tabla.appendChild(fila);
-		}
+		}*/
 
 	});
 	

@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 	 <script src="base/ajax.js"></script>
 	 <script src="index.js"></script>
+	 <script src="js/nicEdit/nicEdit.js" type="text/javascript"></script>
     <title></title>
   </head>
   <body onload="init()">

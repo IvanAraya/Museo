@@ -15,8 +15,8 @@ function noticiaslista_onload(){
 			var editar = document.createElement('td');
 			var eliminar = document.createElement('td');
 
-			editar.innerHTML = '<span class="material-icons" onclick="load(\'noticias\',\''+lista[f][0]+'\')">edit</span>';
-			eliminar.innerHTML = '<span class="material-icons" onclick="eliminar(\''+lista[f][0]+'\',\''+lista[f][1]+'\')">delete</span>';
+			editar.innerHTML = '<i class="material-icons" onclick="load(\'noticias\',\''+lista[f][0]+'\')">edit</i>';
+			eliminar.innerHTML = '<i class="material-icons" onclick="eliminar(\''+lista[f][0]+'\',\''+lista[f][1]+'\')">delete</i>';
 			fila.appendChild(editar);
 			fila.appendChild(eliminar);
 			tabla.appendChild(fila);

@@ -20,7 +20,7 @@
 					<label for="fecha">Fecha</label>
 					<input type="date" name="fecha" id="fecha">
 					<label for="desc">Descripción</label>
-					<textarea name="contenido" id="contenido" style="width:100%;"></textarea>
+					<textarea name="contenido" id="contenido" style="width:100%;height:250px;"></textarea>
 				</div>
 			</div>
 				<div class="centrar">
