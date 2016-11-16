@@ -15,7 +15,7 @@
 			</div>			
 			<div class="w3-row">
 				<div class="w3-rest w3-container w3-center">
-					<input type="file" id="foto" name="foto" style="display:none;" onchange="photoPreview(this)">
+					<input type="file" id="foto" name="foto" accept="image/*" style="display:none;" onchange="photoPreview(this)">
 					<input type="button" value="Subir Imagen" class="w3-btn w3-light-gray w3-border w3-round-large" onclick="document.getElementById('foto').click()">
 					<br><br>
 				</div>
@@ -129,8 +129,9 @@
 							</select>
 						</div>
 					</div>
-				</div>
+				</div>				
 				<div class="centrar">
+					<br>
 					<input type="button" name="b_guardar" value="Guardar" onclick="guardar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 					<input type="button" name="b_cancelar" value="Cancelar" onclick="cancelar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge"> 	
 					<input type="button" id="b_eliminar" value="Eliminar" onclick="eliminar()" class="w3-btn w3-red w3-border w3-round-xlarge"> 

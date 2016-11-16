@@ -18,7 +18,7 @@
 					<tr>
 						<th> Titulo </th>
 						<th> Nombre archivo </th>
-						<th> Descripción </th>
+						<th> Descripci&oacute;n </th>
 						<th> Fecha </th>
 						<th> &nbsp; </th>
 						<th> &nbsp; </th>

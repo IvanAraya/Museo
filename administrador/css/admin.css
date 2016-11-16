@@ -62,7 +62,6 @@ label{
 .contenedor-imagen{
 	position: relative;
    padding-bottom: 75%;
-	background-color:#eee;
 }
 .contenedor-imagen img{
     max-width: 100%;

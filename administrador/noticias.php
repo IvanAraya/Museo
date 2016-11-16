@@ -33,11 +33,13 @@
 				</div>
 			</div>
 				<div class="centrar">
+					<br>
 					<input type="button" name="b_guardar" value="Guardar" onclick="guardar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 					<input type="button" name="b_cancelar" value="Cancelar" onclick="cancelar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge"> 					
 					<!--<input type="button" name="b_publicar" value="Publicar" onclick="publicar()" class="w3-btn w3-light-gray w3-border w3-round-xlarge"> -->
 					<input type="button" id="b_eliminar" value="Eliminar" onclick="eliminar()" class="w3-btn w3-red w3-border w3-round-xlarge"> 
 				</div>
+				<br>
 			</form>
 		</div>
 	</body>

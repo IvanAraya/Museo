@@ -44,6 +44,7 @@
 					<input class="control center w3-btn w3-red        w3-border w3-round-xlarge" value="Eliminar" type="button" onclick="">
 				</div>
 			</div>
+			<br>
 		</form>
 		
 	</body>

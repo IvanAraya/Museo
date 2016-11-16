@@ -21,7 +21,7 @@ class recursos{
 				'id' => $row['id_documento'],
 				'titulo' => $row['titulo'],
 				'ruta' => $row['ruta_documento'],
-				'descripcion' => $row['descripción'],
+				'descripcion' => $row['descripcion'],
 				'fecha' => $row['fecha_subida'],
 			);
 		}
