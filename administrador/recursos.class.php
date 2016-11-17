@@ -1,47 +1,24 @@
 <?php
 
 class recursos{
+	var $db;
 	
-	var $db ;	
-//--------------------------------------------------------------------------------------------------------
 	function __construct(){
 		include ('../../data.php');
 		$this->db = $conn; 
 	}
-//--------------------------------------------------------------------------------------------------------	
-	function obtenerRecurso(){
-		
-		$id = $_POST['id'];		
-		$stmt = $this->db->prepare("SELECT * FROM documentos WHERE id = :usuario");
-		$stmt->bindParam(':id',$id);
-		$stmt->execute();
-		
-		if($row = $stmt->fetch()){
-			$resp = array(
-				'id' => $row['id_documento'],
-				'titulo' => $row['titulo'],
-				'ruta' => $row['ruta_documento'],
-				'descripcion' => $row['descripcion'],
-				'fecha' => $row['fecha_subida'],
-			);
-		}
-		
-		$this->db = null;
-		return $resp;
-	}
-//--------------------------------------------------------------------------------------------------------
+
 	function listarRecursos(){
-		
-		$stmt = $this->db->prepare("SELECT id_documento,titulo,ruta_documento,descripcion,fecha_subida FROM documentos ORDER BY fecha_subida");
+		$stmt = $this->db->prepare("SELECT id,titulo,archivo,fecha FROM documentos ORDER BY fecha");
 		$stmt->execute();
 		$lista = array();
-		if($row = $stmt->fetch()){
+		
+		while($row = $stmt->fetch()){
 			$fila = array(
-				$row['id_documento'],
+				$row['id'],
 				$row['titulo'],
-				$row['ruta_documento'],
-				$row['descripcion'],
-				$row['fecha_subida'],
+				$row['archivo'],
+				$row['fecha'],
 			);
 			array_push($lista,$fila);
 		}
@@ -49,11 +26,72 @@ class recursos{
 		$this->db = null;
 		return $lista;
 	}
-	
-}
 
-function eliminarRecurso(){
-	return true;
+	function cargarRecurso(){
+		$id = $_POST['id'];
+		$stmt = $this->db->prepare("SELECT id,titulo,descripcion,archivo FROM documentos WHERE id = :id");
+		$stmt->bindParam(':id',$id);
+		$stmt->execute();
+		if($row = $stmt->fetch()){
+			$respuesta = array(
+			'id' => $row['id'],
+			'titulo' => $row['titulo'],
+			'descripcion' => $row['descripcion'],
+			'archivo' => $row['archivo'],
+			);
+		}
+		$this->db = null;
+		return $respuesta;
+	}
+
+	function agregarRecurso(){
+		$id = 10;
+		$titulo = $_POST['titulo'];
+		$descripcion = $_POST['descripcion'];
+		$archivo = $_POST['archivo'];
+		$fecha = date('y-m-d');
+		
+		$consulta = "INSERT INTO documentos (id,titulo,descripcion,archivo,fecha) VALUES (:id,:titulo,:descripcion,:archivo,:fecha)";
+			
+		$stmt = $this->db->prepare($consulta);
+		$stmt->bindParam(':id',$id);
+		$stmt->bindParam(':titulo',$titulo);
+		$stmt->bindParam(':descripcion',$descripcion);
+		$stmt->bindParam(':archivo',$archivo);
+		$stmt->bindParam(':fecha',$fecha);	
+		$stmt->execute();
+			
+		return true;
+	}
+
+	function editarRecurso(){
+		$id = $_POST['id'];
+		$titulo = $_POST['titulo'];
+		$descripcion = $_POST['descripcion'];
+		$archivo = $_POST['archivo'];
+		$fecha = date('y-m-d');
+
+		$consulta = "UPDATE documentos SET titulo = :titulo, descripcion = :descripcion, archivo = :archivo, fecha = :fecha WHERE id = :id";
+			
+		$stmt = $this->db->prepare($consulta);
+		$stmt->bindParam(':id',$id);
+		$stmt->bindParam(':titulo',$titulo);
+		$stmt->bindParam(':descripcion',$descripcion);
+		$stmt->bindParam(':archivo',$archivo);
+		$stmt->bindParam(':fecha',$fecha);
+		$stmt->execute();
+			
+		return true;
+	}
+	
+	function eliminarRecurso(){
+		$id = $_POST['id'];	
+		$stmt = $this->db->prepare("DELETE FROM documentos WHERE id = :id");
+		$stmt->execute( array( ":id" => $id ));
+		$this->db = null;
+		return true;	
+	}
+	
 }
 
 ?>
