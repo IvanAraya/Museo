@@ -34,7 +34,7 @@ function eliminarUsuario(rut, nombre)
 		us.callMethod('eliminarUsuario', datos, function(respuesta){			
 			if(respuesta){
 				alert('Usuario eliminado');
-				listausuarios_onload();
+				load('listausuarios');
 			}else
 				alert('El usuario no pudo ser eliminado');
 			//document.getElementById(rut).remove();

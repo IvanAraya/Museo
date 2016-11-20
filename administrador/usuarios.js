@@ -32,25 +32,25 @@ function editarUsuario(rut)
 		document.getElementById("Erut").disabled= true;
 		document.getElementById("Enombre").value = respuesta[1];
 		document.getElementById("Eapellido").value = respuesta[2];
-		document.getElementById("Epass").value = respuesta[3];
-		document.getElementById("Email").value =respuesta[4];
+		//document.getElementById("Epass").value = respuesta[3];
+		document.getElementById("Email").value =respuesta[3];
 		
-		if(respuesta[5] == 1)
+		if(respuesta[4] == 1)
 			document.getElementById("AS").checked= true;
 		else
 			document.getElementById("AS").checked= false;
 
-		if(respuesta[6] == 1)
+		if(respuesta[5] == 1)
 			document.getElementById("EC").checked= true;
 		else
 			document.getElementById("EC").checked= false;
 
-		if(respuesta[7] == 1)
+		if(respuesta[6] == 1)
 			document.getElementById("EAR").checked= true;
 		else
 			document.getElementById("EAR").checked= false;
 
-		if(respuesta[8] == 1)
+		if(respuesta[7] == 1)
 			document.getElementById("ER").checked= true;
 		else
 			document.getElementById("ER").checked= false;
@@ -81,7 +81,7 @@ function agregarUsuario()
 	rut_c=document.getElementById("Erut").value;
 	nombre=document.getElementById("Enombre").value;
 	apellido=document.getElementById("Eapellido").value;
-	pass=document.getElementById("Epass").value;
+	//pass=document.getElementById("Epass").value;
 	email=document.getElementById("Email").value;
 
 	pass = rut_c.substring(0, 5);
@@ -136,7 +136,11 @@ function agregarUsuario()
 	
 	f.callMethod(metodo, arg, function(respuesta){
 		if(respuesta)
+		{
 			alert("Usuario guardado con exito");
+			load('listausuarios');
+		}
+			
 		else
 			alert("No se pudo guardar el usuario");
 	});
@@ -167,6 +171,8 @@ function validando()
 {
     rutValido = false;
     mailValido = false;
+    nombreValido = false;
+    apellidoValido = false;
 
     compRut = document.getElementById("Erut").value;
     if(Fn.validaRut(compRut) == true)
@@ -179,17 +185,41 @@ function validando()
         alert("Rut invalidado: "+compRut);
     }
 
-    compMail= document.getElementById("Email").value;
-    if(validarEmail(compMail) == true)
+    compMail= document.getElementById("Email");
+    if(validarEmail(compMail.value) == true)
     {
         mailValido = true;
     }
     else
     {
-        alert("Mail invalidado: "+compMail);
+        alert("Mail invalidado: "+compMail.value);
+        compMail.focus();
+        compMail.select();
     }
 
- 	if(rutValido==true && mailValido==true)
+    if(document.getElementById("Enombre").value.length==0)
+    {
+    	alert("Ingrese el nombre del usuario");
+    	document.getElementById("Enombre").focus();
+    }
+    else
+    {
+    	nombreValido = true;
+    }
+
+
+    if(document.getElementById("Eapellido").value.length==0)
+    {
+    	alert("Ingrese el apellido del usuario");
+    	document.getElementById("Eapellido").focus();
+    }
+    else
+    {
+    	apellidoValido = true;
+    }
+    	
+
+ 	if(rutValido==true && mailValido==true && nombreValido==true && apellidoValido == true)
  	{
  		agregarUsuario();
  	}   
