@@ -4,7 +4,7 @@ function init(){
 	
 	load('home','Home');
 	
-	initMap();
+	//initMap();
 	
 }
 
@@ -29,7 +29,7 @@ function load(modulo, titulo){
 					head.removeChild(document.getElementById('externJS'));
 				head.appendChild(this.script);
 				var titulo = document.getElementById('pageName');
-				titulo.innerHTML=this.titulo + "&nbsp;";
+				titulo.innerHTML=this.titulo;
 		}
 	}
 	xhr.open('POST',modulo+'.php', true);
@@ -44,15 +44,24 @@ function w3_close() {
 }
 function initMap() {
 	// Create a map object and specify the DOM element for display.
-	 var museo = {lat: -29.908995, lng: -71.245540};
+	var museo = {lat: -29.908995, lng: -71.245540};
 
-	var map = new google.maps.Map(document.getElementById('map'), {
+	var map1 = new google.maps.Map(document.getElementById('map1'), {
 	  center: museo,
 	  zoom: 16
 	});
-	var marker = new google.maps.Marker({
+	var marker1 = new google.maps.Marker({
 		position: museo,
-		map: map,
+		map: map1,
+		title: 'Museo Mineralogico Ignacio Domeyko'
+	});
+	var map2 = new google.maps.Map(document.getElementById('map2'), {
+	  center: museo,
+	  zoom: 16
+	});
+	var marker2 = new google.maps.Marker({
+		position: museo,
+		map: map2,
 		title: 'Museo Mineralogico Ignacio Domeyko'
 	});
 

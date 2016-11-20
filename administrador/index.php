@@ -34,7 +34,12 @@
           </div>
         </div>
       </div>
-      <div id="cuerpo" class="w3-row"> Cargando... </div>
+      <div id="cuerpo" class="w3-row">
+			<div class="w3-panel w3-center">
+				<img src="img/cargando.gif" /><br>
+				<span>Cargando...</span>
+			</div>
+		</div>
     </div>
   </body>
 </html>
