@@ -34,13 +34,13 @@ echo "<p>".$_SESSION['apellido']."</p>";
 							<div class="w3-row" style="margin:5px;">
                                 <div class="w3-col m6 w3-container">Rut<br></div>
                                 <div class="w3-col m6 w3-container">
-                                    <input id="Erut" type="text" onkeyup="validar_rut(this)" placeholder="ej: 11111111-1"><br>
+                                    <input id="Erut" type="text" onblur="validar_rut(this)" placeholder="ej: 11111111-1"><br>
                                 </div>
                             </div>
 							<div class="w3-row" style="margin:5px;">
 								<div class="w3-col m6 w3-container">Nombre</div>
 								<div class="w3-col m6 w3-container">
-									<input id="Enombre" type="text">
+									<input id="Enombre" type="text"  length=10>
 								</div>
 							</div>
 							<div class="w3-row" style="margin:5px;">
@@ -55,12 +55,14 @@ echo "<p>".$_SESSION['apellido']."</p>";
 									<input id="Email" type="text" placeholder='mi@ejemplo.com'>
 								</div>
 							</div>
+							<!--
 							<div class="w3-row" style="margin:5px;">
 								<div class="w3-col m6 w3-container">Contrase&ntilde;a</div>
 								<div class="w3-col m6 w3-container">
 									<input id="Epass" type="text">
 								</div>
 							</div>
+							-->
 						</div>
 
 						<div id="permisoUsuario">
