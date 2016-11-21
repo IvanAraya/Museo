@@ -1,7 +1,7 @@
 <?php 
 
     session_start();
-      if (!isset($_SESSION['nombre'])) {
+      if (!isset($_SESSION['rut'])) {
         //readfile('login.html');
         header('location:login.php');
         exit();

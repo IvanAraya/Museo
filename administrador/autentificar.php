@@ -34,7 +34,6 @@
 		$_SESSION['p_catalogo'] = $row['permiso_catalogo'];
 		$_SESSION['p_actividad'] = $row['permiso_actividad'];
 		$_SESSION['p_recursos'] = $row['permiso_recursos'];
-		echo '<script language="javascript">alert("Entrando");</script>'; 
 		header('location:index.php');
 	}else{
 		//session_destroy();
