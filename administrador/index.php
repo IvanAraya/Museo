@@ -6,16 +6,6 @@
         header('location:login.php');
         exit();
       }
-
-
-	/*session_start();
-	$_SESSION['debug'] = true;
-	
-	//TODO
-	//Gestionar permisos de ususrio al formulario;
-	$permiso = true;
-	if(!$permiso)
-		die('Acceso denegado');*/
 ?>
 
 <!DOCTYPE html>
@@ -40,6 +30,9 @@
           <div class="menu-horizontal">
             <ul class="w3-navbar" id="menu-principal">
               <!--li class="w3-opennav w3-right w3-hide-large">Men&uacute;</li-->
+              <!--li>
+                <a href="cerrar.php">Cerrar Sesi&oacute;n</a>
+              </li-->
             </ul>
           </div>
         </div>
