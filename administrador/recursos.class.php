@@ -9,16 +9,16 @@ class recursos{
 	}
 
 	function listarRecursos(){
-		$stmt = $this->db->prepare("SELECT id,titulo,archivo,fecha FROM documentos ORDER BY fecha");
+		$stmt = $this->db->prepare("SELECT id_documento,titulo,ruta_documento,fecha_subida FROM documentos ORDER BY fecha_subida");
 		$stmt->execute();
 		$lista = array();
 		
 		while($row = $stmt->fetch()){
 			$fila = array(
-				$row['id'],
+				$row['id_documento'],
 				$row['titulo'],
-				$row['archivo'],
-				$row['fecha'],
+				$row['ruta_documento'],
+				$row['fecha_subida'],
 			);
 			array_push($lista,$fila);
 		}
@@ -29,15 +29,15 @@ class recursos{
 
 	function cargarRecurso(){
 		$id = $_POST['id'];
-		$stmt = $this->db->prepare("SELECT id,titulo,descripcion,archivo FROM documentos WHERE id = :id");
+		$stmt = $this->db->prepare("SELECT id_documento,titulo,descripcion,ruta_documento FROM documentos WHERE id_documento = :id");
 		$stmt->bindParam(':id',$id);
 		$stmt->execute();
 		if($row = $stmt->fetch()){
 			$respuesta = array(
-			'id' => $row['id'],
+			'id' => $row['id_documento'],
 			'titulo' => $row['titulo'],
 			'descripcion' => $row['descripcion'],
-			'archivo' => $row['archivo'],
+			'archivo' => $row['ruta_documento'],
 			);
 		}
 		$this->db = null;
@@ -47,7 +47,7 @@ class recursos{
 	function agregarRecurso(){
 		$rutaAdministrador = 'C:/xampp/htdocs/Museo-master/';
 		
-		$consulta = "SELECT MAX(id) FROM documentos";
+		$consulta = "SELECT MAX(id_documento) FROM documentos";
 		$stmt = $this->db->prepare($consulta);
 		$stmt->execute();
 		$numero = mysql_query($consulta);
@@ -65,7 +65,7 @@ class recursos{
 		
 		move_uploaded_file($ruta_temporal,$ruta_guardado);
 		
-		$consulta = "INSERT INTO documentos (id,titulo,descripcion,archivo,fecha) VALUES (:id,:titulo,:descripcion,:archivo,:fecha)";
+		$consulta = "INSERT INTO documentos (id_documento,titulo,descripcion,ruta_documento,fecha_subida) VALUES (:id,:titulo,:descripcion,:archivo,:fecha)";
 			
 		$stmt = $this->db->prepare($consulta);
 		$stmt->bindParam(':id',$id);
@@ -87,10 +87,10 @@ class recursos{
 		$descripcion = $_POST['descripcion'];
 		$fecha = date('y-m-d');
 		
-		$stmt = $this->db->prepare("SELECT archivo FROM documentos WHERE id = :id");
+		$stmt = $this->db->prepare("SELECT ruta_documento FROM documentos WHERE id_documento = :id");
 		$stmt->execute(array( ":id" => $id ));
 		if($row = $stmt->fetch()){
-			$ruta = $row['archivo'];
+			$ruta = $row['ruta_documento'];
 		}
 		
 		if($cambiar){
@@ -101,7 +101,7 @@ class recursos{
 			move_uploaded_file($ruta_temporal,$ruta_guardado);
 		}
 		
-		$consulta = "UPDATE documentos SET titulo = :titulo, descripcion = :descripcion, archivo = :archivo, fecha = :fecha WHERE id = :id";
+		$consulta = "UPDATE documentos SET titulo = :titulo, descripcion = :descripcion, ruta_documento = :archivo, fecha_subida = :fecha WHERE id_documento = :id";
 			
 		$stmt = $this->db->prepare($consulta);
 		$stmt->bindParam(':id',$id);
@@ -118,13 +118,13 @@ class recursos{
 		$rutaAdministrador = 'C:/xampp/htdocs/Museo-master/';
 		
 		$id = $_POST['id'];	
-		$stmt = $this->db->prepare("SELECT archivo FROM documentos WHERE id = :id");
+		$stmt = $this->db->prepare("SELECT ruta_documento FROM documentos WHERE id_documento = :id");
 		$stmt->execute(array( ":id" => $id ));
 		if($row = $stmt->fetch()){
-			$archivo = $row['archivo'];
+			$archivo = $row['ruta_documento'];
 		}
 		
-		$stmt = $this->db->prepare("DELETE FROM documentos WHERE id = :id");
+		$stmt = $this->db->prepare("DELETE FROM documentos WHERE id_documento = :id");
 		$stmt->execute(array( ":id" => $id ));
 		$this->db = null;
 		
