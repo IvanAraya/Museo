@@ -34,7 +34,7 @@
                 <img src="img/logoadmin.png" class="enLinea" width="150px">
                 <div id=texto_izquierda class="enLinea aDerecha">
                     <h2 style="font-size: 30px">Museo Mineralogico</h2>
-                    <h3>Plataforma administartiva</h3>
+                    <h3>Plataforma administartiva99999999999999999999999</h3>
                 </div>
 
             </div>

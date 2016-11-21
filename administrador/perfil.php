@@ -1,5 +1,16 @@
-<?php
 
+
+<?php
+//session_start();
+//if (!isset($_SESSION['user'])) {
+  //readfile('login.html');
+  //header('location:login.html');
+  //exit();
+//}
+//echo "<p>".$_SESSION['user']."</p>";
+//echo "<p>".$_SESSION['nombre']."</p>";
+//echo "<p>".$_SESSION['apellido']."</p>";
+//*/
 ?>
 <html>
   <body>
