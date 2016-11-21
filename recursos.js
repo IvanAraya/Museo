@@ -11,7 +11,7 @@ function recursos_onload(){
 				fila.appendChild(col);
 			}
 			var descargar = document.createElement('td');
-			descargar.innerHTML = '<a href="'+lista[f][3]+'"><i class="material-icons" style="font-size:45px">file_download</i></a>';
+			descargar.innerHTML = '<a href="'+lista[f][3]+'" download><i class="material-icons" style="font-size:45px">file_download</i></a>';
 			fila.appendChild(descargar);
 			tabla.appendChild(fila);
 		}
