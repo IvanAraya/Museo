@@ -30,9 +30,6 @@
 	if($row = $stmt->fetch()){
 		session_start();
 		$_SESSION['rut'] = $row['rut'];
-		$_SESSION['nombre'] = $row['nombre'];
-		$_SESSION['apellido'] = $row['apellido'];
-		$_SESSION['mail'] = $row['mail'];
 		$_SESSION['p_usuarios'] = $row['permiso_usuarios'];
 		$_SESSION['p_catalogo'] = $row['permiso_catalogo'];
 		$_SESSION['p_actividad'] = $row['permiso_actividad'];
