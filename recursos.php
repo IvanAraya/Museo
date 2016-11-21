@@ -5,49 +5,21 @@
 <html>
 	<body>
 		<div class="frame w3-container">
-			<div class="titulo-form w3-row">
-				<div class="w3-col l12">
-					<span> Editar Recurso </span>
-				</div>
-			</div> <br>
-		<form id="formulario_recursos"> 
-			<div class="w3-row w3-panel">
-				<div class="w3-col w3-center m6 w3-container">
-					<label for="titulo"> Titulo </label>
-				</div>
-				<div class="w3-col w3-center m6 w3-container">
-					<input id="campo_titulo" name="titulo">
-				</div>
+			
+			<div>
+				<p> En esta secci&oacute;n podr&aacute; descargar material relacionado a la p&aacute;gina. </p>
 			</div>
-			<div class="w3-row w3-panel">
-				<div class="w3-col w3-center m6 w3-container">
-					<label for="descripcion"> Descripci&oacute;n </label>
-				</div>
-				<div class="w3-col w3-center m6 w3-container">
-					<input id="campo_descripcion" name="descripcion">
-				</div>
+			
+			<div class="w3-responsive">
+				<table class="w3-table-all w3-hoverable" id="tablaLista">
+				<!--table class="w3-table w3-col l12" id="tablaLista"-->
+					<tr>
+						<th> Titulo </th>
+						<th> Descripci&oacute;n </th>
+						<th> Descargar </th>
+					</tr>
+				</table> <br>
 			</div>
-			<div class="w3-row w3-panel">
-				<div class="w3-col w3-center m6 w3-container">
-					<input id="boton_examinar" class="control center w3-btn w3-light-gray w3-border w3-round-xlarge" 
-					value="Examinar" type="button" onclick=document.getElementById("cargar").click();>
-					<input id="cargar" name="archivo" readonly=”readonly” type="file" name="pic" accept="media_type"
-					style="display:none" onchange="mostrarNombre()">
-				</div>
-				<div class="w3-col w3-center m6 w3-container">
-					<input id="campo_archivo" name="archivo" readonly=”readonly”>
-				</div>
-			</div>
-			<div class="w3-row w3-panel">
-				<div class="w3-col w3-center">
-					<input id="boton_agregar"  class="control center w3-btn w3-light-gray w3-border w3-round-xlarge" 
-					value="Guardar"  type="button" onclick="agregarRecurso()">
-					<input id="boton_cancelar" class="control center w3-btn w3-light-gray w3-border w3-round-xlarge" 
-					value="Cancelar" type="button" onclick="cancelarRecurso()">
-					<input id="boton_eliminar" class="control center w3-btn w3-red        w3-border w3-round-xlarge" 
-					value="Eliminar" type="button" onclick="eliminarRecurso()">
-				</div>
-			</div>
-		</form>
+		</div>
 	</body>
 </html>
