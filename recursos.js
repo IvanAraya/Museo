@@ -1,79 +1,19 @@
-var f = new RemoteObject('recursos');
-var nuevoRecurso;
+var obj = new RemoteObject('recursos');
 
 function recursos_onload(){
-	//alert(arguments[0]);
-	if(arguments[0]){
-		nuevoRecurso = false;
-		editarRecurso(arguments[0]);
-		document.getElementById("boton_eliminar").disabled = false;
-		var datos = new FormData();
-		datos.append('id',arguments[0]);		
-		obj.callMethod("cargarRecurso",datos,function(arreglo){
-			document.getElementById("campo_titulo").value = arreglo.titulo;
-			document.getElementById("campo_descripcion").value = arreglo.descripcion;
-			document.getElementById("campo_archivo").value = arreglo.archivo;
-		});
-	}
-	else{
-		nuevoRecurso = true;
-		agregarRecurso(arguments[0]);
-		document.getElementById("boton_eliminar").disabled = true;
-	}
-}
-
-function mostrarNombre(){
-	document.getElementById("campo_archivo").value = document.getElementById("cargar").value;
-}
-
-function agregarRecurso(){
-	/*
-	var datos = new FormData();
-	datos.append('id',id);
-	f.callMethod("agregarRecurso", datos, function(respuesta){
-		if(respuesta){
-			alert('Recurso agregado');
-			load('listarecursos');
-		}
-		else
-			alert('ERROR - No se pudo agregar el recurso');
-		});
-	*/
-}
-
-function editarRecurso(){
-	
-	/*
-	var datos = new FormData();
-	datos.append('id',id);
-	f.callMethod("editarRecurso", datos, function(respuesta){
-		if(respuesta){
-			alert('Recurso agregado');
-			load('listarecursos');
-		}
-		else
-			alert('ERROR - No se pudo agregar el recurso');
-		});
-	*/
-}
-
-function cancelarRecurso(){
-	if(confirm('Desea cancelar? Los datos no guardados se perderan')){	
-		load('listarecursos');
-	}
-}
-
-function eliminarRecurso(){
-	if(confirm('Desea eliminar este recurso?')){
-		var datos = new FormData();
-		datos.append('id',id);
-		f.callMethod("eliminarRecurso", datos, function(respuesta){
-			if(respuesta){
-				alert('Recurso eliminado');
-				load('listarecursos');
+	obj.callMethod('listarRecursos', null, function(lista){
+		var tabla = document.getElementById('tablaLista');		
+		for(f=0;f<lista.length;f++){			
+			var fila = document.createElement('tr');			
+			for(c=1;c<lista[f].length-1;c++){
+				var col = document.createElement('td'); 
+				col.innerHTML = lista[f][c];
+				fila.appendChild(col);
 			}
-			else
-				alert('ERROR - No se pudo eliminar el recurso');
-		});
-	}
+			var descargar = document.createElement('td');
+			descargar.innerHTML = '<a href="'+lista[f][3]+'"><i class="material-icons" style="font-size:45px">file_download</i></a>';
+			fila.appendChild(descargar);
+			tabla.appendChild(fila);
+		}
+	});
 }
