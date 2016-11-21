@@ -45,7 +45,7 @@ class recursos{
 	}
 		
 	function agregarRecurso(){
-		$rutaAdministrador = 'C:/xampp/htdocs/Museo-master/';
+		$rutaAdministrador = 'C:/xampp/htdocs/museo/';
 		
 		$consulta = "SELECT MAX(id_documento) FROM documentos";
 		$stmt = $this->db->prepare($consulta);
@@ -79,7 +79,7 @@ class recursos{
 	}
 	
 	function editarRecurso(){
-		$rutaAdministrador = 'C:/xampp/htdocs/Museo-master/';
+		$rutaAdministrador = 'C:/xampp/htdocs/museo/';
 		
 		$id = $_POST['id'];
 		$cambiar = $_POST['cambiar'];
@@ -115,7 +115,7 @@ class recursos{
 	}
 	
 	function eliminarRecurso(){
-		$rutaAdministrador = 'C:/xampp/htdocs/Museo-master/';
+		$rutaAdministrador = 'C:/xampp/htdocs/museo/';
 		
 		$id = $_POST['id'];	
 		$stmt = $this->db->prepare("SELECT ruta_documento FROM documentos WHERE id_documento = :id");
