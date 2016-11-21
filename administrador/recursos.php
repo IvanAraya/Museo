@@ -7,7 +7,7 @@
 		<div class="frame w3-container">
 			<div class="titulo-form w3-row">
 				<div class="w3-col l12">
-					<span> Editar Recurso </span>
+					<span id="titulo_formulario"> Editar Recurso </span>
 				</div>
 			</div> <br>
 		<form id="formulario_recursos"> 
@@ -16,7 +16,7 @@
 					<label for="titulo"> Titulo </label>
 				</div>
 				<div class="w3-col w3-center m6 w3-container">
-					<input id="campo_titulo" name="titulo">
+					<input id="campo_titulo" name="titulo" style="width:100%" maxlength="50">
 				</div>
 			</div>
 			<div class="w3-row w3-panel">
@@ -24,7 +24,7 @@
 					<label for="descripcion"> Descripci&oacute;n </label>
 				</div>
 				<div class="w3-col w3-center m6 w3-container">
-					<input id="campo_descripcion" name="descripcion">
+					<textarea id="campo_descripcion" name="descripcion" style="width:100%;height:200px;" maxlength="250"></textarea>
 				</div>
 			</div>
 			<div class="w3-row w3-panel">
@@ -35,7 +35,7 @@
 					style="display:none" onchange="mostrarNombre()">
 				</div>
 				<div class="w3-col w3-center m6 w3-container">
-					<input id="campo_archivo" name="archivo" readonly=”readonly”>
+					<input id="campo_archivo" name="archivo" readonly=”readonly” style="width:100%">
 				</div>
 			</div>
 			<div class="w3-row w3-panel">

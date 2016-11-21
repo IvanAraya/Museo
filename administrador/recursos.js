@@ -6,6 +6,7 @@ function recursos_onload(){
 	if(arguments[0]){
 		nuevoRecurso = false;
 		id = arguments[0];
+		titulo_formulario.innerHTML = "Editar Recurso";
 		document.getElementById("boton_eliminar").disabled = false;
 		var datos = new FormData();
 		datos.append('id',arguments[0]);
@@ -18,24 +19,33 @@ function recursos_onload(){
 	else{
 		nuevoRecurso = true;
 		id = null;
+		titulo_formulario.innerHTML = "Agregar Nuevo Recurso";
 		document.getElementById("boton_eliminar").disabled = true;
 	}
 }
 
 function mostrarNombre(){
-	document.getElementById("campo_archivo").value = document.getElementById("cargar").value;
+	document.getElementById("campo_archivo").value = document.getElementById("cargar").value.replace("C:\\fakepath\\", "");
 }
 
 function escribirBD(){
 	var llamada_metodo;
+	var cambiarRecurso = 0;
+	
 	if(nuevoRecurso){
 		llamada_metodo = 'agregarRecurso';
 	}
 	else{
 		llamada_metodo = 'editarRecurso';
 	}
+	
+	if(document.getElementById('cargar').files.length > 0){
+		cambiarRecurso = 1;
+	}
+	
 	var datos = new FormData(document.getElementById('formulario_recursos'));
 	datos.append('id',id);
+	datos.append('cambiar',cambiarRecurso);
 	obj.callMethod(llamada_metodo, datos, function(respuesta){
 		if(respuesta){
 			alert("Recurso guardado");
