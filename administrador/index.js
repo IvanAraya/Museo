@@ -26,6 +26,14 @@ function init(){
 			}				
 			menu.appendChild(li);
 		}
+
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.href = 'cerrar.php';
+		a.innerHTML='Cerrar Sesi&oacute;n';
+		li.appendChild(a);
+		menu.appendChild(li);
+
 		load('perfil');
 	});	
 }

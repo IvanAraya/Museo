@@ -25,7 +25,7 @@ class index{
 				new Menu('Editar Recurso','listarecursos',false),
 				new Menu('Nuevo Recurso','recursos',false)
 			)),
-			new Menu('Cerrar Sesi&oacute;n','cerrar', false)
+			//new Menu('Cerrar Sesi&oacute;n','cerrar', false)
 		);
 
 		return $menu;

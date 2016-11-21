@@ -17,17 +17,13 @@ function noticias_onload(){
 			document.getElementById("titulo").value = respuesta.titulo;
 			document.getElementById("fecha").value= respuesta.fecha;
 			document.getElementById("contenido").value = respuesta.contenido;
-			//document.getElementById("imagenS").src = "css/subir.jpg";
+			document.getElementById("imagenS").src = respuesta.img;
 			document.getElementById("b_eliminar").disabled=false;
 
 			if(respuesta.publicado==0)
 				document.getElementById("publicar").checked = false;
 			else
 				document.getElementById("publicar").checked = true;
-
-			
-
-
 		}else{
 			document.getElementById("b_eliminar").disabled=true;
 		}
@@ -47,14 +43,19 @@ function subirImagen(){
 function guardar(){
 	var verificar=true;
 	//------------------------------------------------------
-	if(document.getElementById("titulo").value == "" || document.getElementById("contenido").value == "" )
+	if(document.getElementById("titulo").value == "" || document.getElementById("contenido").value == "" || document.getElementById("uploadImage").files.length == 0 )
 	{
 		verificar=false;
+		if(!nuevaNoticia && document.getElementById("titulo").value != "" && document.getElementById("contenido").value != ""){
+			verificar=true;
+		}
 	}
 	//------------------------------------------------------/
 	if(verificar){
 		var metodo;
 		var check;
+		var cambiarImagen=0;
+
 		if(nuevaNoticia)
 			metodo = 'guardar';
 		else
@@ -66,11 +67,16 @@ function guardar(){
 		else
 			check=0;
 		
+		if ( document.getElementById("uploadImage").files.length > 0) {
+			cambiarImagen=1;
+		}
 
 
 		var datos = new FormData(document.getElementById('form'));
 		datos.append('id',id);
 		datos.append('check',check);
+		datos.append('cambiarImagen',cambiarImagen);
+		
 		obj.callMethod(metodo, datos, function(respuesta){
 			if(respuesta){
 				alert("Guardado");
