@@ -19,7 +19,10 @@
 		<br>
 		<div class="w3-container">
 			<h3>Actividad Reciente</h3>
-			 <hr><br><br>
+			 <hr>
 		</div>
+		<div id="divNoticias" class="w3-container">
+		</div>
+		<br>
 	</body>
 </html>

@@ -28,7 +28,7 @@
 				array_push($arreglo, $row['dv']);
 				array_push($arreglo, $row['nombre']);
 				array_push($arreglo, $row['apellido']);
-				array_push($arreglo, $row['password']);
+				//array_push($arreglo, $row['password']);
 				array_push($arreglo, $row['mail']);
 				array_push($arreglo, $row['permiso_usuarios']);
 				array_push($arreglo, $row['permiso_catalogo']);
