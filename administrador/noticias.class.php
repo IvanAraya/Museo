@@ -1,11 +1,12 @@
 <?php 
 	class noticias{
-		
 		var $db;
 	//--------------------------------------------------------------------------------------------------------	
 		function __construct(){
 			include ('../../data.php');
 			$this->db = $conn; 
+
+			
 		}
 	//--------------------------------------------------------------------------------------------------------	
 		function subirImagen(){
@@ -15,12 +16,17 @@
 		}
 	//--------------------------------------------------------------------------------------------------------
 		function guardar(){
+			$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
+
+
+
 			$titulo=$_POST['titulo'];
-			$fecha=$_POST['fecha'];
+			$fecha=$_POST['fecha']; //fecha ingresada
 			$cont=$_POST['contenido'];
-			$fecha_actual=date("Y-m-d");
+			$fecha_actual=date("d-m-Y"); //fecha de publicacion de la noticia
 			$publicado=$_POST['check'];
 			$id = 0;
+
 
 			$max_id="select MAX(id_actividad) from actividades";
 			$stmt1=$this->db->prepare($max_id);
@@ -30,10 +36,14 @@
 				$id = $reg['MAX(id_actividad)']+1;
 			}
 
+
+			$imagen_tmp=$_FILES['uploadImage']["tmp_name"];
 			$ruta_imagen="img/imgnoticias/".$id.".jpg";
+			$ruta_guardado=$RutaAdministrador."".$ruta_imagen;
+
+			move_uploaded_file($imagen_tmp, $ruta_guardado);
 
 
-			
 			$accion="INSERT INTO actividades (id_actividad, titulo, texto, fecha,fecha_publicacion,publicado,ruta_imagen) 
 					VALUES (:id,:titulo,:cont,:fecha,:fecha_p,:publicado,:ruta)";
 			$stmt = $this->db->prepare($accion);
@@ -49,12 +59,30 @@
 		}
 	//--------------------------------------------------------------------------------------------------------
 		function actualizar(){
+
+			$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
+
+			
 			// me falta ver como manejar la imagen
 			$id=$_POST['id'];
 			$titulo=$_POST['titulo'];
 			$fecha=$_POST['fecha'];
 			$cont=$_POST['contenido'];
 			$publicado=$_POST['check'];
+			$cambiar=$_POST['cambiarImagen'];
+
+			if($cambiar){
+				//echo "<script>alert('cambiando imagen')</script>";
+
+				$imagen_tmp=$_FILES['uploadImage']["tmp_name"];
+				$ruta_imagen="img/imgnoticias/".$id.".jpg";
+				$ruta_guardado=$RutaAdministrador."".$ruta_imagen;
+
+				move_uploaded_file($imagen_tmp, $ruta_guardado);
+			}
+
+
+
 
 			$accion="UPDATE actividades SET titulo =:titulo , texto =:cont, fecha=:fecha ,publicado=:publicado WHERE id_actividad = :id";	
 			$stmt = $this->db->prepare($accion);
@@ -114,10 +142,17 @@
 	//--------------------------------------------------------------------------------------------------------
 		function eliminarNoticia()
 		{
+			$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
+
+
 			$id = $_POST['id'];
 			$stmt = $this->db->prepare("DELETE FROM actividades WHERE id_Actividad = :id");
 			$stmt->execute( array( ":id" => $id ));
 			$this->db = null;
+
+			
+			unlink($RutaAdministrador."img/imgnoticias/".$id.".jpg");
+
 			return true;
 		}
 	//--------------------------------------------------------------------------------------------------------

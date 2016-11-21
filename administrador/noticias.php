@@ -16,7 +16,7 @@
 					</div>
 					<br>
 					<!-- boton oculto para seleccionar imagen, muestra una previsualizacion de la imagen el el cuadro de imagen-->
-					<input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();" accept="image/*" style="display: none;"/>
+					<input id="uploadImage" type="file" name="uploadImage" onchange="PreviewImage();" accept="image/*" style="display: none;"/>
 					<!-- acciona el boton oculto , principalmente es para no ver la ruta a un lado-->
 					<input type="button" name="b_subir_imagen" value="Subir imagen" onclick="document.getElementById('uploadImage').click();" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 
@@ -25,7 +25,7 @@
 					<label for="ti">Titulo</label>		
 					<input type="text" name="titulo" id="titulo" style="width:100%;"><br>
 					<label for="fecha">Fecha</label>
-					<input type="date" name="fecha" id="fecha">
+					<input type="date" name="fecha" id="fecha" placeholder="dd-mm-aaaa" >
 					<label for="publi">Publicar</label>
 					<input type="checkbox" id="publicar" name="publicar">
 					<label for="desc">Descripción</label>

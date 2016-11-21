@@ -1,13 +1,23 @@
 <?php 
-	session_start();
+
+    session_start();
+      if (!isset($_SESSION['nombre'])) {
+        //readfile('login.html');
+        header('location:login.php');
+        exit();
+      }
+
+
+	/*session_start();
 	$_SESSION['debug'] = true;
 	
 	//TODO
 	//Gestionar permisos de ususrio al formulario;
 	$permiso = true;
 	if(!$permiso)
-		die('Acceso denegado');
+		die('Acceso denegado');*/
 ?>
+
 <!DOCTYPE html>
 <html>
   <head>
