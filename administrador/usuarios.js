@@ -136,12 +136,13 @@ function agregarUsuario()
 	
 	f.callMethod(metodo, arg, function(respuesta){
 		if(respuesta)
-			alert("Usuario guardado con exito");
+		{
+			alert("Usuario guardado con exito1.0");
+			load('listausuarios');
+		}
 		else
 			alert("No se pudo guardar el usuario");
 	});
-
-
 }
 
 var Fn = {
