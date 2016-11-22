@@ -8,11 +8,12 @@
 				</div>
 			</div>
 			<br>
-			<form id="busqueda">
+			<form id="busqueda" action="javascript:buscar(1)">
 				<div>
 					<div class="w3-row">
-						<div class="w3-threequarter w3-container"><input type="search" id="q" name="q" style="width:100%" /></div>
-						<div class="w3-quarter w3-container"><input type="button" value="Buscar" style="width:100%" class="w3-btn w3-light-gray w3-border w3-round-xlarge" onclick="buscar(1)"/></div>
+						<div class="w3-half w3-container"><input type="search" id="q" name="q" style="width:100%" /></div>
+						<div class="w3-quarter w3-container"><input type="submit" value="Buscar" style="width:100%" class="w3-btn w3-light-gray w3-border w3-round-xlarge" /></div>
+						<div class="w3-quarter w3-container"><input type="reset" value="Limpiar" style="width:100%" class="w3-btn w3-light-gray w3-border w3-round-xlarge" /></div>
 					</div>
 				</div>
 				<div class="w3-accordion" style='margin-top:16px;'>
@@ -60,14 +61,7 @@
 			<br>
 			<div id="divNumResultados" class="w3-small" ></div>
 			<div id="divPaginas">
-				<ul class="w3-pagination w3-small" id="paginador">
-				  <!--li><a href="#">&laquo;</a></li>
-				  <li><a class="w3-green" href="#">1</a></li>
-				  <li><a href="#">2</a></li>
-				  <li><a href="#">3</a></li>
-				  <li><a href="#">4</a></li>
-				  <li><a href="#">5</a></li>
-				  <!--li><a href="#">&raquo;</a></li-->
+				<ul class="w3-pagination w3-small w3-center" id="paginador">
 				</ul>
 			</div>
 			<div id="divResultados">
@@ -76,7 +70,7 @@
 			<br>
 		</div>
 		<div id="modalWindow" class="w3-modal" onclick="this.style.display='none'">				
-			<div class="w3-modal-content w3-animate-zoom w3-card-24 w3-center" style="padding:5px;">
+			<div class="w3-modal-content w3-card-24 w3-center w3-animate-zoom" style="padding:5px;">
 				<span class="w3-closebtn w3-container w3-padding-16 w3-display-topright" style="color:white;">&times;</span>
 				<div style="background-color:#999; margin:0px;">
 					<img id="modalImage" class="w3-image w3-card-2" style="max-height:350px;" src="">
@@ -85,49 +79,49 @@
 					<div class="w3-row">
 						<div class="w3-half">
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">N. Muestra:</div>
+								<div class="w3-col m5" style="text-align:left;">N. Muestra:</div>
 								<div class="w3-col m7" id="lblnMuestra" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Descripci&oacute;n : </div>
+								<div class="w3-col m5" style="text-align:left;">Descripci&oacute;n : </div>
 								<div class="w3-col m7" id="lblDescripcion" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">F&oacute;rmula Qu&iacute;mica : </div>
+								<div class="w3-col m5" style="text-align:left;">F&oacute;rmula Qu&iacute;mica : </div>
 								<div class="w3-col m7" id="lblFormula" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Tipo Muestra : </div>
+								<div class="w3-col m5" style="text-align:left;">Tipo Muestra : </div>
 								<div class="w3-col m7" id="lblTipo" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Carac. Tipo Muestra : </div>
+								<div class="w3-col m5" style="text-align:left;">Carac. Tipo Muestra : </div>
 								<div class="w3-col m7" id="lblCaracteristica" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Vitrina : </div>
+								<div class="w3-col m5" style="text-align:left;">Vitrina : </div>
 								<div class="w3-col m7" id="lblVitrina" style="text-align:left;">--</div>
 							</div>
 						</div>
 						<div class="w3-half">
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Pa&iacute;s / Continente : </div>
+								<div class="w3-col m5" style="text-align:left;">Pa&iacute;s / Continente : </div>
 								<div class="w3-col m7" id="lblPais" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Regi&oacute;n : </div>
+								<div class="w3-col m5" style="text-align:left;">Regi&oacute;n : </div>
 								<div class="w3-col m7" id="lblRegion" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Ubicaci&oacute;n : </div>
+								<div class="w3-col m5" style="text-align:left;">Ubicaci&oacute;n : </div>
 								<div class="w3-col m7" id="lblUbicacion" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Colecci&oacute;n : </div>
+								<div class="w3-col m5" style="text-align:left;">Colecci&oacute;n : </div>
 								<div class="w3-col m7" id="lblColeccion" style="text-align:left;">--</div>
 							</div>
 							<div class="w3-row">
-								<div class="w3-col m5" style="text-align:right;">Adquisici&oacute;n : </div>
+								<div class="w3-col m5" style="text-align:left;">Adquisici&oacute;n : </div>
 								<div class="w3-col m7" id="lblAdquisicion" style="text-align:left;">--</div>
 							</div>
 							

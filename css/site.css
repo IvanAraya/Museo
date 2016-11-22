@@ -10,7 +10,12 @@ body{
 	-o-background-size: cover;
 	background-size: cover;
 }
-
+input , select{
+	padding:5px;
+	border-radius:10px;
+	border:thin solid gray;
+	display: inline-block;
+}
 label{
 	font-size: 14px;
 	display: block;

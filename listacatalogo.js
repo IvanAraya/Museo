@@ -26,18 +26,7 @@ function mostrarResultados(respuesta){
 	var divNumResultados = document.getElementById('divNumResultados');
 	divNumResultados.innerHTML = '&#91;'+respuesta.paginas.totalResultados.toString() +' resultados&#93;  P&aacute;gina '+ respuesta.paginas.paginaActual + ' de ' + respuesta.paginas.totalPaginas ;
 	
-	ClearOptionsFast('paginador');
-	var paginador = document.getElementById('paginador');	
-	for(var p = 0 ; p < respuesta.paginas.totalPaginas ; p++){
-		var li = document.createElement('li');
-		var a = document.createElement('a');
-		a.innerHTML = p+1;
-		a.href = "javascript:buscar("+(p+1)+")";
-		li.appendChild(a);
-		paginador.appendChild(li);
-		if((p+1) == respuesta.paginas.paginaActual)
-			a.className = "w3-orange";
-	}
+	paginar(respuesta.paginas);
 	
 	ClearOptionsFast('divResultados');
 	var divResultados = document.getElementById('divResultados');
@@ -79,6 +68,60 @@ function mostrarResultados(respuesta){
 		divResultados.appendChild(fila);		
 	}
 	
+}
+//-----------------------------------------------------------
+function paginar(paginas){
+	
+	var valorReferencia = 8;
+	var min = 0 ;
+	var max = paginas.totalPaginas ;
+	var puntosInicio = false ;
+	var puntosFinal = false ;
+	if(paginas.totalPaginas > valorReferencia){
+		if(paginas.paginaActual <= (valorReferencia/2)  ){
+			max = valorReferencia - 1 ;
+			puntosFinal = true ;
+		}else	if(paginas.paginaActual > (paginas.totalPaginas - (valorReferencia/2))){
+			puntosInicio = true ;
+			min = (paginas.totalPaginas - valorReferencia)
+		}else {
+			puntosInicio = true ;
+			puntosFinal = true ;
+			min = parseInt(paginas.paginaActual) - (valorReferencia/2)  ;
+			max = parseInt(paginas.paginaActual) + (valorReferencia/2) -1 ;
+		}
+	}
+	
+	ClearOptionsFast('paginador');
+	
+	var paginador = document.getElementById('paginador');	
+	if(puntosInicio){
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.innerHTML = "...";
+		a.href = "#";
+		li.appendChild(a);
+		paginador.appendChild(li);
+	}
+	
+	for(var p = min ; p < max ; p++){
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.innerHTML = p+1;
+		a.href = "javascript:buscar("+(p+1)+")";
+		li.appendChild(a);
+		paginador.appendChild(li);
+		if((p+1) == paginas.paginaActual)
+			a.className = "w3-orange";
+	}
+	if(puntosFinal){
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.innerHTML = "...";
+		a.href = "#";
+		li.appendChild(a);
+		paginador.appendChild(li);
+	}
 }
 //-----------------------------------------------------------
 function verDetalle(id, src){

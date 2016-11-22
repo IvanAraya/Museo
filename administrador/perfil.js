@@ -24,7 +24,7 @@ function guardarPass()
 
 	if (nuevaPass == confPass)
 	{
-		alert(rut);
+		//alert(rut);
 		var arr =[];
 		arr[0] = rut;
 		arr[1] = confPass;
