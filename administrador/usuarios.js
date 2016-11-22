@@ -124,15 +124,32 @@ function agregarUsuario()
 	arr[8] = ear;
 	arr[9] = er;
 
-	var jsonarr = JSON.stringify(arr);
 	
-	var arg = new FormData();
-	arg.append('datos',jsonarr);
 	var metodo;
 	if(nuevoUsuario)
 		metodo  = "agregarUsuario";
 	else
-		metodo  = "editarUsuario";
+		{
+			metodo  = "editarUsuario";
+			var arr =[];
+
+			arr[0] = rut;
+			arr[1] = div;
+
+			arr[2] = nombre;
+			arr[3] = apellido;
+			arr[4] = email;
+
+			arr[5] = as;
+			arr[6] = ec;
+			arr[7] = ear;
+			arr[8] = er;
+		}
+	
+	var jsonarr = JSON.stringify(arr);
+	
+	var arg = new FormData();
+	arg.append('datos',jsonarr);
 	
 	f.callMethod(metodo, arg, function(respuesta){
 		if(respuesta)
@@ -140,12 +157,9 @@ function agregarUsuario()
 			alert("Usuario guardado con exito");
 			load('listausuarios');
 		}
-			
 		else
 			alert("No se pudo guardar el usuario");
 	});
-
-
 }
 
 var Fn = {

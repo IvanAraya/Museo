@@ -97,22 +97,21 @@
 			$div = $datos[1];
 			$nombre =$datos[2];
 			$apellido =$datos[3];
-			$pass=$datos[4];
-			$mail=$datos[5];
+			//$pass=$datos[4];
+			$mail=$datos[4];
 
-			$as = $datos[6];
-			$ec = $datos[7];
-			$ear = $datos[8];
-			$er =$datos[9];
+			$as = $datos[5];
+			$ec = $datos[6];
+			$ear = $datos[7];
+			$er =$datos[8];
 
 
-			$stmt = $this->db->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, password=:password, mail=:mail, permiso_usuarios=:permiso_usuarios, 
+			$stmt = $this->db->prepare("UPDATE usuarios_administracion SET nombre=:nombre, apellido=:apellido, mail=:mail, permiso_usuarios=:permiso_usuarios, 
 				permiso_catalogo=:permiso_catalogo, permiso_actividad=:permiso_actividad, permiso_recursos=:permiso_recursos WHERE rut=:rut");
 
 			$stmt->bindParam(":rut", $rut);
 			$stmt->bindParam(":nombre", $nombre);
 			$stmt->bindParam(":apellido", $apellido);
-			$stmt->bindParam(":password", $pass);
 			$stmt->bindParam(":mail", $mail);
 			$stmt->bindParam(":permiso_usuarios", $as);
 			$stmt->bindParam(":permiso_catalogo", $ec);

@@ -1,18 +1,14 @@
 var obj = new RemoteObject('recursos');
 
-//----------------------------------------------------------------------------
 function listarecursos_onload(){
-	
-	
 	obj.callMethod('listarRecursos', null, function(lista){
-		
 		var tabla = document.getElementById('tablaLista');		
 		for(f=0;f<lista.length;f++){			
 			var fila = document.createElement('tr');			
 			for(c=1;c<lista[f].length;c++){
-				var col = document.createElement('td'); 
-				col.innerHTML = lista[f][c];
-				fila.appendChild(col);
+				var columna = document.createElement('td'); 
+				columna.innerHTML = lista[f][c];
+				fila.appendChild(columna);
 			}
 			var editar = document.createElement('td');
 			var eliminar = document.createElement('td');
@@ -22,22 +18,21 @@ function listarecursos_onload(){
 			fila.appendChild(eliminar);
 			tabla.appendChild(fila);
 		}
-
 	});
 }
-//----------------------------------------------------------------------------
+
 function eliminar(id,titulo){
-	
 	if(confirm('Desea eliminar '+ titulo+ '?')){
-		//var obj = new RemoteObject('recursos');
 		var datos = new FormData();
 		datos.append('id',id);
 		obj.callMethod('eliminarRecurso', datos, function(result){
-			if(result)
+			if(result){
 				alert('Recurso eliminado');
-			else
-				alert('El recurso no pudo ser eliminado');
+				load('listarecursos');
+			}
+			else{
+				alert('ERROR - No se pudo eliminar el recurso');
+			}
 		});
 	}
-//----------------------------------------------------------------------------
 }
