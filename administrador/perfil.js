@@ -10,7 +10,7 @@ function perfil_onload(){
 	});
 }
 
-function boton(){
+/*function boton(){
 	
 	alert('hola boton');
-}
+}*/
