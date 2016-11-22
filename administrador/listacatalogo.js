@@ -1,5 +1,6 @@
 var obj = new RemoteObject('catalogo');
 var rutaImagenesCatalogo = '../img/catalogo/' ;
+var sinInfo = 'nodisponible.png' ;
 
 function listacatalogo_onload(){
 	
@@ -13,18 +14,39 @@ function listacatalogo_onload(){
 	obj.callMethod('listarMuestras',null, mostrarResultados);
 }
 //-----------------------------------------------------------
+function buscar(pagina){
+	var datos = new FormData(document.getElementById('busqueda'));
+	datos.append('pagina',pagina) ;
+	obj.callMethod('listarMuestras',datos, mostrarResultados);
+}
+//-----------------------------------------------------------
 function mostrarResultados(respuesta){
 	
 	var columnas = 4;
 	var divNumResultados = document.getElementById('divNumResultados');
-	divNumResultados.innerHTML = respuesta.paginas.totalResultados.toString() +' resultados.'
+	divNumResultados.innerHTML = '&#91;'+respuesta.paginas.totalResultados.toString() +' resultados&#93;  P&aacute;gina '+ respuesta.paginas.paginaActual + ' de ' + respuesta.paginas.totalPaginas ;
 	
+	ClearOptionsFast('paginador');
+	var paginador = document.getElementById('paginador');	
+	for(var p = 0 ; p < respuesta.paginas.totalPaginas ; p++){
+		var li = document.createElement('li');
+		var a = document.createElement('a');
+		a.innerHTML = p+1;
+		a.href = "javascript:buscar("+(p+1)+")";
+		li.appendChild(a);
+		paginador.appendChild(li);
+		if((p+1) == respuesta.paginas.paginaActual)
+			a.className = "w3-orange";
+	}
+	
+	ClearOptionsFast('divResultados');
 	var divResultados = document.getElementById('divResultados');
+	
 	var i = 0;
 	for(var ii=0; ii < respuesta.resultados.length; ii = ii+columnas){
 		var fila = document.createElement('div');
 		fila.className = 'w3-row-padding w3-margin-top';
-		for(var c=0; c < columnas ;c++){
+		for(var c=0; c < columnas && i < respuesta.resultados.length ;c++){
 			
 			var col = document.createElement('div');
 			var card = document.createElement('div');
@@ -36,9 +58,15 @@ function mostrarResultados(respuesta){
 			card.className = 'w3-card-2';
 			panelImg.className = 'contenedor-imagen' ;
 			panelImg.style.width = '100%';
-			panelDesc.className = 'w3-container';
-			
+			panelImg.style.cursor = 'pointer';
+			panelDesc.className = 'w3-container';			
+			if(respuesta.resultados[i].imagen != sinInfo)
+				panelImg.style.backgroundColor = '#999';
 			img.src = rutaImagenesCatalogo+respuesta.resultados[i].imagen;
+			img.id = respuesta.resultados[i].id
+			img.onclick = function(){
+				verDetalle(this.id, this.src);
+			}		
 			desc.appendChild(document.createTextNode(respuesta.resultados[i].descripcion));
 			col.appendChild(card);
 			card.appendChild(panelImg);
@@ -51,6 +79,28 @@ function mostrarResultados(respuesta){
 		divResultados.appendChild(fila);		
 	}
 	
+}
+//-----------------------------------------------------------
+function verDetalle(id, src){
+	
+	var datos = new FormData();
+	datos.append('id',id);
+	obj.callMethod('detalleMuestra', datos, function(muestra){
+		
+		document.getElementById('lblnMuestra').innerHTML = muestra.numeroMuestra;
+		document.getElementById('lblDescripcion').innerHTML = muestra.descripcion ;
+		document.getElementById('lblFormula').innerHTML = muestra.formula;
+		document.getElementById('lblTipo').innerHTML = muestra.tipoMuestra;
+		document.getElementById('lblCaracteristica').innerHTML = muestra.caracteristicaTipoMuestra;
+		document.getElementById('lblPais').innerHTML = muestra.pais;
+		document.getElementById('lblRegion').innerHTML = muestra.region;
+		document.getElementById('lblUbicacion').innerHTML = muestra.ubicacion;
+		document.getElementById('lblColeccion').innerHTML = muestra.coleccion;
+		document.getElementById('lblAdquisicion').innerHTML = muestra.adquisicion;
+		document.getElementById('lblVitrina').innerHTML = muestra.vitrina;
+		document.getElementById('modalWindow').style.display = 'block';
+		document.getElementById('modalImage').src = src ;
+	});
 }
 //-----------------------------------------------------------
 function llenarRegion(){
