@@ -41,7 +41,7 @@
 			  <!-- Sidenav -->
 				<div class="w3-black w3-col w3-hide-medium w3-hide-small menu" style="width:200px; height:100%" >
 					<div><a class="w3-btn" href="javascript:load('home','Home')">Home</a></div>
-					<div><a class="w3-btn" href="javascript:load('catalogo','Cat&aacute;logo Virtual')">Cat&aacute;logo Virtual</a></div>
+					<div><a class="w3-btn" href="javascript:load('listacatalogo','Cat&aacute;logo Virtual')">Cat&aacute;logo Virtual</a></div>
 					<div class="w3-dropdown-hover">
 						<span class="w3-btn" >Historia <i class="fa fa-caret-down"></i></span>
 						<div class="w3-dropdown-content" style="margin-left:20px;width:200px;">

@@ -69,6 +69,20 @@ p{
 	padding-right:16px;
 	padding-bottom:16px;
 }
+.contenedor-imagen{
+	position: relative;
+   padding-bottom: 75%;
+}
+.contenedor-imagen img{
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+}
 .mapa{
 	margin:auto;
 	width:95%;
