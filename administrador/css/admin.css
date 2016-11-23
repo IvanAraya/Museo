@@ -27,13 +27,13 @@ label{
 	display: block;
 }
 #pagina{
-	max-width: 860px;
+	max-width: 900px;
 	margin:auto;
 	border-radius: 25px;
 	background-color:#ffffff;
 }
 #header{
-	max-width: 860px;
+	max-width: 900px;
 	background-color:#000066 ;
 }
 #imagenS{
@@ -44,6 +44,7 @@ label{
 	margin:auto;
 	margin:15px;
 	border:thin solid #d6d6d6;
+	min-height:400px;
 }
 .menu-horizontal{
 	background-color:#ff6600;
@@ -72,5 +73,8 @@ label{
     bottom: 0px;
     right: 0px;
     left: 0px;
+}
+.footer {
+   background-color: #191A36;
 }
 
