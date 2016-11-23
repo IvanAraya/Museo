@@ -1,7 +1,9 @@
 <?php
 
 class recursos{
+	
 	var $db;
+	var $rutaAdministrador = 'C:/xampp/htdocs/museo/';
 	
 	function __construct(){
 		include ('../../data.php');
@@ -45,7 +47,7 @@ class recursos{
 	}
 		
 	function agregarRecurso(){
-		$rutaAdministrador = 'C:/xampp/htdocs/museo/';
+		
 		
 		$consulta = "SELECT MAX(id_documento) FROM documentos";
 		$stmt = $this->db->prepare($consulta);
@@ -59,8 +61,8 @@ class recursos{
 		$titulo = $_POST['titulo'];
 		$descripcion = $_POST['descripcion'];
 		$ruta_temporal = $_FILES['archivo']['tmp_name'];
-		$ruta = "recursos/".$_FILES['archivo']['name'];
-		$ruta_guardado = $rutaAdministrador."".$ruta;
+		$ruta = "recursos/".str_replace(" ","_",$_FILES['archivo']['name']);
+		$ruta_guardado = $this->rutaAdministrador."".$ruta;
 		$fecha = date('y-m-d');
 		
 		move_uploaded_file($ruta_temporal,$ruta_guardado);
@@ -79,7 +81,7 @@ class recursos{
 	}
 	
 	function editarRecurso(){
-		$rutaAdministrador = 'C:/xampp/htdocs/museo/';
+		
 		
 		$id = $_POST['id'];
 		$cambiar = $_POST['cambiar'];
@@ -94,10 +96,10 @@ class recursos{
 		}
 		
 		if($cambiar){
-			unlink($rutaAdministrador."".$ruta);
+			unlink($this->rutaAdministrador."".$ruta);
 			$ruta_temporal = $_FILES['archivo']['tmp_name'];
-			$ruta = "recursos/".$_FILES['archivo']['name'];
-			$ruta_guardado = $rutaAdministrador."".$ruta;
+			$ruta = "recursos/".str_replace(" ","_",$_FILES['archivo']['name']);
+			$ruta_guardado = $this->rutaAdministrador."".$ruta;
 			move_uploaded_file($ruta_temporal,$ruta_guardado);
 		}
 		
@@ -115,7 +117,7 @@ class recursos{
 	}
 	
 	function eliminarRecurso(){
-		$rutaAdministrador = 'C:/xampp/htdocs/museo/';
+		//$rutaAdministrador = 'C:/xampp/htdocs/museo/';
 		
 		$id = $_POST['id'];	
 		$stmt = $this->db->prepare("SELECT ruta_documento FROM documentos WHERE id_documento = :id");
@@ -128,7 +130,7 @@ class recursos{
 		$stmt->execute(array( ":id" => $id ));
 		$this->db = null;
 		
-		unlink($rutaAdministrador."".$archivo);
+		unlink($this->rutaAdministrador."".$archivo);
 		return true;
 	}
 	
