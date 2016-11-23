@@ -69,9 +69,9 @@
 			</div>
 			<br>
 		</div>
-		<div id="modalWindow" class="w3-modal" onclick="this.style.display='none'">				
-			<div class="w3-modal-content w3-card-24 w3-center w3-animate-zoom" style="padding:5px;">
-				<span class="w3-closebtn w3-container w3-padding-16 w3-display-topright" style="color:white;">&times;</span>
+		<div id="modalWindow" class="w3-modal" >				
+			<div id="modalContent" class="w3-modal-content w3-card-24 w3-center w3-animate-zoom" style="padding:5px;">
+				<span class="w3-closebtn w3-container w3-padding-16 w3-display-topright" style="color:white;" onclick="cerrarModal()">&times;</span>
 				<div style="background-color:#999; margin:0px;">
 					<img id="modalImage" class="w3-image w3-card-2" style="max-height:350px;" src="">
 				</div>
@@ -126,6 +126,10 @@
 							</div>
 							
 						</div>
+					</div>
+					<div>
+						<input type="hidden" id="idMuestra"/>
+						<input type="button" id="btnEditar" value="Editar" onclick="cargarEditor()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
 					</div>
 				</div>
 			</div>

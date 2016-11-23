@@ -78,7 +78,7 @@
 					<div class="w3-hide-large w3-black" style="text-align:left;">
 						<ul class="w3-navbar menu">
 							<li><a href="javascript:load('home','Home')">Home</a></li>
-							<li><a href="javascript:load('catalogo','Cat&aacute;logo Virtual')">Cat&aacute;logo Virtual</a></li>
+							<li><a href="javascript:load('listacatalogo','Cat&aacute;logo Virtual')">Cat&aacute;logo Virtual</a></li>
 							<li class="w3-dropdown-hover">
 								<a href="#">Historia <i class="fa fa-caret-down"></i></a>
 								<div class="w3-dropdown-content">

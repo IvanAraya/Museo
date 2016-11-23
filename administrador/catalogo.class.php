@@ -49,8 +49,7 @@ class catalogo{
 						ctm.descripcion LIKE '%".$q."%' OR a.descripcion LIKE '%".$q."%' " ;
 			array_push($condicion,$cond1);
 		}
-		
-		
+
 		$cond2 = "" ;
 		if($numMuestra != ""){
 			$cond2 = " m.numero_muetra = $numMuestra ";
@@ -69,7 +68,6 @@ class catalogo{
 			
 			if(count($busquedaAvanzada) > 0)
 				$cond2 = implode(" AND " , $busquedaAvanzada);
-
 		}
 		if($cond2 != "")
 			array_push($condicion,$cond2);
@@ -78,7 +76,6 @@ class catalogo{
 		if($where != "")
 			$where = " WHERE ".$where ;
 		
-
 		$totalRegistros = 0;
 		$stmt = $this->db->prepare($select2.$from.$where);	
 		$stmt->execute();
@@ -122,7 +119,17 @@ class catalogo{
 		$combos['vitrinas'] = $this->obtenerDetalleTabla('vitrinas','descripcion','id_vitrina','descripcion');
 		$combos['colecciones'] = $this->obtenerDetalleTabla('colecciones','descripcion','id_coleccion','descripcion');
 		$combos['paises'] = $this->obtenerDetalleTabla('paises','descripcion','id_pais','descripcion');
+		
+		if(isset($_POST['editar']))
+			$combos['tipoMuestra'] = $this->obtenerDetalleTabla('tipo_muestra','descripcion','id_tipo_muestra','descripcion');{
+			$combos['adquisicion'] = $this->obtenerDetalleTabla('adquisiciones','descripcion','id_adquisiciones','descripcion');
+		}
 		return $combos ;
+	}
+//--------------------------------------------------------------------------------------------------------
+	function llenarCaracteristica(){
+		$id = $_POST['id'];
+		return $this->obtenerDetalleTabla('caracteristica_tipo_muestra','descripcion','id_caractristica_tipo_muestra','descripcion','id_tipo_muestra',$id);
 	}
 //--------------------------------------------------------------------------------------------------------
 	function llenarRegion(){
@@ -165,7 +172,8 @@ class catalogo{
 	function detalleMuestra(){
 		
 		$id = $_POST['id'] ;		
-		$consulta = "SELECT 	m.numero_muetra, m.descripcion, m.formula_quimica, ctm.descripcion AS caracteristica_tipo_muestra, 
+		$consulta = "SELECT 	m.numero_muetra, m.descripcion, m.formula_quimica, 
+									ctm.descripcion AS caracteristica_tipo_muestra, 
 									tm.descripcion AS tipo_muestra, u.descripcion AS ubicacion,	r.descripcion AS region, p.descripcion AS pais,
 									v.descripcion AS vitrina, c.descripcion AS coleccion, a.descripcion AS adquisicion
 						FROM	muestras AS m
@@ -200,7 +208,42 @@ class catalogo{
 		return $muestra;
 	}
 //--------------------------------------------------------------------------------------------------------
-
+	function detalleMuestraEditor(){
+		
+		$id = $_POST['id'] ;		
+		$consulta = "SELECT
+							m.numero_muetra, m.descripcion, m.formula_quimica,	m.id_caracteristica_tipo_muestra,
+							ctm.id_tipo_muestra, m.id_ubicacion, u.id_region, r.id_pais, m.id_coleccion, 
+							m.id_vitrina, m.id_adquicicion, m.ruta_imagen
+						FROM
+							muestras AS m
+							INNER JOIN caracteristica_tipo_muestra AS ctm ON m.id_caracteristica_tipo_muestra = ctm.id_caractristica_tipo_muestra
+							INNER JOIN ubicaciones AS u ON m.id_ubicacion = u.id_ubicacion
+							INNER JOIN regiones AS r ON u.id_region = r.id_region 
+						WHERE m.id = :id"; 
+		$stmt = $this->db->prepare($consulta);
+		$stmt->bindParam(':id',$id);
+		$stmt->execute();
+		$muestra = null;
+		while( $reg = $stmt->fetch() ){
+			$muestra = array(
+				'numeroMuestra' => $reg['numero_muetra'], 
+				'descripcion' => $reg['descripcion'],
+				'formula' => $reg['formula_quimica'],
+				'caracteristicaTipoMuestra' => $reg['id_caracteristica_tipo_muestra'],
+				'tipoMuestra' => $reg['id_tipo_muestra'],
+				'ubicacion' => $reg['id_ubicacion'],
+				'region' => $reg['id_region'],
+				'pais' => $reg['id_pais'],
+				'vitrina' => $reg['id_vitrina'],
+				'coleccion' => $reg['id_coleccion'],
+				'adquisicion' => $reg['id_adquicicion'],
+				'imagen' => $reg['ruta_imagen']
+			);
+		}
+		return $muestra;
+	}
+//--------------------------------------------------------------------------------------------------------
 }
 
 ?>

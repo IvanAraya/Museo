@@ -143,7 +143,18 @@ function verDetalle(id, src){
 		document.getElementById('lblVitrina').innerHTML = muestra.vitrina;
 		document.getElementById('modalWindow').style.display = 'block';
 		document.getElementById('modalImage').src = src ;
+		document.getElementById('idMuestra').value = id ;
 	});
+}
+//-----------------------------------------------------------
+function cargarEditor(){
+	var id = document.getElementById('idMuestra').value ;
+	load('catalogo',id);
+}
+//-----------------------------------------------------------
+function cerrarModal(){
+	var modal = document.getElementById('modalWindow') ;
+	modal.style.display='none'
 }
 //-----------------------------------------------------------
 function llenarRegion(){
