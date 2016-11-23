@@ -43,7 +43,7 @@
 			$pass = $datos[1];
 			$email = $datos[2];
 
-			if (strlen($rut)>0)
+			if (strlen($pass)>0)
 			{
 				$stmt = $this->db->prepare("UPDATE usuarios_administracion SET mail=:mail, password=:password WHERE rut=:rut");
 

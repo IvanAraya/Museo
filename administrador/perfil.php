@@ -65,8 +65,9 @@
 			<div class="w3-row">
 				<div class="w3-rest w3-center">
 					<input name="ok" value="ok" type="button" onclick="guardarPass()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">
+					<br>
 				</div>
-			</div>
+			</div>			
 		</form>
 	</div>
 </body></html>
