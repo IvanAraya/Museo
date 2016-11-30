@@ -81,10 +81,7 @@ function agregarUsuario()
 	rut_c=document.getElementById("Erut").value;
 	nombre=document.getElementById("Enombre").value;
 	apellido=document.getElementById("Eapellido").value;
-	//pass=document.getElementById("Epass").value;
 	email=document.getElementById("Email").value;
-
-	pass = rut_c.substring(0, 5);
 
 	rut = rut_c.split("-")[0];
 	div = rut_c.split("-")[1];
@@ -116,7 +113,7 @@ function agregarUsuario()
 
 	arr[2] = nombre;
 	arr[3] = apellido;
-	arr[4] = pass;
+	arr[4] = null;
 	arr[5] = email;
 
 	arr[6] = as;

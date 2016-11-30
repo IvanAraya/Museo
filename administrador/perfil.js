@@ -5,7 +5,7 @@ var rut = null;
 function perfil_onload(){
 	remote.callMethod('obtenerDato', null, function(respuesta)
 	{
-		document.getElementById("rut").innerHTML = respuesta.rut+"-"+respuesta.dv;
+		document.getElementById("rut").innerHTML = respuesta.rutFormato+"-"+respuesta.dv;
 		document.getElementById("nombre").innerHTML = respuesta.nombre+" "+respuesta.apellido;
 		document.getElementById("email").value = respuesta.mail;
 		document.getElementById("nuevaPass").value = "";
@@ -24,7 +24,7 @@ function guardarPass()
 
 	if (nuevaPass == confPass)
 	{
-		//alert(rut);
+		
 		var arr =[];
 		arr[0] = rut;
 		arr[1] = confPass;

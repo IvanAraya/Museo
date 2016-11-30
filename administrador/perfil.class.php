@@ -29,7 +29,8 @@
 			{
 				$respuesta = array(
 
-					'rut' => number_format($rut,0,',','.'),
+					'rutFormato' => number_format($rut,0,',','.'),
+					'rut' => $rut,
 					'dv' => $row['dv'],
 					'nombre' => $row['nombre'],
 					'apellido' => $row['apellido'],
@@ -57,7 +58,7 @@
 
 				$stmt->bindParam(":rut", $rut);
 				$stmt->bindParam(":mail", $email);
-				$stmt->bindParam(":password", md5($datos[1]));
+				$stmt->bindParam(":password", md5($pass));
 			}
 			else
 			{
