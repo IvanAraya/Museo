@@ -21,10 +21,10 @@ class Configuracion{
 	var $tamanioMaximoArchivo = 8 ;
 	
 //-- Correo Electronico ----------------------------------
-	var $correoHabilitado = true;
+	var $correoHabilitado = false;
 	var $mailSMTPHost = 'smtp.googlemail.com';  						
-	var $mailUsername = 'iaraya1@alumnosuls.cl';            
-	var $mailPassword = 'dassault1';                        
+	var $mailUsername = '';            
+	var $mailPassword = '';                        
 	var $mailSMTPSecure = 'tls';                            
 	var $mailPort = 25;                                   
 }
