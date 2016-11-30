@@ -13,12 +13,20 @@ class Configuracion{
 
 //-- Rutas de Archivos -----------------------------------
 	var $rutaAplicacion = 'C:/xampp/htdocs/museo/';
+	var $urlRecursos = 'recursos/' ;
 	var $urlImagenesNoticias = 'img/imgnoticias/';
 	var $urlImagenesCatalogo = 'img/catalogo/';
-	var $urlRecursos = 'recursos/' ;
+
+//-- Archivos ----------------------------------
+	var $tamanioMaximoArchivo = 8 ;
 	
-//-- Correo Electrónico ----------------------------------
-	
+//-- Correo Electronico ----------------------------------
+	var $correoHabilitado = true;
+	var $mailSMTPHost = 'smtp.googlemail.com';  						
+	var $mailUsername = 'iaraya1@alumnosuls.cl';            
+	var $mailPassword = 'dassault1';                        
+	var $mailSMTPSecure = 'tls';                            
+	var $mailPort = 25;                                   
 }
 
 ?>
