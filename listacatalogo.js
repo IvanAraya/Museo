@@ -1,6 +1,4 @@
 var obj = new RemoteObject('catalogo');
-var rutaImagenesCatalogo = 'img/catalogo/' ;
-var sinInfo = 'nodisponible.png' ;
 
 function listacatalogo_onload(){
 	
@@ -49,9 +47,9 @@ function mostrarResultados(respuesta){
 			panelImg.style.width = '100%';
 			panelImg.style.cursor = 'pointer';
 			panelDesc.className = 'w3-container';			
-			if(respuesta.resultados[i].imagen != sinInfo)
+			if(respuesta.resultados[i].imagen != respuesta.configuracion.imagenNoDisponible)
 				panelImg.style.backgroundColor = '#999';
-			img.src = rutaImagenesCatalogo+respuesta.resultados[i].imagen;
+			img.src = respuesta.configuracion.rutaImagenesCatalogo+respuesta.resultados[i].imagen;
 			img.id = respuesta.resultados[i].id
 			img.onclick = function(){
 				verDetalle(this.id, this.src);

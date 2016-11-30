@@ -1,12 +1,19 @@
 <?php
 
+include('../configuracion.php');
+include('../data.php');
+
 class home{
 	
 	var $db;
 	function __construct(){
 		
-		include ('../data.php');
-		$this->db = $conn; 
+		//include ('../data.php');
+		//$this->db = $conn; 
+		
+		$config = new Configuracion();
+		$baseDato = new BaseDatos($config);
+		$this->db = $baseDato->conectarPDO();
 	}
 	//--------------------------------------------------------------------------------------------------------
 	function cargarNoticias(){
@@ -18,7 +25,7 @@ class home{
 		while( $reg = $stmt->fetch() ){
 			$noticia = array(
 				'id' => $reg['id_actividad'],
-				'imagen' => $reg['ruta_imagen'] ,
+				'imagen' => $reg['ruta_imagen'].'?'.time() ,
 				'titulo' => $reg['titulo'],
 				'cuerpo' =>$reg['texto'],
 				'fecha' => $reg['fecha']

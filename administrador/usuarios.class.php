@@ -1,17 +1,19 @@
 <?php 
-	//include("../data.php");
-
-	/**
-	* 
-	*/
-
+	
+	include('../../configuracion.php');
+	include('../../data.php');
+	
 	class usuarios 
 	{
 		var $db;
 	//--------------------------------------------------------------------------------------------------------
 		function __construct(){
-			include ('../../data.php');
-			$this->db = $conn; 
+			//include ('../../data.php');
+			//$this->db = $conn; 
+			
+			$configuracion = new Configuracion();
+			$baseDato = new BaseDatos($configuracion);
+			$this->db = $baseDato->conectarPDO();
 		}
 	//--------------------------------------------------------------------------------------------------------	
 		function enviarInfo()

@@ -1,5 +1,6 @@
 <?php
 	session_start() ;
+	
 	$script = $_POST['0'] ;
 	$clase = $_POST['1'] ;	
 	$metodo = $_POST['2'] ;

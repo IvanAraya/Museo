@@ -1,11 +1,18 @@
 <?php
 
+include('../configuracion.php');
+include('../data.php');
+
 class recursos{
 	var $db;
 	
 	function __construct(){
-		include ('../data.php');
-		$this->db = $conn; 
+		//include ('../data.php');
+		//$this->db = $conn; 
+		
+		$config = new Configuracion();
+		$baseDato = new BaseDatos($config);
+		$this->db = $baseDato->conectarPDO();
 	}
 
 	function listarRecursos(){

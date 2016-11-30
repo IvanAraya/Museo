@@ -1,8 +1,15 @@
 <?php 
 
-	$db;
-	include ('../data.php');
-	$db = $conn; 
+	//$db;
+	//include ('../data.php');
+	//$db = $conn; 
+	
+	include('../configuracion.php');
+	include('../data.php');
+	
+	$configuracion = new Configuracion();
+	$baseDato = new BaseDatos($configuracion);
+	$db = $baseDato->conectarPDO();
 
 	$user=$_POST['rut'];
 	$pass=$_POST['pass'];
@@ -20,7 +27,6 @@
 	echo "digito v = ".$dv."<br>";
 */
 
-
 	$stmt = $db->prepare("SELECT * FROM usuarios_administracion WHERE rut = :usuario and password=:pass");
 	$stmt->bindParam(':usuario',$numero);
 	$stmt->bindParam(':pass',md5($pass));
@@ -37,7 +43,7 @@
 		header('location:index.php');
 	}else{
 		//session_destroy();
-		echo '<script language="javascript">alert("ERROR");window.location.href="login.php";</script>'; 
+		echo '<script language="javascript">alert("Nombre de Usuario o Contraseña incorrectos.");window.location.href="login.php";</script>'; 
 	}
 
 

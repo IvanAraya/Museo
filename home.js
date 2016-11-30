@@ -72,7 +72,7 @@ function cargarNoticias(){
 			fecha.appendChild(iconofecha);
 			fecha.appendChild(document.createTextNode(' '+noticias[i].fecha));	
 			
-			imagen.src = 'administrador/' + noticias[i].imagen ;
+			imagen.src = noticias[i].imagen ;
 			imagen.style.maxWidth = '300px';
 			imagen.className = 'img-noticia';			
 			

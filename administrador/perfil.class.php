@@ -1,12 +1,20 @@
 <?php
+
+	include('../../configuracion.php');
+	include('../../data.php');
+
 	class perfil
 	{
 		
 		var $db;
 	//--------------------------------------------------------------------------------------------------------
 		function __construct(){
-			include ('../../data.php');
-			$this->db = $conn; 
+			//include ('../../data.php');
+			//$this->db = $conn; 
+			
+			$configuracion = new Configuracion();
+			$baseDato = new BaseDatos($configuracion);
+			$this->db = $baseDato->conectarPDO();
 		}
 	//--------------------------------------------------------------------------------------------------------
 		function obtenerDato()
@@ -21,7 +29,7 @@
 			{
 				$respuesta = array(
 
-					'rut' => $rut,
+					'rut' => number_format($rut,0,',','.'),
 					'dv' => $row['dv'],
 					'nombre' => $row['nombre'],
 					'apellido' => $row['apellido'],

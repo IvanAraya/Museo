@@ -1,14 +1,21 @@
 <?php 
 
+include('../../configuracion.php');
+include('../../data.php');
+
 class catalogo{
 	
 	var $db;
+	var $configuracion ;
 	var $sinInfo = 'Sin Información' ;
+	var $imagenSinInformacion = 'nodisponible.png' ;
 	var $resultadosPagina = 40;
 //--------------------------------------------------------------------------------------------------------	
 	function __construct(){
-		include ('../../data.php');
-		$this->db = $conn; 
+
+		$this->configuracion = new Configuracion();
+		$baseDato = new BaseDatos($this->configuracion);
+		$this->db = $baseDato->conectarPDO();
 	}
 //--------------------------------------------------------------------------------------------------------
 	function listarMuestras(){
@@ -93,6 +100,10 @@ class catalogo{
 				'totalResultados' => $totalRegistros,
 				'totalPaginas'=> $paginas,
 				'paginaActual' => $paginaActual
+			),
+			'configuracion' => array(
+				'rutaImagenesCatalogo' => '../'.$this->configuracion->urlImagenesCatalogo ,
+				'imagenNoDisponible' => $this->imagenSinInformacion ,
 			),
 			'resultados' => array()
 		);

@@ -1,12 +1,19 @@
 <?php 
+
+include('../../configuracion.php');
+include('../../data.php');
+
 	class noticias{
 		var $db;
+		var $configuracion ;
 	//--------------------------------------------------------------------------------------------------------	
 		function __construct(){
-			include ('../../data.php');
-			$this->db = $conn; 
+			//include ('../../data.php');
+			//$this->db = $conn; 
 
-			
+			$this->configuracion = new Configuracion();
+			$baseDato = new BaseDatos($this->configuracion);
+			$this->db = $baseDato->conectarPDO();
 		}
 	//--------------------------------------------------------------------------------------------------------	
 		function subirImagen(){
@@ -16,7 +23,7 @@
 		}
 	//--------------------------------------------------------------------------------------------------------
 		function guardar(){
-			$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
+			//$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
 
 
 
@@ -38,8 +45,10 @@
 
 
 			$imagen_tmp=$_FILES['uploadImage']["tmp_name"];
-			$ruta_imagen="img/imgnoticias/".$id.".jpg";
-			$ruta_guardado=$RutaAdministrador."".$ruta_imagen;
+			//$ruta_imagen="img/imgnoticias/".$id.".jpg";
+			//$ruta_guardado=$RutaAdministrador."".$ruta_imagen;
+			$ruta_imagen= $this->configuracion->urlImagenesNoticias.$id.".jpg";
+			$ruta_guardado=$this->configuracion->rutaAplicacion.$ruta_imagen;
 
 			move_uploaded_file($imagen_tmp, $ruta_guardado);
 
@@ -60,7 +69,7 @@
 	//--------------------------------------------------------------------------------------------------------
 		function actualizar(){
 
-			$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
+			//$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
 
 			
 			// me falta ver como manejar la imagen
@@ -75,8 +84,10 @@
 				//echo "<script>alert('cambiando imagen')</script>";
 
 				$imagen_tmp=$_FILES['uploadImage']["tmp_name"];
-				$ruta_imagen="img/imgnoticias/".$id.".jpg";
-				$ruta_guardado=$RutaAdministrador."".$ruta_imagen;
+				//$ruta_imagen="img/imgnoticias/".$id.".jpg";
+				//$ruta_guardado=$RutaAdministrador."".$ruta_imagen;
+				$ruta_imagen= $this->configuracion->urlImagenesNoticias.$id.".jpg";
+				$ruta_guardado=$this->configuracion->rutaAplicacion.$ruta_imagen;
 
 				move_uploaded_file($imagen_tmp, $ruta_guardado);
 			}
@@ -111,7 +122,7 @@
 					$retorno['titulo']	 = $reg['titulo'];
 					$retorno['fecha']	 = $reg['fecha'];
 					$retorno['contenido']= $reg['texto'];
-					$retorno['img']		 = $reg['ruta_imagen'];
+					$retorno['img']		= '../'.$reg['ruta_imagen'].'?'.time();
 					$retorno['publicado']= $reg['publicado'];
 					$retorno['b']		 = true;
 				}	
@@ -142,7 +153,7 @@
 	//--------------------------------------------------------------------------------------------------------
 		function eliminarNoticia()
 		{
-			$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
+			//$RutaAdministrador='C:/xampp/htdocs/Museo/administrador/';
 
 
 			$id = $_POST['id'];
@@ -151,7 +162,8 @@
 			$this->db = null;
 
 			
-			unlink($RutaAdministrador."img/imgnoticias/".$id.".jpg");
+			//unlink($RutaAdministrador."img/imgnoticias/".$id.".jpg");
+			unlink($this->configuracion->rutaAplicacion.$this->configuracion->urlImagenesNoticias.$id.".jpg");
 
 			return true;
 		}

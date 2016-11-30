@@ -1,13 +1,20 @@
 <?php
 
+include('../../configuracion.php');
+include('../../data.php');
+
 class recursos{
 	
 	var $db;
-	var $rutaAdministrador = 'C:/xampp/htdocs/museo/';
+	//var $rutaAdministrador = 'C:/xampp/htdocs/museo/';
 	
 	function __construct(){
-		include ('../../data.php');
-		$this->db = $conn; 
+		//include ('../../data.php');
+		//$this->db = $conn; 
+		
+		$this->configuracion = new Configuracion();
+		$baseDato = new BaseDatos($this->configuracion);
+		$this->db = $baseDato->conectarPDO();
 	}
 
 	function listarRecursos(){
@@ -61,8 +68,10 @@ class recursos{
 		$titulo = $_POST['titulo'];
 		$descripcion = $_POST['descripcion'];
 		$ruta_temporal = $_FILES['archivo']['tmp_name'];
-		$ruta = "recursos/".str_replace(" ","_",$_FILES['archivo']['name']);
-		$ruta_guardado = $this->rutaAdministrador."".$ruta;
+		//$ruta = "recursos/".str_replace(" ","_",$_FILES['archivo']['name']);
+		//$ruta_guardado = $this->rutaAdministrador."".$ruta;
+		$ruta= $this->configuracion->urlRecursos.str_replace(" ","_",$_FILES['archivo']['name']);
+		$ruta_guardado=$this->configuracion->rutaAplicacion.$ruta;
 		$fecha = date('y-m-d');
 		
 		move_uploaded_file($ruta_temporal,$ruta_guardado);
@@ -96,10 +105,13 @@ class recursos{
 		}
 		
 		if($cambiar){
-			unlink($this->rutaAdministrador."".$ruta);
+			//unlink($this->rutaAdministrador."".$ruta);
+			unlink($this->configuracion->rutaAplicacion."".$ruta);
 			$ruta_temporal = $_FILES['archivo']['tmp_name'];
-			$ruta = "recursos/".str_replace(" ","_",$_FILES['archivo']['name']);
-			$ruta_guardado = $this->rutaAdministrador."".$ruta;
+			//$ruta = "recursos/".str_replace(" ","_",$_FILES['archivo']['name']);
+			//$ruta_guardado = $this->rutaAdministrador."".$ruta;
+			$ruta= $this->configuracion->urlRecursos.str_replace(" ","_",$_FILES['archivo']['name']);
+			$ruta_guardado=$this->configuracion->rutaAplicacion.$ruta;
 			move_uploaded_file($ruta_temporal,$ruta_guardado);
 		}
 		
@@ -130,7 +142,8 @@ class recursos{
 		$stmt->execute(array( ":id" => $id ));
 		$this->db = null;
 		
-		unlink($this->rutaAdministrador."".$archivo);
+		//unlink($this->rutaAdministrador."".$archivo);
+		unlink($this->configuracion->rutaAplicacion.$archivo);
 		return true;
 	}
 	

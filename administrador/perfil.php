@@ -27,7 +27,7 @@
 					<label for="rut">Rut </label>
 				</div>
 				<div class="w3-col m6  w3-container">
-					<span id="rut" >{Rut}</span> <br>
+					<span id="rut" >&nbsp;</span> <br>
 				</div>
 			</div>
 			<div class="w3-row">
@@ -35,7 +35,7 @@
 					<label for="nombre" >Nombre </label><br>
 				</div>
 				<div class="w3-col m6  w3-container">
-					<span class="control" id="nombre">{Nombre}</span> 	<br>	
+					<span class="control" id="nombre">&nbsp;</span> 	<br>	
 				</div>
 			</div>
 			<div class="w3-row">
