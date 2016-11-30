@@ -156,7 +156,7 @@
 		function enviarCorreo($usuario){
 			
 			if(!$this->configuracion->correoHabilitado)
-				return false;
+				return true;
 			
 			$mail = new PHPMailer;
 
