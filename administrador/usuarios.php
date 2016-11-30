@@ -1,11 +1,14 @@
 <?php
-/*
+
 session_start();
 if (!isset($_SESSION['user'])) {
   //readfile('login.html');
-  header('location:login.html');
+  //if ($_SESSION['p_usuarios'] == 0)
+  //header('location:login.php');
+  header("HTTP/1.0 404 Not Found - Archive Empty");
   exit();
 }
+/*
 echo "<p>".$_SESSION['user']."</p>";
 echo "<p>".$_SESSION['nombre']."</p>";
 echo "<p>".$_SESSION['apellido']."</p>";
