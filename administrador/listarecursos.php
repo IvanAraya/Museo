@@ -1,5 +1,17 @@
 <?php
 
+session_start();
+if (isset($_SESSION['p_recursos'])) {
+
+  if($_SESSION['p_recursos'] == 0)
+  {
+    die("acceso denegado");
+    exit();
+  }
+}
+else{
+  die("acceso denegado");
+}
 ?>
 
 <html>

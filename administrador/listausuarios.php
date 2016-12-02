@@ -1,15 +1,17 @@
 <?php
-/*
+
 session_start();
-if (!isset($_SESSION['user'])) {
-  //readfile('login.html');
-  header('location:login.html');
-  exit();
+if (isset($_SESSION['p_usuarios'])) {
+
+  if($_SESSION['p_usuarios'] == 0)
+  {
+    die("acceso denegado");
+    exit();
+  }
 }
-echo "<p>".$_SESSION['user']."</p>";
-echo "<p>".$_SESSION['nombre']."</p>";
-echo "<p>".$_SESSION['apellido']."</p>";
-*/
+else{
+  die("acceso denegado");
+}
 ?>
 
 
