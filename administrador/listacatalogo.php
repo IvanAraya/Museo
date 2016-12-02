@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+if (isset($_SESSION['p_catalogo'])) {
+
+  if($_SESSION['p_catalogo'] == 0)
+  {
+    die("acceso denegado");
+    exit();
+  }
+}
+else{
+  die("acceso denegado");
+}
+?>
 <!DOCTYPE html>
 <html>
 	<body>
