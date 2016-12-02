@@ -1,5 +1,4 @@
 var obj = new RemoteObject('catalogo');
-var rutaImagenesCatalogo = '../img/catalogo/' ;
 
 function catalogo_onload(){
 	
@@ -20,6 +19,7 @@ function catalogo_onload(){
 	if(arguments[0]){
 		id = arguments[0] ;
 		cargar(id)
+		document.getElementById('b_eliminar').disabled = false;
 	}
 
 	var myNicEditor = new nicEditor({iconsPath : 'js/nicEdit/nicEditorIcons.gif', buttonList : ['subscript','superscript']});
@@ -31,23 +31,64 @@ function cargar(id){
 	var datos = new FormData();
 	datos.append('id',id);
 	obj.callMethod('detalleMuestraEditor',datos,function(muestra){
-		//alert(muestra.tipoMuestra)
-		
+		document.getElementById('idMuestra').value = muestra.idMuestra;
 		document.getElementById('txtNmuestra').value = muestra.numeroMuestra;
 		document.getElementById('txtDescripcion').value = muestra.descripcion ;
-		nicEditors.findEditor('txtFormula').setContent( muestra.formula );
 		document.getElementById('cmbTipomuestra').value = muestra.tipoMuestra;
-		llenarCaracteristica();
-		//document.getElementById('cmbCarTipoMuestra').value = muestra.caracteristicaTipoMuestra;
-		document.getElementById('cmbPais').value = muestra.pais;
-		llenarRegion();
-		//document.getElementById('lblRegion').innerHTML = muestra.region;
-		//document.getElementById('lblUbicacion').innerHTML = muestra.ubicacion;
+		document.getElementById('cmbPais').value = muestra.pais;		
 		document.getElementById('cmbColecciones').value = muestra.coleccion;
 		document.getElementById('cmbAdquisicion').value = muestra.adquisicion;
 		document.getElementById('cmbVitrinas').value = muestra.vitrina;
-		document.getElementById('imgFoto').src = rutaImagenesCatalogo + muestra.imagen ;
-	})
+		document.getElementById('imgFoto').src = muestra.imagen ;
+		nicEditors.findEditor('txtFormula').setContent( muestra.formula );
+		llenarCaracteristica(muestra.caracteristicaTipoMuestra);
+		llenarRegion(muestra.region, muestra.ubicacion);
+	});
+}
+//-----------------------------------------------------------
+function guardar(){
+	
+	if(!validarForm()){
+		alert('Por favor complete todos los campos necesarios. Verifique que la muestra disponga de una descripcion y en los campos en los que no disponga de informacion seleccione la opcion \'Sin Informacion\'.')
+		return false;
+	}		
+	
+	if(confirm('¿Desea guardar esta muestra?')){
+		var datos = new FormData( document.getElementById('frmMuestra') );
+		var nicE = new nicEditors.findEditor('txtFormula');
+		datos.append('formula',nicE.getContent());
+
+		obj.callMethod('guardar',datos, function(respuesta){
+			if(respuesta.resultado)
+				alert('Los datos de la muestra se guardaron exitosamente');
+			else
+				alert(respuesta.mensaje);
+		});
+	}
+}
+//-----------------------------------------------------------
+function eliminar(){
+	if(confirm('¿Desea eliminar esta muestra?')){
+		var datos = new FormData( document.getElementById('frmMuestra') );
+		obj.callMethod('eliminarMuestra',datos, function(respuesta){
+			if(respuesta.resultado){
+				alert('La muestra fue eliminada exitosamente');
+				load('listacatalogo');
+			}else
+				alert(respuesta.mensaje);
+		});
+	}
+}
+//-----------------------------------------------------------
+function validarForm(){
+
+	if(document.getElementById('txtDescripcion').value == '') return false;
+	if(document.getElementById('cmbTipomuestra').value < 0 ) return false;
+	if(document.getElementById('cmbUbicacion').value < 0 ) return false;	
+	if(document.getElementById('cmbColecciones').value < 0 ) return false;
+	if(document.getElementById('cmbAdquisicion').value < 0 ) return false;
+	if(document.getElementById('cmbVitrinas').value < 0 ) return false;
+	return true;
 }
 //-----------------------------------------------------------
 function photoPreview(file){
@@ -62,9 +103,14 @@ function llenarCaracteristica(){
 	resetCombo('cmbCarTipoMuestra','Tipo Muestra');
 	var datos = new FormData();
 	datos.append('id',document.getElementById('cmbTipomuestra').value);
-	obj.callMethod('llenarCaracteristica', datos, function(caracteristica){
+	if(arguments[0])
+		datos.append('seleccion', arguments[0]);
+	obj.callMethod('llenarCaracteristica', datos, function(respuesta){
 		ClearOptionsFast('cmbCarTipoMuestra');
-		setOptions('cmbCarTipoMuestra',caracteristica);
+		setOptions('cmbCarTipoMuestra', respuesta.caracteristicas);		
+		if(respuesta.seleccion)
+			document.getElementById('cmbCarTipoMuestra').value = respuesta.seleccion ;
+		
 	});
 }
 //-----------------------------------------------------------
@@ -73,9 +119,18 @@ function llenarRegion(){
 	resetCombo('cmbUbicacion','Region');
 	var datos = new FormData();
 	datos.append('id',document.getElementById('cmbPais').value);
-	obj.callMethod('llenarRegion', datos, function(regiones){
+	if(arguments[0]){
+		datos.append('region', arguments[0]);
+		datos.append('ubicacion', arguments[1]);
+	}		
+	obj.callMethod('llenarRegion', datos, function(respuesta){
 		ClearOptionsFast('cmbRegion');
-		setOptions('cmbRegion',regiones);
+		setOptions('cmbRegion',respuesta.regiones);
+		if(respuesta.region){
+			document.getElementById('cmbRegion').value = respuesta.region ;
+			llenarUbicacion(respuesta.ubicacion);
+		}
+			
 	});
 }
 //-----------------------------------------------------------
@@ -83,9 +138,13 @@ function llenarUbicacion(){
 	resetCombo('cmbUbicacion','Region');
 	var datos = new FormData();
 	datos.append('id',document.getElementById('cmbRegion').value);
-	obj.callMethod('llenarUbicacion', datos, function(ubicaciones){
+	if(arguments[0])
+		datos.append('seleccion', arguments[0]);
+	obj.callMethod('llenarUbicacion', datos, function(respuesta){
 		ClearOptionsFast('cmbUbicacion');
-		setOptions('cmbUbicacion',ubicaciones);
+		setOptions('cmbUbicacion',respuesta.ubicaciones);
+		if(respuesta.seleccion)
+			document.getElementById('cmbUbicacion').value = respuesta.seleccion ;
 	});
 }
 //-----------------------------------------------------------
@@ -118,3 +177,4 @@ function ClearOptionsFast(id){
 function cancelar(){
 	load('listacatalogo');
 }
+//-----------------------------------------------------------

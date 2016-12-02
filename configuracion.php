@@ -18,7 +18,7 @@ class Configuracion{
 	var $urlImagenesCatalogo = 'img/catalogo/';
 
 //-- Archivos ----------------------------------
-	var $tamanioMaximoArchivo = 8 ;
+	var $tamanioMaximoArchivo = 8388608 ;
 	
 //-- Correo Electronico ----------------------------------
 	var $correoHabilitado = true;

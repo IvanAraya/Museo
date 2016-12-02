@@ -9,6 +9,7 @@ class catalogo{
 	var $configuracion ;
 	var $sinInfo = 'Sin Información' ;
 	var $imagenSinInformacion = 'nodisponible.png' ;
+	var $sinNumero = 'S/N' ;
 	var $resultadosPagina = 40;
 //--------------------------------------------------------------------------------------------------------	
 	function __construct(){
@@ -121,7 +122,251 @@ class catalogo{
 				'imagen' => $imagen
 			));
 		}
+		$this->db = null;
 		return $respuesta;
+	}
+//--------------------------------------------------------------------------------------------------------
+	function guardar(){
+		
+		$id = $_POST['idMuestra'] ;
+		if($id == "")
+			return $this->nuevaMuestra();
+		else
+			return $this->actualizarMuestra();		
+	}
+//--------------------------------------------------------------------------------------------------------
+	function nuevaMuestra(){
+		
+		$respuesta = array(
+			'resultado' => true ,
+			'mensaje' => null
+		);
+		
+		$consulta = "SELECT MAX(id) FROM muestras";
+		$stmt = $this->db->prepare($consulta);
+		$stmt->execute();
+		if($row = $stmt->fetch())
+			$nmax = trim($row[0]);
+		$id = $nmax+1;
+		$numMuestra = addslashes($_POST['txtNmuestra']) ;
+		$descripcion = addslashes($_POST['txtDescripcion']) ;
+		$formula = addslashes($_POST['formula']) ;
+		$caracTipoMuestra = $_POST['cmbCarTipoMuestra'] ;
+		$ubicacion = $_POST['cmbUbicacion'] ;
+		$coleccion = $_POST['cmbColecciones'] ;
+		$adquisicion = $_POST['cmbAdquisicion'] ;
+		$vitrinas = $_POST['cmbVitrinas'] ;
+		
+		if($numMuestra == '')
+			$numMuestra = $this->sinNumero ;
+		if(trim($formula) == '<br>')
+			$formula = $this->sinInfo ;
+
+		try{
+			$consulta = 'INSERT INTO muestras 
+								(id, numero_muetra, descripcion, formula_quimica, id_caracteristica_tipo_muestra, id_ubicacion, id_coleccion, id_vitrina, id_adquicicion, ruta_imagen ) 
+							VALUES 
+								(:id, :numMuestra, :descripcion, :formula, :caracteristica, :ubicacion, :coleccion,	:vitrina , :adquisicion, :imagen )';
+			$stmt = $this->db->prepare($consulta);	
+			$stmt->bindParam(':id',$id);
+			$stmt->bindParam(':numMuestra',$numMuestra);
+			$stmt->bindParam(':descripcion',$descripcion);
+			$stmt->bindParam(':formula',$formula);
+			$stmt->bindParam(':caracteristica',$caracTipoMuestra);
+			$stmt->bindParam(':ubicacion',$ubicacion);
+			$stmt->bindParam(':coleccion',$coleccion);
+			$stmt->bindParam(':vitrina',$vitrinas);
+			$stmt->bindParam(':adquisicion',$adquisicion);
+			$stmt->bindParam(':imagen',$this->sinInfo);
+			$stmt->execute();
+		}catch(Exception $e){
+			$respuesta['resultado'] = false;
+			if($this->configuracion->debug)
+				$respuesta['mensaje'] = $e->getMessage();
+			else
+				$respuesta['mensaje'] = 'Ocurrió un error al guardar los datos. ';
+			$this->db = null;
+			return $respuesta;
+		}
+		if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
+			$check = getimagesize($_FILES['foto']['tmp_name']);
+			if($check){
+				if($_FILES['foto']['size'] > $this->configuracion->tamanioMaximoArchivo){
+					$respuesta['resultado'] = false;
+					$respuesta['mensaje'] = 'El tamaño del archivo supera el maximo permitido.';
+					$this->db = null;
+					return $respuesta;
+				}
+				
+				$nombreArchivoNuevo = str_replace(' ','_',$_FILES['foto']['name']);
+				$imagen_tmp = $_FILES['foto']['tmp_name'];
+				$ruta_imagen = $this->configuracion->urlImagenesCatalogo.$nombreArchivoNuevo ;
+				$ruta_guardado = $this->configuracion->rutaAplicacion.$ruta_imagen;
+				$subida = move_uploaded_file($imagen_tmp, $ruta_guardado);	
+				if(!$subida){
+					$respuesta['resultado'] = false;
+					$respuesta['mensaje'] = 'El archivo no pudo ser guardado, intentelo nuevamente. Si el problema persiste contacte al administrador de sistema.';
+					$this->db = null;
+					return $respuesta;
+				}
+			}
+			
+			try{
+				$consulta = 'UPDATE muestras SET ruta_imagen = :imagen WHERE id = :id';
+				$stmt = $this->db->prepare($consulta);	
+				$stmt->bindParam(':id',$id);
+				$stmt->bindParam(':imagen',$nombreArchivoNuevo);
+				$stmt->execute();
+			}catch(Exception $e){
+				$respuesta['resultado'] = false;
+				if($this->configuracion->debug)
+					$respuesta['mensaje'] = $e->getMessage();
+				else
+					$respuesta['mensaje'] = 'Ocurrió un error al guardar la imagen.';
+				$this->db = null;
+				return $respuesta;
+			}
+		}
+		$this->db = null;
+		return $respuesta;
+		
+	}
+//--------------------------------------------------------------------------------------------------------
+	function actualizarMuestra(){
+		
+		$respuesta = array(
+			'resultado' => true ,
+			'mensaje' => null
+		);
+		
+		$id = $_POST['idMuestra'] ;
+		$numMuestra = addslashes($_POST['txtNmuestra']) ;
+		$descripcion = addslashes($_POST['txtDescripcion']) ;
+		$formula = addslashes($_POST['formula']) ;
+		$caracTipoMuestra = $_POST['cmbCarTipoMuestra'] ;
+		$ubicacion = $_POST['cmbUbicacion'] ;
+		$coleccion = $_POST['cmbColecciones'] ;
+		$adquisicion = $_POST['cmbAdquisicion'] ;
+		$vitrinas = $_POST['cmbVitrinas'] ;
+		
+		if($numMuestra == '')
+			$numMuestra = $this->sinNumero ;
+		if(trim($formula) == '<br>')
+			$formula = $this->sinInfo ;
+
+		try{
+			$consulta = 'UPDATE muestras SET numero_muetra = :numMuestra, descripcion = :descripcion, formula_quimica = :formula,
+								id_caracteristica_tipo_muestra = :caracteristica, id_ubicacion = :ubicacion, id_coleccion = :coleccion,
+								id_vitrina = :vitrina , id_adquicicion = :adquisicion 
+							WHERE id = :id';
+			$stmt = $this->db->prepare($consulta);	
+			$stmt->bindParam(':id',$id);
+			$stmt->bindParam(':numMuestra',$numMuestra);
+			$stmt->bindParam(':descripcion',$descripcion);
+			$stmt->bindParam(':formula',$formula);
+			$stmt->bindParam(':caracteristica',$caracTipoMuestra);
+			$stmt->bindParam(':ubicacion',$ubicacion);
+			$stmt->bindParam(':coleccion',$coleccion);
+			$stmt->bindParam(':vitrina',$vitrinas);
+			$stmt->bindParam(':adquisicion',$adquisicion);
+			$stmt->execute();
+		}catch(Exception $e){
+			$respuesta['resultado'] = false;
+			if($this->configuracion->debug)
+				$respuesta['mensaje'] = $e->getMessage();
+			else
+				$respuesta['mensaje'] = 'Ocurrió un error al guardar los datos. ';
+			$this->db = null;
+			return $respuesta;
+		}
+		if (is_uploaded_file($_FILES['foto']['tmp_name'])) {
+			$check = getimagesize($_FILES['foto']['tmp_name']);
+			if($check){
+				if($_FILES['foto']['size'] > $this->configuracion->tamanioMaximoArchivo){
+					$respuesta['resultado'] = false;
+					$respuesta['mensaje'] = 'El tamaño del archivo supera el maximo permitido.';
+					$this->db = null;
+					return $respuesta;
+				}
+				
+				$stmt = $this->db->prepare('SELECT ruta_imagen FROM muestras WHERE id = :id');
+				$stmt->bindParam(':id',$id);			
+				$stmt->execute();
+				while( $reg = $stmt->fetch() )
+					$rutaImagenActual = $reg['ruta_imagen'];	
+				if($rutaImagenActual != $this->sinInfo)
+					unlink($this->configuracion->rutaAplicacion.$this->configuracion->urlImagenesCatalogo.$rutaImagenActual);
+				
+				$nombreArchivoNuevo = str_replace(' ','_',$_FILES['foto']['name']);
+				$imagen_tmp = $_FILES['foto']['tmp_name'];
+				$ruta_imagen = $this->configuracion->urlImagenesCatalogo.$nombreArchivoNuevo ;
+				$ruta_guardado = $this->configuracion->rutaAplicacion.$ruta_imagen;
+				$subida = move_uploaded_file($imagen_tmp, $ruta_guardado);	
+				if(!$subida){
+					$respuesta['resultado'] = false;
+					$respuesta['mensaje'] = 'El archivo no pudo ser guardado, intentelo nuevamente. Si el problema persiste contacte al administrador de sistema.';
+					$this->db = null;
+					return $respuesta;
+				}
+			}
+			
+			try{
+				$consulta = 'UPDATE muestras SET ruta_imagen = :imagen WHERE id = :id';
+				$stmt = $this->db->prepare($consulta);	
+				$stmt->bindParam(':id',$id);
+				$stmt->bindParam(':imagen',$nombreArchivoNuevo);
+				$stmt->execute();
+			}catch(Exception $e){
+				$respuesta['resultado'] = false;
+				if($this->configuracion->debug)
+					$respuesta['mensaje'] = $e->getMessage();
+				else
+					$respuesta['mensaje'] = 'Ocurrió un error al guardar la imagen.';
+				$this->db = null;
+				return $respuesta;
+			}
+		}
+		$this->db = null;
+		return $respuesta;
+		
+	}
+//--------------------------------------------------------------------------------------------------------
+	function eliminarMuestra(){
+		
+		$respuesta = array(
+			'resultado' => true ,
+			'mensaje' => null
+		);
+		
+		$id = $_POST['idMuestra'] ;
+		
+		try{			
+			$stmt = $this->db->prepare('SELECT ruta_imagen FROM muestras WHERE id = :id');
+			$stmt->bindParam(':id',$id);			
+			$stmt->execute();
+			while( $reg = $stmt->fetch() )
+				$rutaImagenActual = $reg['ruta_imagen'];	
+			if($rutaImagenActual != $this->sinInfo)
+				unlink($this->configuracion->rutaAplicacion.$this->configuracion->urlImagenesCatalogo.$rutaImagenActual);
+			
+			$consulta = 'DELETE FROM muestras WHERE id = :id' ;
+			$stmt = $this->db->prepare($consulta);	
+			$stmt->bindParam(':id',$id);
+			$stmt->execute();
+		
+		}catch(Exception $e){
+			$respuesta['resultado'] = false;
+			if($this->configuracion->debug)
+				$respuesta['mensaje'] = $e->getMessage();
+			else
+				$respuesta['mensaje'] = 'Ocurrió un error al guardar la imagen.';
+			$this->db = null;
+			return $respuesta;
+		}
+		
+		
+		$this->db = null;
+		return $respuesta ;
 	}
 //--------------------------------------------------------------------------------------------------------
 	function llenarCombos(){
@@ -139,18 +384,41 @@ class catalogo{
 	}
 //--------------------------------------------------------------------------------------------------------
 	function llenarCaracteristica(){
+
 		$id = $_POST['id'];
-		return $this->obtenerDetalleTabla('caracteristica_tipo_muestra','descripcion','id_caractristica_tipo_muestra','descripcion','id_tipo_muestra',$id);
+		$salida = array(
+			'caracteristicas' => $this->obtenerDetalleTabla('caracteristica_tipo_muestra','descripcion','id_caractristica_tipo_muestra','descripcion','id_tipo_muestra',$id)
+		);
+		if(isset($_POST['seleccion']))
+			$salida['seleccion'] = $_POST['seleccion'];
+		else
+			$salida['seleccion'] = false;
+		return $salida ;
 	}
 //--------------------------------------------------------------------------------------------------------
 	function llenarRegion(){
 		$id = $_POST['id'];
-		return $this->obtenerDetalleTabla('regiones','descripcion','id_region','descripcion','id_pais',$id);
+		$salida = array(
+			'regiones' => $this->obtenerDetalleTabla('regiones','descripcion','id_region','descripcion','id_pais',$id)
+		);
+		if(isset($_POST['region'])){
+			$salida['region'] = $_POST['region'];
+			$salida['ubicacion'] = $_POST['ubicacion'];
+		}else
+			$salida['region'] = false;
+		return $salida;
 	}
 //--------------------------------------------------------------------------------------------------------
 	function llenarUbicacion(){
 		$id = $_POST['id'];
-		return $this->obtenerDetalleTabla('ubicaciones','descripcion','id_ubicacion','descripcion','id_region',$id);
+		$salida = array(
+			'ubicaciones' => $this->obtenerDetalleTabla('ubicaciones','descripcion','id_ubicacion','descripcion','id_region',$id)
+		);
+		if(isset($_POST['seleccion']))
+			$salida['seleccion'] = $_POST['seleccion'];
+		else
+			$salida['seleccion'] = false;		
+		return $salida;
 	}
 //--------------------------------------------------------------------------------------------------------
 	function obtenerDetalleTabla($tabla,$campoOrden,$campoId,$campoValor,$claveForanea=null,$valorClave=null){
@@ -203,6 +471,7 @@ class catalogo{
 		$muestra = null;
 		while( $reg = $stmt->fetch() ){
 			$muestra = array(
+				
 				'numeroMuestra' => $reg['numero_muetra'], 
 				'descripcion' => $reg['descripcion'],
 				'formula' => $reg['formula_quimica'],
@@ -216,6 +485,7 @@ class catalogo{
 				'adquisicion' => $reg['adquisicion']
 			);
 		}
+		$this->db = null;
 		return $muestra;
 	}
 //--------------------------------------------------------------------------------------------------------
@@ -238,6 +508,7 @@ class catalogo{
 		$muestra = null;
 		while( $reg = $stmt->fetch() ){
 			$muestra = array(
+				'idMuestra' => $id ,
 				'numeroMuestra' => $reg['numero_muetra'], 
 				'descripcion' => $reg['descripcion'],
 				'formula' => $reg['formula_quimica'],
@@ -248,10 +519,14 @@ class catalogo{
 				'pais' => $reg['id_pais'],
 				'vitrina' => $reg['id_vitrina'],
 				'coleccion' => $reg['id_coleccion'],
-				'adquisicion' => $reg['id_adquicicion'],
-				'imagen' => $reg['ruta_imagen']
+				'adquisicion' => $reg['id_adquicicion']
 			);
+			if($reg['ruta_imagen'] != $this->sinInfo)
+				$muestra['imagen'] = '../'.$this->configuracion->urlImagenesCatalogo.$reg['ruta_imagen'] ;
+			else
+				$muestra['imagen'] = '../'.$this->configuracion->urlImagenesCatalogo.$this->imagenSinInformacion ;
 		}
+		$this->db = null;
 		return $muestra;
 	}
 //--------------------------------------------------------------------------------------------------------
