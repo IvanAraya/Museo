@@ -23,11 +23,12 @@ class recursos{
 		$lista = array();
 		
 		while($row = $stmt->fetch()){
+			$fechaS=date("d-m-Y",strtotime($row['fecha_subida']));
 			$fila = array(
 				$row['id_documento'],
 				$row['titulo'],
 				$row['ruta_documento'],
-				$row['fecha_subida'],
+				$fechaS,
 			);
 			array_push($lista,$fila);
 		}
