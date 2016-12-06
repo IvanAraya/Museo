@@ -6,14 +6,24 @@ include('../data.php');
 class home{
 	
 	var $db;
+	var $configuracion ;
 	function __construct(){
 		
-		//include ('../data.php');
-		//$this->db = $conn; 
-		
-		$config = new Configuracion();
-		$baseDato = new BaseDatos($config);
+		$this->configuracion = new Configuracion();
+		$baseDato = new BaseDatos($this->configuracion);
 		$this->db = $baseDato->conectarPDO();
+	}
+	//--------------------------------------------------------------------------------------------------------
+	function cargarBanner(){
+		
+		$banner = array();
+		$directorio = opendir($this->configuracion->rutaAplicacion.$this->configuracion->urlImagenesBanner); //ruta actual
+		while ($archivo = readdir($directorio)){
+			 if (!is_dir($archivo)){
+				  array_push($banner,$this->configuracion->urlImagenesBanner.$archivo);
+			 }
+		}
+		return $banner;
 	}
 	//--------------------------------------------------------------------------------------------------------
 	function cargarNoticias(){
