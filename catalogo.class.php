@@ -12,8 +12,7 @@ class catalogo{
 	var $resultadosPagina = 40;
 //--------------------------------------------------------------------------------------------------------	
 	function __construct(){
-		//include ('../data.php');
-		//$this->db = $conn; 
+
 		
 		$this->configuracion = new Configuracion();
 		$baseDato = new BaseDatos($this->configuracion);
@@ -207,8 +206,12 @@ class catalogo{
 				'pais' => $reg['pais'],
 				'vitrina' => $reg['vitrina'],
 				'coleccion' => $reg['coleccion'],
-				'adquisicion' => $reg['adquisicion']
+				'adquisicion' => $reg['adquisicion'],
 			);
+			if($reg['vitrina'] != $this->sinInfo)
+				$muestra['imgVitrina'] = $this->configuracion->urlImagenesVitrinas. strtolower( str_replace(' ','_',$reg['vitrina'])).'.png' ;
+			else
+				$muestra['imgVitrina'] = '';
 		}
 		return $muestra;
 	}

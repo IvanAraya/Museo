@@ -70,9 +70,9 @@
 			</div>
 			<br>
 		</div>
-		<div id="modalWindow" class="w3-modal" onclick="this.style.display='none'">				
+		<div id="modalWindow" class="w3-modal">				
 			<div class="w3-modal-content w3-card-24 w3-center w3-animate-zoom" style="padding:5px;">
-				<span class="w3-closebtn w3-container w3-padding-16 w3-display-topright" style="color:white;">&times;</span>
+				<span class="w3-closebtn w3-container w3-padding-16 w3-display-topright" style="color:white;"  onclick="cerrarModal()">&times;</span>
 				<div style="background-color:#999; margin:0px;">
 					<img id="modalImage" class="w3-image w3-card-2" style="max-height:350px;" src="">
 				</div>
@@ -102,6 +102,9 @@
 							<div class="w3-row">
 								<div class="w3-col m5" style="text-align:left;">Vitrina : </div>
 								<div class="w3-col m7" id="lblVitrina" style="text-align:left;">--</div>
+								<input type="hidden" id="rutaVitrina">
+								<input type="hidden" id="rutaImagen">
+								<input type="hidden" id="switchImage" value="false">
 							</div>
 						</div>
 						<div class="w3-half">

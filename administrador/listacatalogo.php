@@ -116,6 +116,9 @@ else{
 							<div class="w3-row">
 								<div class="w3-col m5" style="text-align:left;">Vitrina : </div>
 								<div class="w3-col m7" id="lblVitrina" style="text-align:left;">--</div>
+								<input type="hidden" id="rutaVitrina">
+								<input type="hidden" id="rutaImagen">
+								<input type="hidden" id="switchImage" value="false">
 							</div>
 						</div>
 						<div class="w3-half">

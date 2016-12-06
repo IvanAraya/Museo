@@ -141,7 +141,35 @@ function verDetalle(id, src){
 		document.getElementById('lblVitrina').innerHTML = muestra.vitrina;
 		document.getElementById('modalWindow').style.display = 'block';
 		document.getElementById('modalImage').src = src ;
+		document.getElementById('rutaImagen').value = src ;
+		document.getElementById('rutaVitrina').value = muestra.imgVitrina ;
+		document.getElementById('switchImage').value = 'false';
+		
+		lblVitrina = document.getElementById('lblVitrina');
+		if(muestra.imgVitrina.length > 0){
+			lblVitrina.style.color = 'blue';
+			lblVitrina.style.cursor = 'pointer';
+		}
+		lblVitrina.onclick = function(){			
+			rutaVitrina = document.getElementById('rutaVitrina');
+			modalImage = document.getElementById('modalImage');
+			switchImage = document.getElementById('switchImage');
+			if(switchImage.value == 'false' && rutaVitrina.value.length > 0){					
+				modalImage.src = rutaVitrina.value ;
+				switchImage.value = 'true';
+			}else{
+				modalImage.src = document.getElementById('rutaImagen').value ;
+				switchImage.value = 'false';
+			}
+				
+		}
+
 	});
+}
+//-----------------------------------------------------------
+function cerrarModal(){
+	var modal = document.getElementById('modalWindow') ;
+	modal.style.display='none'
 }
 //-----------------------------------------------------------
 function llenarRegion(){

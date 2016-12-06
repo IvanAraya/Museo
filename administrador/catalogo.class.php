@@ -484,6 +484,10 @@ class catalogo{
 				'coleccion' => $reg['coleccion'],
 				'adquisicion' => $reg['adquisicion']
 			);
+			if($reg['vitrina'] != $this->sinInfo)
+				$muestra['imgVitrina'] = '../'.$this->configuracion->urlImagenesVitrinas. strtolower( str_replace(' ','_',$reg['vitrina'])).'.png' ;
+			else
+				$muestra['imgVitrina'] = '';
 		}
 		$this->db = null;
 		return $muestra;

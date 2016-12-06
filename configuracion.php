@@ -17,6 +17,7 @@ class Configuracion{
 	var $urlImagenesNoticias = 'img/imgnoticias/';
 	var $urlImagenesCatalogo = 'img/catalogo/';
 	var $urlImagenesBanner = 'img/banner/';
+	var $urlImagenesVitrinas = 'img/vitrinas/';
 
 //-- Archivos ----------------------------------
 	var $tamanioMaximoArchivo = 8388608 ;
