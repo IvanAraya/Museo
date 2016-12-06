@@ -42,7 +42,7 @@ else{
 					<label for="ti">Titulo</label>		
 					<input type="text" name="titulo" id="titulo" style="width:100%;"><br>
 					<label for="fecha">Fecha</label>
-					<input type="date" name="fecha" id="fecha" placeholder="dd-mm-aaaa" >
+					<input type="date" name="fecha" id="fecha" placeholder="aaaa-mm-dd" >
 					<label for="publi">Publicar</label>
 					<input type="checkbox" id="publicar" name="publicar">
 					<label for="desc">Descripción</label>
