@@ -41,7 +41,7 @@
             <form id="login" action="autentificar.php" method="post" class="enLinea" >
                 <input type="text" name="rut" placeholder="Rut" >
                 <br><br>
-                <input type="password" name="pass" placeholder="Contraseña"> 
+                <input type="password" name="pass" placeholder="Contrase&ntilde;a"> 
                 <br><br>
                 <input type="submit" name="b_ingresar" value="Ingresar" >
             </form>

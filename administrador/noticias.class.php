@@ -145,8 +145,8 @@ include('../../data.php');
 					$estado="oculto";
 
 
-
-				array_push($resp, array($reg['id_actividad'], $reg['titulo'], $reg['fecha'],$estado));
+				$fechaS=date("d-m-Y",strtotime($reg['fecha']));  //dar formato a la fecha 
+				array_push($resp, array($reg['id_actividad'], $reg['titulo'], $fechaS,$estado));
 			}
 			return $resp;
 		}

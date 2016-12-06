@@ -9,7 +9,7 @@ class noticiaslista{
 			$resp = array();
 
 			while( $reg = $stmt->fetch() ){	
-				array_push($resp, array($reg['id_actividad'], $reg['titulo'], $reg['fecha'],$reg['publicado']));
+				array_push($resp, array($reg['id_actividad'], $reg['titulo'], $fechaS,$reg['publicado']));
 			}
 			return $resp;
 		}
