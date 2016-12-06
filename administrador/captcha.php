@@ -23,7 +23,7 @@
   }
 
   // record digits in session variable
-  $_SESSION['code'] = $digit;
+  $_SESSION['code'] = md5($digit);
 
 
   // display image and clean up

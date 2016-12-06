@@ -14,7 +14,7 @@
 
 	//captcha check
 	$b_captcha = false;
-	$captcha = $_POST['captcha'];
+	$captcha = md5($_POST['captcha']);
 	session_start();
 	$digit = $_SESSION['code'];
 	if( $captcha == $digit){
