@@ -30,7 +30,7 @@
     </head>
     <body>
         <div class="main">
-            <div id="panel_izquierdo" class="enLinea">
+            <div id="panel_izquierdo" class="enLinea"><br>
                 <img src="img/logoadmin.png" class="enLinea" width="150px">
                 <div id=texto_izquierda class="enLinea aDerecha">
                     <h2 style="font-size: 30px">Museo Mineralogico</h2>
@@ -42,7 +42,14 @@
                 <input type="text" name="rut" placeholder="Rut" >
                 <br><br>
                 <input type="password" name="pass" placeholder="Contrase&ntilde;a"> 
-                <br><br>
+                <br>
+
+
+                <p style="text-align: center;">
+                    <img src="captcha.php" width="120px" height="30px"  border="1" alt="CAPTCHA">
+                </p>
+                <input type="text" name="captcha" placeholder="Captcha"><br><br>
+
                 <input type="submit" name="b_ingresar" value="Ingresar" >
             </form>
         </div>
