@@ -9,8 +9,6 @@
 		var $db;
 	//--------------------------------------------------------------------------------------------------------
 		function __construct(){
-			//include ('../../data.php');
-			//$this->db = $conn; 
 			
 			$configuracion = new Configuracion();
 			$baseDato = new BaseDatos($configuracion);

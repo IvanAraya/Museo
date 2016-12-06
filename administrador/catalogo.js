@@ -1,4 +1,5 @@
 var obj = new RemoteObject('catalogo');
+var mantenedor = new RemoteObject('mantenedor');	
 
 function catalogo_onload(){
 	
@@ -176,5 +177,101 @@ function ClearOptionsFast(id){
 //-----------------------------------------------------------
 function cancelar(){
 	load('listacatalogo');
+}
+//-----------------------------------------------------------
+function cerrarModal(){
+	var modal = document.getElementById('modalWindow') ;
+	modal.style.display='none'
+}
+//-----------------------------------------------------------
+function abrirMantenedor(entidad){
+	
+	datos = new FormData();
+	datos.append('entidad',entidad);
+	document.getElementById('idAntecesor').value = '' ;
+	document.getElementById('idRegistro').value = '';
+	document.getElementById('valorRegistro').value = '' ;
+	document.getElementById('entidad').value = entidad ;
+	if(arguments[1]){
+		predecesor = document.getElementById(arguments[1]).value;
+		document.getElementById('idAntecesor').value = predecesor;
+		datos.append('predecesor',predecesor);		
+	}
+
+	
+	mantenedor.callMethod('recuperarDatos',datos, function(lista){
+		ClearFast('tablaLista');
+		var tabla = document.getElementById('tablaLista');		
+		for(f=0;f<lista.length;f++){			
+			var fila = document.createElement('tr');			
+			for(c=1;c<lista[f].length;c++){
+				var columna = document.createElement('td'); 
+				columna.innerHTML = lista[f][c];
+				fila.appendChild(columna);
+			}
+			var editar = document.createElement('td');
+			var eliminar = document.createElement('td');
+			editar.innerHTML = '<span class="material-icons" style="cursor:pointer" onclick="editarRegistroMantenedor(\''+lista[f][0]+'\',\''+lista[f][1]+'\')">edit</span>';
+			eliminar.innerHTML = '<span class="material-icons" style="cursor:pointer" onclick="eliminarRegistroMantenedo(\''+lista[f][0]+'\')">delete</span>';
+			fila.appendChild(editar);
+			fila.appendChild(eliminar);
+			tabla.appendChild(fila);
+		}
+		document.getElementById('lblTituloMantenedor').innerHTML = entidad.toUpperCase() ;
+		document.getElementById('modalWindow').style.display = 'block';
+	});
+
+}
+//-----------------------------------------------------------
+function editarRegistroMantenedor(id, valor){
+	document.getElementById('idRegistro').value = id;
+	document.getElementById('valorRegistro').value = valor;
+}
+//-----------------------------------------------------------
+function guardarRegistroMantenedor(){
+	if(!confirm('¿Desea guardar este registro?'))
+		return false;
+	datos = new FormData();
+	datos.append('id',document.getElementById('idRegistro').value);
+	datos.append('valor',document.getElementById('valorRegistro').value);
+	datos.append('predecesor',document.getElementById('idAntecesor').value);
+	datos.append('entidad',document.getElementById('entidad').value);
+	
+	mantenedor.callMethod('guardarRegistro',datos, function(resp){
+		if(resp.resultado){
+			alert('Registro guardado con exito');
+			//refrescarCombos(document.getElementById('entidad').value);
+			
+		}else
+			alert(resp.mensaje);
+	});
+}
+//----------------------------------------------------------
+function refrescarCombos(entidad){
+	abrirMantenedor(entidad);
+}
+//-----------------------------------------------------------
+function eliminarRegistroMantenedo(id){
+	if(!confirm('¿Desea eliminar este registro?'))
+		return false;
+	
+	datos = new FormData();
+	datos.append('id',id);
+	datos.append('entidad',document.getElementById('entidad').value);
+	mantenedor.callMethod('eliminarRegistro',datos, function(resp){
+		if(resp.resultado){
+			alert('Registro eliminado con exito');
+			//refrescarCombos(entidad);
+		}			
+		else
+			alert(resp.mensaje);
+	});
+}
+//-----------------------------------------------------------
+function ClearFast(id){
+	var selectObj = document.getElementById(id);
+	var selectParentNode = selectObj.parentNode;
+	var newSelectObj = selectObj.cloneNode(false); // Make a shallow copy
+	selectParentNode.replaceChild(newSelectObj, selectObj);
 }
 //-----------------------------------------------------------

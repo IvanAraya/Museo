@@ -83,7 +83,7 @@ else{
 											
 										</select>
 									</div>
-									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim">...</span></div>
+									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim" onclick="abrirMantenedor('paises')">...</span></div>
 								</div>
 							</div>
 						</div>
@@ -96,7 +96,7 @@ else{
 											
 										</select>
 									</div>
-									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim">...</span></div>
+									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim" onclick="abrirMantenedor('regiones','cmbPais')">...</span></div>
 								</div>
 							</div>
 						</div>
@@ -109,7 +109,7 @@ else{
 											
 										</select>
 									</div>
-									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim">...</span></div>
+									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim" onclick="abrirMantenedor('ubicaciones','cmbRegion')">...</span></div>
 								</div>
 							</div>
 						</div>
@@ -122,7 +122,7 @@ else{
 											
 										</select>
 									</div>
-									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim">...</span></div>
+									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim" onclick="abrirMantenedor('colecciones')">...</span></div>
 								</div>
 							</div>
 						</div>
@@ -135,7 +135,7 @@ else{
 											
 										</select>
 									</div>
-									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim">...</span></div>
+									<div class="w3-col" style="width:10%;"><span class="w3-btn w3-light-gray w3-border w3-round-large w3-small w3-slim" onclick="abrirMantenedor('adquisiciones')">...</span></div>
 								</div>
 							</div>
 						</div>
@@ -158,5 +158,32 @@ else{
 			</form>
 			<br>
 		</div>
+		
+		<div id="modalWindow" class="w3-modal" >				
+			<div id="modalContent" class="w3-modal-content w3-card-24 w3-center w3-animate-zoom" style="padding:5px;">
+				<div  class="w3-panel " ><span id="lblTituloMantenedor"></span></div>
+				<span class="w3-closebtn w3-container w3-display-topright" style="color:black;" onclick="cerrarModal()">&times;</span>
+				
+				<div class="w3-container">
+					<input type="text" id="valorRegistro" style="width:60%">
+					<input type="hidden" id="idRegistro"/>
+					<input type="hidden" id="idAntecesor"/>
+					<input type="hidden" id="entidad"/>
+					<input type="button" id="btnGuardar" value="Guardar" onclick="guardarRegistroMantenedor()" class="w3-btn w3-light-gray w3-border w3-round-xlarge">					
+				</div>
+				<br>
+				<div class="w3-responsive" style="height:300px">
+					<table class="w3-table-all w3-hoverable" id="tablaLista" >
+						<tr>
+							<th> Nombre</th>
+							<th> &nbsp; </th>
+							<th> &nbsp; </th>
+						</tr>
+					</table> <br>
+				</div>
+				
+			</div>
+		</div>
+		
 	</body>
 </html>
