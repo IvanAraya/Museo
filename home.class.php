@@ -23,12 +23,13 @@ class home{
 		$resp = array();
 
 		while( $reg = $stmt->fetch() ){
+			$fechaS=date("d-m-Y",strtotime($reg['fecha'])); 
 			$noticia = array(
 				'id' => $reg['id_actividad'],
 				'imagen' => $reg['ruta_imagen'].'?'.time() ,
 				'titulo' => $reg['titulo'],
 				'cuerpo' =>$reg['texto'],
-				'fecha' => $reg['fecha']
+				'fecha' => $fechaS
 			);
 			array_push($resp, $noticia);
 		}
