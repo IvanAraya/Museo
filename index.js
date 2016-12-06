@@ -3,9 +3,7 @@ var r = new RemoteObject('index');
 function init(){
 	
 	load('home','Home');
-	
-	//initMap();
-	
+
 }
 
 function load(modulo, titulo){
@@ -44,7 +42,7 @@ function w3_close() {
 }
 function initMap() {
 	// Create a map object and specify the DOM element for display.
-	var museo = {lat: -29.908995, lng: -71.245540};
+	var museo = {lat: -29.908925, lng: -71.246824};
 
 	var map1 = new google.maps.Map(document.getElementById('map1'), {
 	  center: museo,

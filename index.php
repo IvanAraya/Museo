@@ -69,11 +69,9 @@
 						 Benavente 980, La Serena.<br>
 						 Campus Ignacio Domeyko.<br>                
 						 Fono: 
-						 051-2204096<br>                
-						 Fax : 
-						 051-2223350<br>                
+						 051-2204096<br>                  
 						 Correo electr&oacute;nico:
-						 mmineralogico@userena.cl
+						 <a href="mailto:mmineralogico@userena.cl?subject=Consultas">mmineralogico@userena.cl</a>
 						 </p>
 					</div>
 					<br>
@@ -116,11 +114,9 @@
 							 Benavente 980, La Serena.<br>
 							 Campus Ignacio Domeyko.<br>                
 							 Fono: 
-							 051-2204096<br>                
-							 Fax : 
-							 051-2223350<br>                
+							 051-2204096<br>                 
 							 Correo electr&oacute;nico:
-							 mmineralogico@userena.cl
+							 <a href="mailto:mmineralogico@userena.cl?subject=Consultas">mmineralogico@userena.cl</a>
 						</div>
 						<br>
 					</div>
